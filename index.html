@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Bærekraftssjekk for små og mellomstore bedrifter: utslippsestimat, prioriterte tiltak og et ferdig VSME-svar til kunden på ti minutter.">
+<link rel="canonical" href="https://klimasvar.no/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F2E26'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%2334574B' stroke-width='7'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23C9D79B' stroke-width='7' stroke-dasharray='88 107' transform='rotate(-90 32 32)'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0F2E26">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://klimasvar.no/">
+<meta property="og:site_name" content="Klimasvar">
+<meta property="og:title" content="Klimasvar">
+<meta property="og:description" content="Når kunden spør om klimatall, har dere svaret klart. Bærekraftssjekk for små og mellomstore bedrifter.">
+<meta property="og:image" content="https://klimasvar.no/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Klimasvar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: mørk granskog-forside over en lys arbeidsflate. Veiviser i fem steg til venstre, klimakortet følger med til høyre. Tiltak, kundesvar, metode og om prosjektet i rolige bånd under. */
+:root {
+  --bg: #F3F6F4;
+  --paper: #FFFFFF;
+  --soft: #E8EEEB;
+  --ink: #0F211C;
+  --muted: #5B6B65;
+  --line: #DAE2DE;
+  --accent: #2A6A55;
+  --accent-ink: #FFFFFF;
+  --hero: #0F2E26;
+  --hero-ink: #E6EFEA;
+  --hero-muted: #9DB5AB;
+  --hero-line: rgba(201, 215, 155, 0.22);
+  --lichen: #C9D79B;
+  --lichen-ink: #0F211C;
+  --s1: #1F5B4A;
+  --s2: #5A84AE;
+  --s3: #B39745;
+  --focus: #2F7FBF;
+
+  --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --f-ui: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+
+  --r: 14px;
+  --shadow: 0 1px 2px rgba(15, 33, 28, 0.04), 0 8px 28px rgba(15, 33, 28, 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1311; --paper: #111C19; --soft: #17231F; --ink: #E4EDE9; --muted: #93A39C; --line: #22302B;
+    --accent: #7CC3A8; --accent-ink: #0B1A15;
+    --hero: #0A221C; --hero-ink: #E6EFEA; --hero-muted: #93AEA3; --hero-line: rgba(201, 215, 155, 0.18);
+    --lichen: #C9D79B; --lichen-ink: #0F211C;
+    --s1: #6CBB9D; --s2: #93B4D8; --s3: #D3BA6E; --focus: #7DB8E8;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1311; --paper: #111C19; --soft: #17231F; --ink: #E4EDE9; --muted: #93A39C; --line: #22302B;
+  --accent: #7CC3A8; --accent-ink: #0B1A15;
+  --hero: #0A221C; --hero-ink: #E6EFEA; --hero-muted: #93AEA3; --hero-line: rgba(201, 215, 155, 0.18);
+  --lichen: #C9D79B; --lichen-ink: #0F211C;
+  --s1: #6CBB9D; --s2: #93B4D8; --s3: #D3BA6E; --focus: #7DB8E8;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-ui);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+button { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- Forside ---------- */
+.hero { background: var(--hero); color: var(--hero-ink); position: relative; overflow: hidden; }
+.hero canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 20%, #000 75%);
+  mask-image: linear-gradient(90deg, transparent 20%, #000 75%);
+}
+.hero .wrap { position: relative; padding-block: 22px 56px; display: grid; gap: 56px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.mark { font-family: var(--f-display); font-size: 24px; font-style: italic; letter-spacing: -0.01em; color: var(--hero-ink); text-decoration: none; }
+.mark b { font-style: normal; font-weight: 500; }
+.topright { display: flex; align-items: center; gap: 24px; }
+.nav { display: flex; gap: 22px; font-size: 14px; }
+.nav a { color: var(--hero-muted); text-decoration: none; }
+.nav a:hover { color: var(--hero-ink); }
+@media (max-width: 760px) { .nav { display: none; } }
+.lang { display: inline-flex; border: 1px solid var(--hero-line); border-radius: 99px; padding: 3px; }
+.lang button {
+  background: none; border: 0; color: var(--hero-muted); font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 5px 11px; border-radius: 99px; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--lichen); color: var(--lichen-ink); }
+.hero-copy { display: grid; gap: 22px; max-width: 780px; }
+.hero .eyebrow { color: var(--lichen); }
+.hero h1 {
+  font-family: var(--f-display); font-weight: 300; font-size: clamp(40px, 6.4vw, 78px);
+  line-height: 1.02; letter-spacing: -0.025em;
+}
+.hero h1 em { font-style: italic; color: var(--lichen); }
+.hero .lede { font-size: 19px; color: var(--hero-muted); max-width: 56ch; line-height: 1.6; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 99px; padding: 13px 22px;
+  font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.lichen { background: var(--lichen); color: var(--lichen-ink); }
+.btn.ghost-dark { background: transparent; color: var(--hero-ink); border-color: var(--hero-line); }
+.btn.ghost-dark:hover { border-color: var(--lichen); }
+.btn.solid { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--accent); }
+.facts { display: flex; flex-wrap: wrap; border-top: 1px solid var(--hero-line); padding-top: 22px; max-width: 780px; }
+.fact { padding-right: 28px; margin-right: 28px; border-right: 1px solid var(--hero-line); display: grid; gap: 2px; }
+.fact:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.fact .v { font-family: var(--f-display); font-size: 26px; font-weight: 400; line-height: 1.1; }
+.fact .k { font-size: 13px; color: var(--hero-muted); }
+@media (max-width: 560px) {
+  .facts { gap: 14px; }
+  .fact { border-right: 0; margin-right: 0; padding-right: 18px; }
+}
+
+/* ---------- Arbeidsflate ---------- */
+.tool { padding-block: 56px 24px; }
+.tool-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.tool-head h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(30px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.1; }
+.linkbtns { display: flex; gap: 6px; flex-wrap: wrap; }
+.linkbtn { background: none; border: 0; padding: 6px 10px; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; border-radius: 99px; }
+.linkbtn:hover { color: var(--ink); background: var(--soft); }
+.example-note { margin-bottom: 18px; font-size: 14px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+.example-note::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--s3); flex: none; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 28px; align-items: start; }
+@media (max-width: 960px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* Veiviser */
+.wizard { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+.rail { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.rail button {
+  background: none; border: 0; padding: 16px 12px 14px; text-align: left; cursor: pointer; color: var(--muted);
+  display: grid; gap: 2px; position: relative; font-size: 14px; font-weight: 500; border-radius: 0;
+}
+.rail button .n { font-family: var(--f-display); font-size: 20px; line-height: 1; display: flex; align-items: center; gap: 6px; }
+.rail button .n i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0; transition: opacity .2s; }
+.rail button.filled .n i { opacity: 1; }
+.rail button::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; background: transparent; }
+.rail button[aria-current="step"] { color: var(--ink); }
+.rail button[aria-current="step"]::after { background: var(--ink); }
+.rail button:focus-visible { outline-offset: -3px; }
+@media (max-width: 600px) {
+  .rail button { padding: 14px 6px 12px; text-align: center; }
+  .rail button .n { justify-content: center; }
+  .rail button .t { display: none; }
+}
+.step { padding: 32px 32px 8px; display: grid; gap: 26px; }
+@media (max-width: 600px) { .step { padding: 24px 20px 4px; } }
+.step-head { display: grid; gap: 8px; }
+.step-head h3 { font-family: var(--f-display); font-weight: 400; font-size: 30px; letter-spacing: -0.015em; line-height: 1.15; }
+.step-head h3:focus { outline: none; }
+.step-head p { color: var(--muted); max-width: 58ch; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 28px; }
+@media (max-width: 640px) { .fields { grid-template-columns: minmax(0, 1fr); } }
+.fld { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.fld label { display: grid; gap: 2px; }
+.fl { font-weight: 600; font-size: 15px; }
+.fh { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.in { display: flex; align-items: baseline; gap: 10px; border-bottom: 1.5px solid var(--line); transition: border-color .15s; padding-top: 2px; }
+.in:focus-within { border-color: var(--accent); }
+.in .u { flex: none; font-size: 13px; color: var(--muted); white-space: nowrap; }
+.in input, .in select {
+  flex: 1 1 0; width: 0; min-width: 0; border: 0; background: transparent; color: var(--ink); padding: 8px 0 10px;
+  font: 400 26px/1.2 var(--f-display); font-variant-numeric: lining-nums tabular-nums; outline: none;
+}
+.in select { font: 500 17px/1.3 var(--f-ui); padding: 12px 0; cursor: pointer; }
+.in input::placeholder { color: var(--line); }
+.step-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px 32px 28px; flex-wrap: wrap; }
+@media (max-width: 600px) { .step-foot { padding: 18px 20px 22px; } }
+.step-foot .count { font-size: 13px; color: var(--muted); }
+.step-foot .btns { display: flex; gap: 10px; margin-left: auto; }
+
+/* Brytere */
+.checks { display: grid; }
+.check { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.check:first-child { padding-top: 4px; }
+.switch { position: relative; width: 48px; height: 28px; flex: none; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.switch span { position: absolute; inset: 0; border-radius: 99px; background: var(--line); transition: background .2s; }
+.switch span::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--paper); box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s;
+}
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(20px); }
+.switch input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.datasrc { display: grid; gap: 10px; padding: 18px 0 6px; }
+.seg { display: inline-grid; grid-template-columns: 1fr 1fr; background: var(--soft); border-radius: 99px; padding: 4px; max-width: 360px; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { text-align: center; padding: 9px 14px; border-radius: 99px; font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; transition: background .15s, color .15s; }
+.seg input:checked + label { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.seg input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+/* Klimakort */
+.card {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); scroll-margin-top: 20px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
+  display: grid;
+}
+@media (max-width: 960px) { .card { position: static; } }
+.card-sec { padding: 22px 24px; border-bottom: 1px solid var(--line); display: grid; gap: 14px; }
+.card-sec:last-child { border-bottom: 0; }
+.card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.card-co { font-family: var(--f-display); font-size: 20px; line-height: 1.2; overflow-wrap: anywhere; }
+.card-yr { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.ring { position: relative; width: 196px; height: 196px; margin: 4px auto 0; max-width: 100%; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 14; }
+.ring .arc { transition: stroke-dasharray .6s cubic-bezier(.2,.7,.2,1), stroke-dashoffset .6s cubic-bezier(.2,.7,.2,1); }
+.ring-c { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 2px; }
+.ring-c .big { font-family: var(--f-display); font-size: 46px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: lining-nums tabular-nums; }
+.ring-c .u { font-size: 13px; color: var(--muted); }
+.legend { display: grid; gap: 8px; font-size: 14px; }
+.legend .li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.sw { width: 10px; height: 10px; border-radius: 50%; }
+.legend .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.kpi { display: grid; gap: 4px; align-content: start; }
+.kpi .v { font-family: var(--f-display); font-size: 24px; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.kpi .k { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.sources { display: grid; gap: 12px; }
+.src { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; font-size: 14px; }
+.src .val { font-variant-numeric: tabular-nums; color: var(--muted); }
+.src .bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: var(--soft); overflow: hidden; }
+.src .bar i { display: block; height: 100%; border-radius: 2px; transition: width .5s ease; }
+.ready { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+.ready i { height: 6px; border-radius: 3px; background: var(--soft); transition: background .3s; }
+.ready i.on { background: var(--accent); }
+.ready-txt { font-size: 14px; color: var(--muted); }
+.ready-txt b { color: var(--ink); font-weight: 600; }
+.empty { font-size: 14px; color: var(--muted); }
+
+/* ---------- Bånd under ---------- */
+.band { padding-block: 72px 0; }
+.band-head { display: grid; gap: 12px; margin-bottom: 30px; max-width: 680px; }
+.band-head h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(32px, 4.4vw, 46px); letter-spacing: -0.02em; line-height: 1.08; }
+.band-head p { color: var(--muted); font-size: 17px; }
+
+ol.actions { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; counter-reset: a; }
+@media (max-width: 820px) { ol.actions { grid-template-columns: minmax(0, 1fr); } }
+ol.actions li {
+  counter-increment: a; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 6px 4px;
+  padding: 24px 0; border-top: 1px solid var(--line);
+}
+ol.actions li::before {
+  content: counter(a); grid-row: 1 / span 3;
+  font-family: var(--f-display); font-style: italic; font-size: 38px; line-height: 0.9; color: var(--accent);
+}
+.act-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.act-head h3 { font-size: 18px; font-weight: 600; line-height: 1.3; }
+.tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tag.kutt { color: var(--accent); }
+.act-body { color: var(--muted); max-width: 58ch; }
+.act-effect { font-size: 14px; font-weight: 500; color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
+.act-effect::before { content: "→"; color: var(--accent); }
+
+/* Kundesvar som dokument */
+.answer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 40px; align-items: start; }
+@media (max-width: 900px) { .answer { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+.doc {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 4px; box-shadow: var(--shadow);
+  padding: clamp(24px, 5vw, 52px); display: grid; gap: 22px;
+}
+.doc-head { display: grid; gap: 6px; padding-bottom: 18px; border-bottom: 1px solid var(--ink); }
+.doc-head h3 { font-family: var(--f-display); font-weight: 400; font-size: 30px; letter-spacing: -0.015em; line-height: 1.15; overflow-wrap: anywhere; }
+.doc-head p { color: var(--muted); font-size: 14px; }
+.doc-sec { display: grid; gap: 4px; }
+.doc-sec h4 { margin: 0 0 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.doc-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; padding: 7px 0; border-bottom: 1px dotted var(--line); font-size: 15px; }
+.doc-row .v { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
+.doc-row.total { border-bottom: 0; border-top: 1px solid var(--ink); margin-top: 2px; }
+.doc-row.sub { padding-left: 16px; color: var(--muted); }
+.doc-foot { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.answer-side { display: grid; gap: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); }
+@media (max-width: 900px) { .answer-side { position: static; } }
+.answer-side p { color: var(--muted); font-size: 15px; }
+.status { font-size: 14px; color: var(--accent); min-height: 1.4em; }
+.feedback { border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 12px; }
+.feedback .q { font-family: var(--f-display); font-size: 21px; line-height: 1.2; color: var(--ink); }
+.fb-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 99px;
+  padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: border-color .15s;
+}
+.pill:hover { border-color: var(--accent); }
+.fb-thanks { font-size: 15px; color: var(--accent); }
+
+/* Metode */
+.method { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; }
+@media (max-width: 900px) { .method { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 11px 12px 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+td.f { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+td.g { color: var(--muted); }
+.prose { display: grid; gap: 14px; max-width: 60ch; align-content: start; }
+.prose ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--muted); }
+.prose .src-links { font-size: 14px; color: var(--muted); }
+
+/* Om prosjektet */
+.about { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+@media (max-width: 900px) { .about { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+.about .prose p { font-size: 18px; line-height: 1.65; }
+.about .prose p:first-child::first-letter {
+  font-family: var(--f-display); float: left; font-size: 64px; line-height: 0.85; padding: 6px 10px 0 0; color: var(--accent);
+}
+.maker { background: var(--hero); color: var(--hero-ink); border-radius: var(--r); padding: 28px; display: grid; gap: 16px; }
+.maker .eyebrow { color: var(--lichen); }
+.maker h3 { font-family: var(--f-display); font-weight: 400; font-size: 30px; line-height: 1.1; letter-spacing: -0.01em; }
+.maker p { color: var(--hero-muted); font-size: 15px; }
+.maker a { color: var(--lichen); font-weight: 600; }
+.maker .road { border-top: 1px solid var(--hero-line); padding-top: 16px; display: grid; gap: 12px; }
+.maker ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.maker li { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 10px; font-size: 15px; color: var(--hero-ink); }
+.maker li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--lichen); margin-top: 8px; }
+
+footer { margin-top: 88px; border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 28px 44px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+footer .mark { color: var(--ink); font-size: 20px; }
+
+/* Mobil: totalen nederst */
+.dock {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  padding: 12px max(20px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+  background: var(--hero); color: var(--hero-ink);
+  display: none; align-items: center; justify-content: space-between; gap: 12px;
+}
+.dock .t { font-family: var(--f-display); font-size: 20px; }
+.dock .t small { font-family: var(--f-ui); font-size: 13px; color: var(--hero-muted); }
+.dock a { color: var(--lichen); font-weight: 600; text-decoration: none; font-size: 14px; }
+@media (max-width: 960px) {
+  .dock.show { display: flex; }
+  body { padding-bottom: 76px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <canvas id="lines" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="mark" href="#top"><b>Klima</b>svar</a>
+      <div class="topright">
+        <nav class="nav" aria-label="Snarveier">
+          <a href="#sjekk" data-i18n="nav.sjekk">Sjekken</a><a href="#tiltak" data-i18n="nav.tiltak">Tiltak</a><a href="#svar" data-i18n="nav.svar">Kundesvar</a><a href="#metode" data-i18n="nav.metode">Metode</a><a href="#om" data-i18n="nav.om">Om</a>
+        </nav>
+        <div class="lang" role="group" aria-label="Språk / Language">
+          <button type="button" data-lang="no" aria-pressed="true">NO</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-copy">
+      <div class="eyebrow" data-i18n="hero.eyebrow">Bærekraftssjekk for små og mellomstore bedrifter</div>
+      <h1 data-i18n="hero.h1">Når kunden spør om klimatall, har dere <em>svaret klart.</em></h1>
+      <p class="lede" data-i18n="hero.lede">Fyll inn strøm, drivstoff og flyreiser. Klimasvar regner ut utslippene, viser hva dere bør gjøre først, og setter opp et svar dere kan sende kunden eller banken.</p>
+      <div class="cta">
+        <a class="btn lichen" href="#sjekk" data-i18n="hero.start">Start sjekken</a>
+        <button type="button" class="btn ghost-dark" id="btn-example-hero" data-i18n="hero.example">Se et eksempel</button>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><span class="v">10 min</span><span class="k" data-i18n="fact1">fra start til svar</span></div>
+      <div class="fact"><span class="v">Scope 1–3</span><span class="k" data-i18n="fact2">etter GHG-protokollen</span></div>
+      <div class="fact"><span class="v">VSME</span><span class="k" data-i18n="fact3">EUs standard for småbedrifter</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="tool" id="sjekk">
+    <div class="wrap">
+      <div class="tool-head">
+        <h2 data-i18n="tool.h">Sjekken</h2>
+        <div class="linkbtns">
+          <button type="button" class="linkbtn" id="btn-example" data-i18n="tool.example">Vis eksempel</button>
+          <button type="button" class="linkbtn" id="btn-clear" data-i18n="tool.clear">Tøm skjemaet</button>
+        </div>
+      </div>
+      <p class="example-note" id="example-note" hidden><span data-i18n="tool.note">Du ser en eksempelbedrift: en elektriker med 14 ansatte. Bytt ut tallene med deres egne.</span></p>
+
+      <div class="grid">
+        <form class="wizard" id="f" autocomplete="off" novalidate>
+          <div class="rail" role="group" aria-label="Steg">
+            <button type="button" data-go="1"><span class="n">1<i></i></span><span class="t" data-i18n="rail1">Bedriften</span></button>
+            <button type="button" data-go="2"><span class="n">2<i></i></span><span class="t" data-i18n="rail2">Energi</span></button>
+            <button type="button" data-go="3"><span class="n">3<i></i></span><span class="t" data-i18n="rail3">Kjøretøy</span></button>
+            <button type="button" data-go="4"><span class="n">4<i></i></span><span class="t" data-i18n="rail4">Reiser</span></button>
+            <button type="button" data-go="5"><span class="n">5<i></i></span><span class="t" data-i18n="rail5">Styring</span></button>
+          </div>
+
+          <section class="step" data-step="1">
+            <div class="step-head">
+              <h3 tabindex="-1" data-i18n="s1.h">Om bedriften</h3>
+              <p data-i18n="s1.p">Navn og år brukes i svaret til kunden. Omsetningen trengs for klimaintensiteten, som banker ofte spør etter.</p>
+            </div>
+            <div class="fields">
+              <div class="fld"><label for="navn"><span class="fl" data-i18n="f.navn">Navn</span></label><div class="in"><input id="navn" type="text" placeholder="Bedrift AS" data-i18n-ph="ph.navn"></div></div>
+              <div class="fld"><label for="bransje"><span class="fl" data-i18n="f.bransje">Bransje</span></label><div class="in">
+                <select id="bransje">
+                  <option value="kontor" data-i18n="b.kontor">Kontor og tjenester</option>
+                  <option value="handverk" data-i18n="b.handverk">Håndverk og service</option>
+                  <option value="bygg" data-i18n="b.bygg">Bygg og anlegg</option>
+                  <option value="transport" data-i18n="b.transport">Transport og logistikk</option>
+                  <option value="handel" data-i18n="b.handel">Varehandel</option>
+                  <option value="servering" data-i18n="b.servering">Servering</option>
+                  <option value="industri" data-i18n="b.industri">Industri og produksjon</option>
+                  <option value="annet" data-i18n="b.annet">Annet</option>
+                </select></div></div>
+              <div class="fld"><label for="aar"><span class="fl" data-i18n="f.aar">Regnskapsår</span></label><div class="in"><input id="aar" type="text" inputmode="numeric" placeholder="2025"></div></div>
+              <div class="fld"><label for="ansatte"><span class="fl" data-i18n="f.ansatte">Ansatte</span><span class="fh" data-i18n="h.ansatte">Årsverk, omtrentlig</span></label><div class="in"><input id="ansatte" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.arsverk">årsverk</span></div></div>
+              <div class="fld"><label for="omsetning"><span class="fl" data-i18n="f.omsetning">Omsetning</span><span class="fh" data-i18n="h.omsetning">Siste regnskapsår</span></label><div class="in"><input id="omsetning" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.mnok">mill. kr</span></div></div>
+            </div>
+          </section>
+
+          <section class="step" data-step="2" hidden>
+            <div class="step-head">
+              <h3 tabindex="-1" data-i18n="s2.h">Bygg og energi</h3>
+              <p data-i18n="s2.p">Energien dere kjøper til lokalene. Strøm og fjernvarme er Scope 2, propan dere brenner selv er Scope 1.</p>
+            </div>
+            <div class="fields">
+              <div class="fld"><label for="strom"><span class="fl" data-i18n="f.strom">Strøm</span><span class="fh" data-i18n="h.strom">På fakturaen eller i Elhub. Inkludert i husleien? Spør utleier.</span></label><div class="in"><input id="strom" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.kwh">kWh i året</span></div></div>
+              <div class="fld"><label for="fjernvarme"><span class="fl" data-i18n="f.fjernvarme">Fjernvarme</span><span class="fh" data-i18n="h.fjernvarme">På fakturaen fra fjernvarmeselskapet</span></label><div class="in"><input id="fjernvarme" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.kwh">kWh i året</span></div></div>
+              <div class="fld"><label for="propan"><span class="fl" data-i18n="f.propan">Propan</span><span class="fh" data-i18n="h.propan">Kjøkken, oppvarming eller tørking. En vanlig flaske er 11 kg.</span></label><div class="in"><input id="propan" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.kg">kg i året</span></div></div>
+            </div>
+          </section>
+
+          <section class="step" data-step="3" hidden>
+            <div class="step-head">
+              <h3 tabindex="-1" data-i18n="s3.h">Kjøretøy og maskiner</h3>
+              <p data-i18n="s3.p">For de fleste håndverkere og transportbedrifter er dette den største posten. Literne står i rapporten fra drivstoffkortet.</p>
+            </div>
+            <div class="fields">
+              <div class="fld"><label for="diesel"><span class="fl" data-i18n="f.diesel">Diesel til biler</span><span class="fh" data-i18n="h.diesel">Firmabiler og varebiler</span></label><div class="in"><input id="diesel" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
+              <div class="fld"><label for="bensin"><span class="fl" data-i18n="f.bensin">Bensin til biler</span><span class="fh" data-i18n="h.bensin">Inkludert ladbare hybrider</span></label><div class="in"><input id="bensin" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
+              <div class="fld"><label for="anlegg"><span class="fl" data-i18n="f.anlegg">Anleggsdiesel</span><span class="fh" data-i18n="h.anlegg">Maskiner, aggregater og byggtørking</span></label><div class="in"><input id="anlegg" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
+              <div class="fld"><label for="fossile"><span class="fl" data-i18n="f.fossile">Diesel- og bensinbiler</span><span class="fh" data-i18n="h.fossile">Brukes til å regne effekten av å bytte</span></label><div class="in"><input id="fossile" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.stk">stk.</span></div></div>
+              <div class="fld"><label for="elbiler"><span class="fl" data-i18n="f.elbiler">Elbiler</span><span class="fh" data-i18n="h.elbiler">Ladestrøm hos dere selv er med under strøm</span></label><div class="in"><input id="elbiler" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.stk">stk.</span></div></div>
+            </div>
+          </section>
+
+          <section class="step" data-step="4" hidden>
+            <div class="step-head">
+              <h3 tabindex="-1" data-i18n="s4.h">Flyreiser i jobben</h3>
+              <p data-i18n="s4.p">Antall tur-retur-reiser for alle ansatte til sammen. Reisebyrået kan ofte gi dere en oversikt.</p>
+            </div>
+            <div class="fields">
+              <div class="fld"><label for="flyInn"><span class="fl" data-i18n="f.flyInn">Innenlands</span><span class="fh" data-i18n="h.flyInn">For eksempel Oslo–Bergen eller Oslo–Tromsø</span></label><div class="in"><input id="flyInn" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
+              <div class="fld"><label for="flyEur"><span class="fl" data-i18n="f.flyEur">Europa</span><span class="fh" data-i18n="h.flyEur">For eksempel Oslo–London eller Oslo–Barcelona</span></label><div class="in"><input id="flyEur" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
+              <div class="fld"><label for="flyInt"><span class="fl" data-i18n="f.flyInt">Utenfor Europa</span><span class="fh" data-i18n="h.flyInt">For eksempel Oslo–New York eller Oslo–Bangkok</span></label><div class="in"><input id="flyInt" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
+            </div>
+          </section>
+
+          <section class="step" data-step="5" hidden>
+            <div class="step-head">
+              <h3 tabindex="-1" data-i18n="s5.h">Styring og datagrunnlag</h3>
+              <p data-i18n="s5.p">Kunder og banker spør ikke bare om tall. De vil også vite hvem som har ansvaret, og hva dere har bestemt dere for.</p>
+            </div>
+            <div class="checks">
+              <label class="check" for="ansvar"><span data-i18n="c.ansvar">Én person har ansvaret for bærekraft og klimatall</span><span class="switch"><input type="checkbox" id="ansvar"><span></span></span></label>
+              <label class="check" for="policy"><span data-i18n="c.policy">Vi har en skriftlig miljø- eller bærekraftspolicy</span><span class="switch"><input type="checkbox" id="policy"><span></span></span></label>
+              <label class="check" for="maal"><span data-i18n="c.maal">Vi har et mål for å kutte utslipp</span><span class="switch"><input type="checkbox" id="maal"><span></span></span></label>
+              <label class="check" for="kunde"><span data-i18n="c.kunde">Vi har fått spørsmål om klimatall fra kunde, bank eller i anbud</span><span class="switch"><input type="checkbox" id="kunde"><span></span></span></label>
+              <div class="datasrc" role="group" aria-labelledby="data-lbl">
+                <span class="fl" id="data-lbl" data-i18n="c.data">Tallene vi har lagt inn er</span>
+                <span class="seg">
+                  <input type="radio" name="data" id="data-malt" value="malt"><label for="data-malt" data-i18n="c.malt">Fra fakturaer</label>
+                  <input type="radio" name="data" id="data-anslag" value="anslag"><label for="data-anslag" data-i18n="c.anslag">Anslag</label>
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <div class="step-foot">
+            <span class="count" id="step-count">Steg 1 av 5</span>
+            <div class="btns">
+              <button type="button" class="btn ghost" id="prev" data-i18n="btn.prev">Tilbake</button>
+              <button type="button" class="btn solid" id="next">Neste</button>
+            </div>
+          </div>
+        </form>
+
+        <aside class="card" id="kort" aria-live="polite">
+          <div class="card-sec">
+            <div class="card-top"><span class="card-co" id="c-co">Bedrift AS</span><span class="card-yr" id="c-yr"></span></div>
+            <div class="ring">
+              <svg viewBox="0 0 200 200" aria-hidden="true">
+                <circle cx="100" cy="100" r="80" style="stroke: var(--soft)"></circle>
+                <circle class="arc" id="arc1" cx="100" cy="100" r="80" style="stroke: var(--s1)" stroke-dasharray="0 503"></circle>
+                <circle class="arc" id="arc2" cx="100" cy="100" r="80" style="stroke: var(--s2)" stroke-dasharray="0 503"></circle>
+                <circle class="arc" id="arc3" cx="100" cy="100" r="80" style="stroke: var(--s3)" stroke-dasharray="0 503"></circle>
+              </svg>
+              <div class="ring-c"><span class="big" id="r-total">0</span><span class="u" data-i18n="card.unit">tonn CO₂e i året</span></div>
+            </div>
+            <div class="legend" id="r-legend"></div>
+          </div>
+          <div class="card-sec">
+            <div class="kpis">
+              <div class="kpi"><span class="v" id="r-int">–</span><span class="k" data-i18n="card.int">tonn per mill. kr, Scope 1 og 2</span></div>
+              <div class="kpi"><span class="v" id="r-ans">–</span><span class="k" data-i18n="card.ans">tonn per årsverk</span></div>
+              <div class="kpi"><span class="v" id="r-mwh">0</span><span class="k" data-i18n="card.mwh">MWh energi</span></div>
+            </div>
+          </div>
+          <div class="card-sec">
+            <span class="eyebrow" data-i18n="card.src">Største kilder</span>
+            <div class="sources" id="r-sources"></div>
+          </div>
+          <div class="card-sec">
+            <span class="eyebrow" data-i18n="card.ready">Klar til å svare</span>
+            <div class="ready" id="r-ready" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="ready-txt" id="r-ready-txt"></p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="tiltak">
+    <div class="wrap">
+      <div class="band-head">
+        <span class="eyebrow" data-i18n="t.eye">Prioritert</span>
+        <h2 data-i18n="t.h">Gjør dette først</h2>
+        <p data-i18n="t.p">Rangert etter hva som kutter mest, og hva kundene deres oftest spør om. Listen følger tallene dine.</p>
+      </div>
+      <ol class="actions" id="actions"></ol>
+    </div>
+  </section>
+
+  <section class="band" id="svar">
+    <div class="wrap">
+      <div class="band-head">
+        <span class="eyebrow" data-i18n="a.eye">Ferdig til å sende</span>
+        <h2 data-i18n="a.h">Svar til kunden</h2>
+      </div>
+      <div class="answer">
+        <article class="doc" id="doc"></article>
+        <div class="answer-side">
+          <p data-i18n="a.p1">Svaret følger datapunktene i basismodulen til VSME. Det er den frivillige standarden EU-kommisjonen ber store selskaper og banker bruke når de spør småbedrifter om bærekraftsinformasjon.</p>
+          <p data-i18n="a.p2">Kopier teksten og lim den inn i e-posten, anbudet eller kundeskjemaet.</p>
+          <div><button type="button" class="btn solid" id="btn-copy" data-i18n="a.copy">Kopier svaret</button></div>
+          <span class="status" id="copy-status" role="status"></span>
+          <div class="feedback" id="feedback">
+            <p class="q" data-i18n="fb.q">Var Klimasvar nyttig for dere?</p>
+            <div class="fb-btns" id="fb-btns">
+              <button type="button" class="pill" data-fb="ja" data-i18n="fb.ja">Ja</button>
+              <button type="button" class="pill" data-fb="delvis" data-i18n="fb.delvis">Delvis</button>
+              <button type="button" class="pill" data-fb="nei" data-i18n="fb.nei">Nei</button>
+            </div>
+            <p class="fb-thanks" id="fb-thanks" hidden data-i18n="fb.thanks">Takk! Svaret ditt hjelper meg å gjøre verktøyet bedre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="metode">
+    <div class="wrap">
+      <div class="band-head">
+        <span class="eyebrow" data-i18n="m.eye">Metode</span>
+        <h2 data-i18n="m.h">Slik regner vi</h2>
+      </div>
+      <div class="method">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th data-i18n="m.c1">Kilde</th><th data-i18n="m.c2">Faktor</th><th data-i18n="m.c3">Grunnlag</th></tr></thead>
+            <tbody data-i18n="m.tbody">
+              <tr><td>Strøm</td><td class="f">0,0094 kg/kWh</td><td class="g">NVE, klimadeklarasjon for fysisk levert strøm 2025</td></tr>
+              <tr><td>Fjernvarme</td><td class="f">0,015 kg/kWh</td><td class="g">Anslått norsk gjennomsnitt, varierer mellom nettene</td></tr>
+              <tr><td>Propan</td><td class="f">2,94 kg/kg</td><td class="g">DEFRA/DESNZ 2025, LPG omregnet fra liter</td></tr>
+              <tr><td>Diesel, biler</td><td class="f">2,571 kg/l</td><td class="g">DEFRA/DESNZ 2025, med biodrivstoff</td></tr>
+              <tr><td>Bensin, biler</td><td class="f">2,069 kg/l</td><td class="g">DEFRA/DESNZ 2025, med biodrivstoff</td></tr>
+              <tr><td>Anleggsdiesel</td><td class="f">2,755 kg/l</td><td class="g">DEFRA/DESNZ 2025, fossil gassolje</td></tr>
+              <tr><td>Fly, innenlands</td><td class="f">229 kg</td><td class="g">Per tur-retur. DEFRA/DESNZ 2026, 2 × 500 km</td></tr>
+              <tr><td>Fly, Europa</td><td class="f">352 kg</td><td class="g">Per tur-retur. DEFRA/DESNZ 2026, 2 × 1 400 km</td></tr>
+              <tr><td>Fly, utenfor Europa</td><td class="f">1 639 kg</td><td class="g">Per tur-retur. DEFRA/DESNZ 2026, 2 × 7 000 km</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prose">
+          <p data-i18n="m.p">Beregningen følger GHG-protokollen. Scope 1 er det dere brenner selv. Scope 2 er utslippene fra å produsere strømmen og varmen dere kjøper. Scope 3 er resten av verdikjeden, og her er bare flyreiser med.</p>
+          <ul data-i18n="m.ul">
+            <li>Norsk drivstoff har mer biodrivstoff enn den britiske snittfaktoren, så utslippene fra biler blir heller litt for høye enn for lave.</li>
+            <li>Strøm regnes lokasjonsbasert, slik VSME ber om. Opprinnelsesgarantier endrer ikke dette tallet.</li>
+            <li>Flyfaktorene inkluderer effekten av utslipp i høyden.</li>
+            <li>Innkjøp av varer og tjenester er ikke med. For mange bedrifter er det den største posten.</li>
+            <li>Resultatet er et estimat, ikke et revidert klimaregnskap.</li>
+          </ul>
+          <p class="src-links"><span data-i18n="m.src">Kilder:</span> <a href="https://www.nve.no/energi/energisystem/energibruk/stroemdeklarasjoner/" target="_blank" rel="noopener">NVE</a> · <a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025" target="_blank" rel="noopener">DEFRA/DESNZ 2025</a> · <a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026" target="_blank" rel="noopener">DEFRA/DESNZ 2026</a> · <a href="https://www.efrag.org" target="_blank" rel="noopener">EFRAG</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="om">
+    <div class="wrap">
+      <div class="band-head">
+        <span class="eyebrow" data-i18n="o.eye">Om prosjektet</span>
+        <h2 data-i18n="o.h">Hvorfor Klimasvar</h2>
+      </div>
+      <div class="about">
+        <div class="prose">
+          <p data-i18n="o.p1">Store selskaper må rapportere stadig mer om bærekraft, og spørsmålene havner hos leverandørene deres. En elektriker med 14 ansatte eller et lite verksted har sjelden en egen bærekraftsansvarlig, og et fullt klimaregnskap er mer enn de trenger for å svare på et kundeskjema.</p>
+          <p data-i18n="o.p2">Klimasvar gir dem et godt nok første svar på ti minutter. Estimatet bygger på offentlige utslippsfaktorer og er satt opp etter VSME, som EU-kommisjonen har anbefalt som felles mal for slike forespørsler. Verktøyet viser også hva bedriften bør gjøre først, så svaret kan bli starten på et faktisk klimaarbeid.</p>
+          <p data-i18n="o.p3">Alt regnes ut i nettleseren. Ingen tall sendes til meg eller andre.</p>
+        </div>
+        <aside class="maker">
+          <span class="eyebrow" data-i18n="o.made">Laget av</span>
+          <h3>Victor Sjuve-Opsahl</h3>
+          <p data-i18n="o.bio">Bachelor i bærekraft og forretningsutvikling fra Høyskolen Kristiania, der bacheloroppgaven om en sirkulær forretningsmodell for ombruk av betongelementer fikk karakteren A. Studerer nå bedriftsøkonomi ved Handelshøyskolen BI.</p>
+          <p id="linkedin-row" hidden><a id="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a></p>
+          <div class="road">
+            <span class="eyebrow" data-i18n="o.road">Veien videre</span>
+            <ul data-i18n="o.ul">
+              <li>Teste verktøyet med de første ti bedriftene og justere etter tilbakemeldingene</li>
+              <li>Ta med innkjøp og resten av Scope 3, med utgiftsbaserte faktorer</li>
+              <li>Rapport som PDF med bedriftens egen logo</li>
+              <li>Sammenligning med andre i samme bransje</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mark"><b>Klima</b>svar</span>
+    <span data-i18n="foot">Laget av Victor Sjuve-Opsahl, 2026 · Tallene lagres bare i din nettleser</span>
+  </div>
+</footer>
+
+<div class="dock" id="dock"><span class="t"><span id="dock-t">0</span> <small data-i18n="dock.u">tonn CO₂e</small></span><a href="#kort" data-i18n="dock.a">Se klimakortet</a></div>
+
+<script>
+(function () {
+  // ---------- Innstillinger ----------
+  // Fylles inn når siden flyttes til eget domene, f.eks. "https://klimasvar.goatcounter.com/count"
+  var GOATCOUNTER = "https://klimasvar.goatcounter.com/count";
+  // Lenke til LinkedIn-profilen, vises i "Laget av" når den er fylt inn
+  var LINKEDIN = "";
+
+  // ---------- Faktorer (kg CO2e per enhet) ----------
+  var F = { strom: 0.0094, fjernvarme: 0.015, propan: 2.94, diesel: 2.571, bensin: 2.069, anlegg: 2.755,
+            flyInn: 0.22928, flyEur: 0.12576, flyInt: 0.11704 };
+  var KM = { flyInn: 500, flyEur: 1400, flyInt: 7000 };
+  var TRIP = { flyInn: 2 * KM.flyInn * F.flyInn, flyEur: 2 * KM.flyEur * F.flyEur, flyInt: 2 * KM.flyInt * F.flyInt };
+  var KWH = { diesel: 10.0, bensin: 8.9, anlegg: 10.0, propan: 12.8 };
+
+  var NUM = ["omsetning", "ansatte", "strom", "fjernvarme", "propan", "diesel", "bensin", "anlegg", "fossile", "elbiler", "flyInn", "flyEur", "flyInt"];
+  var TXT = ["navn", "aar", "bransje"];
+  var CHK = ["ansvar", "policy", "maal", "kunde"];
+  var STEP_FIELDS = { 1: ["navn", "ansatte", "omsetning"], 2: ["strom", "fjernvarme", "propan"], 3: ["diesel", "bensin", "anlegg", "fossile", "elbiler"], 4: ["flyInn", "flyEur", "flyInt"], 5: [] };
+
+  var EXAMPLE = {
+    navn: "Fjordlys Elektro AS", bransje: "handverk", aar: "2025", ansatte: "14", omsetning: "28",
+    strom: "62 000", fjernvarme: "", propan: "", diesel: "9 800", bensin: "", anlegg: "300",
+    fossile: "8", elbiler: "3", flyInn: "10", flyEur: "2", flyInt: "",
+    ansvar: false, policy: false, maal: false, kunde: true, data: "anslag", _example: true
+  };
+
+  // ---------- Språk ----------
+  var lang = "no";
+  var EN = {
+    "nav.sjekk": "The check", "nav.tiltak": "Actions", "nav.svar": "Customer answer", "nav.metode": "Method", "nav.om": "About",
+    "hero.eyebrow": "Sustainability check for small and medium-sized businesses",
+    "hero.h1": "When a customer asks for climate figures, you have <em>the answer ready.</em>",
+    "hero.lede": "Enter your electricity, fuel and flights. Klimasvar calculates your emissions, shows what to do first, and drafts an answer you can send to your customer or bank.",
+    "hero.start": "Start the check", "hero.example": "See an example",
+    "fact1": "from start to answer", "fact2": "under the GHG Protocol", "fact3": "the EU standard for SMEs",
+    "tool.h": "The check", "tool.example": "Show example", "tool.clear": "Clear the form",
+    "tool.note": "You are looking at an example business: an electrician with 14 employees. Replace the figures with your own.",
+    "rail1": "Company", "rail2": "Energy", "rail3": "Vehicles", "rail4": "Travel", "rail5": "Governance",
+    "s1.h": "About the business", "s1.p": "Name and year are used in the answer to your customer. Turnover is needed for emissions intensity, which banks often ask for.",
+    "f.navn": "Name", "ph.navn": "Your company AS", "f.bransje": "Industry",
+    "b.kontor": "Office and services", "b.handverk": "Trades and services", "b.bygg": "Construction", "b.transport": "Transport and logistics",
+    "b.handel": "Retail", "b.servering": "Food service", "b.industri": "Manufacturing", "b.annet": "Other",
+    "f.aar": "Financial year", "f.ansatte": "Employees", "h.ansatte": "Full-time equivalents, roughly", "u.arsverk": "FTE",
+    "f.omsetning": "Turnover", "h.omsetning": "Last financial year", "u.mnok": "NOK million",
+    "s2.h": "Buildings and energy", "s2.p": "The energy you buy for your premises. Electricity and district heating are Scope 2, propane you burn yourselves is Scope 1.",
+    "f.strom": "Electricity", "h.strom": "On your invoice or in Elhub. Included in the rent? Ask your landlord.", "u.kwh": "kWh a year",
+    "f.fjernvarme": "District heating", "h.fjernvarme": "On the invoice from your district heating supplier",
+    "f.propan": "Propane", "h.propan": "Kitchen, heating or drying. A standard cylinder holds 11 kg.", "u.kg": "kg a year",
+    "s3.h": "Vehicles and machinery", "s3.p": "For most tradespeople and transport companies this is the largest item. The litres are in your fuel card report.",
+    "f.diesel": "Diesel for vehicles", "h.diesel": "Company cars and vans", "u.liter": "litres a year",
+    "f.bensin": "Petrol for vehicles", "h.bensin": "Including plug-in hybrids",
+    "f.anlegg": "Off-road diesel", "h.anlegg": "Machinery, generators and construction drying",
+    "f.fossile": "Diesel and petrol vehicles", "h.fossile": "Used to estimate the effect of switching", "u.stk": "vehicles",
+    "f.elbiler": "Electric vehicles", "h.elbiler": "Charging at your premises is included under electricity",
+    "s4.h": "Business flights", "s4.p": "Number of return trips for all employees combined. Your travel agency can often provide an overview.",
+    "f.flyInn": "Domestic", "h.flyInn": "For example Oslo–Bergen or Oslo–Tromsø", "u.tur": "return trips",
+    "f.flyEur": "Europe", "h.flyEur": "For example Oslo–London or Oslo–Barcelona",
+    "f.flyInt": "Outside Europe", "h.flyInt": "For example Oslo–New York or Oslo–Bangkok",
+    "s5.h": "Governance and data", "s5.p": "Customers and banks don't only ask for figures. They also want to know who is responsible, and what you have decided to do.",
+    "c.ansvar": "One person is responsible for sustainability and climate figures",
+    "c.policy": "We have a written environmental or sustainability policy",
+    "c.maal": "We have a target for cutting emissions",
+    "c.kunde": "We have been asked for climate figures by a customer, a bank or in a tender",
+    "c.data": "The figures we have entered are", "c.malt": "From invoices", "c.anslag": "Estimates",
+    "btn.prev": "Back",
+    "card.unit": "tonnes CO₂e a year", "card.int": "tonnes per NOK million, Scope 1 and 2", "card.ans": "tonnes per FTE", "card.mwh": "MWh of energy",
+    "card.src": "Largest sources", "card.ready": "Ready to answer",
+    "t.eye": "Prioritised", "t.h": "Do this first", "t.p": "Ranked by what cuts the most, and what your customers most often ask about. The list follows your figures.",
+    "a.eye": "Ready to send", "a.h": "Answer for your customer",
+    "a.p1": "The answer follows the data points in the VSME basic module. That is the voluntary standard the European Commission asks large companies and banks to use when they request sustainability information from small businesses.",
+    "a.p2": "Copy the text and paste it into your email, tender or customer form.", "a.copy": "Copy the answer",
+    "fb.q": "Was Klimasvar useful to you?", "fb.ja": "Yes", "fb.delvis": "Partly", "fb.nei": "No",
+    "fb.thanks": "Thank you! Your answer helps me make the tool better.",
+    "m.eye": "Method", "m.h": "How we calculate", "m.c1": "Source", "m.c2": "Factor", "m.c3": "Basis",
+    "m.tbody":
+      '<tr><td>Electricity</td><td class="f">0.0094 kg/kWh</td><td class="g">NVE, climate declaration for physically delivered electricity 2025</td></tr>' +
+      '<tr><td>District heating</td><td class="f">0.015 kg/kWh</td><td class="g">Estimated Norwegian average, varies between networks</td></tr>' +
+      '<tr><td>Propane</td><td class="f">2.94 kg/kg</td><td class="g">DEFRA/DESNZ 2025, LPG converted from litres</td></tr>' +
+      '<tr><td>Diesel, vehicles</td><td class="f">2.571 kg/l</td><td class="g">DEFRA/DESNZ 2025, with biofuel blend</td></tr>' +
+      '<tr><td>Petrol, vehicles</td><td class="f">2.069 kg/l</td><td class="g">DEFRA/DESNZ 2025, with biofuel blend</td></tr>' +
+      '<tr><td>Off-road diesel</td><td class="f">2.755 kg/l</td><td class="g">DEFRA/DESNZ 2025, fossil gas oil</td></tr>' +
+      '<tr><td>Flight, domestic</td><td class="f">229 kg</td><td class="g">Per return trip. DEFRA/DESNZ 2026, 2 × 500 km</td></tr>' +
+      '<tr><td>Flight, Europe</td><td class="f">352 kg</td><td class="g">Per return trip. DEFRA/DESNZ 2026, 2 × 1,400 km</td></tr>' +
+      '<tr><td>Flight, outside Europe</td><td class="f">1,639 kg</td><td class="g">Per return trip. DEFRA/DESNZ 2026, 2 × 7,000 km</td></tr>',
+    "m.p": "The calculation follows the GHG Protocol. Scope 1 is what you burn yourselves. Scope 2 is the emissions from producing the electricity and heat you buy. Scope 3 is the rest of the value chain, and only flights are included here.",
+    "m.ul":
+      "<li>Norwegian fuel contains more biofuel than the UK average factor, so vehicle emissions are more likely slightly too high than too low.</li>" +
+      "<li>Electricity is calculated location-based, as VSME asks. Guarantees of origin do not change this figure.</li>" +
+      "<li>The flight factors include the warming effect of emissions at altitude.</li>" +
+      "<li>Purchased goods and services are not included. For many businesses they are the largest item.</li>" +
+      "<li>The result is an estimate, not an audited carbon account.</li>",
+    "m.src": "Sources:",
+    "o.eye": "About the project", "o.h": "Why Klimasvar",
+    "o.p1": "Large companies have to report more and more on sustainability, and the questions end up with their suppliers. An electrician with 14 employees or a small workshop rarely has a sustainability manager, and a full carbon account is more than they need to answer a customer form.",
+    "o.p2": "Klimasvar gives them a good-enough first answer in ten minutes. The estimate is built on public emission factors and structured according to VSME, which the European Commission has recommended as the common template for such requests. The tool also shows what the business should do first, so the answer can be the start of real climate work.",
+    "o.p3": "Everything is calculated in your browser. No figures are sent to me or anyone else.",
+    "o.made": "Made by",
+    "o.bio": "Bachelor's degree in Sustainability and Business Development from Kristiania University of Applied Sciences, where my thesis on a circular business model for reusing precast concrete elements received an A. Now studying business administration at BI Norwegian Business School.",
+    "o.road": "What's next",
+    "o.ul":
+      "<li>Test the tool with the first ten businesses and adjust based on their feedback</li>" +
+      "<li>Add purchases and the rest of Scope 3, using spend-based factors</li>" +
+      "<li>A PDF report with the company's own logo</li>" +
+      "<li>Comparison with others in the same industry</li>",
+    "foot": "Made by Victor Sjuve-Opsahl, 2026 · Your figures are stored only in your browser",
+    "dock.u": "tonnes CO₂e", "dock.a": "See the climate card"
+  };
+
+  var TX = {
+    no: {
+      src: { kjoretoy: "Biler", anlegg: "Maskiner og aggregater", propan: "Propan", strom: "Strøm", fjernvarme: "Fjernvarme", fly: "Flyreiser" },
+      scope: { 1: "Scope 1 · egne utslipp", 2: "Scope 2 · kjøpt energi", 3: "Scope 3 · flyreiser" },
+      company: "Din bedrift", yr: function (y) { return "Regnskapsår " + y; },
+      empty: "Kildene vises her når du har fylt inn forbruk i steg 2 til 4.",
+      ready: ["Ikke i gang ennå.", "Dere har et første estimat.", "Noe styring er på plass.", "Godt i gang, noen hull gjenstår.", "Ett punkt gjenstår.", "Klare til å svare kunder og bank."],
+      of5: function (n) { return n + " av 5."; },
+      step: function (n) { return "Steg " + n + " av 5"; },
+      names: { 2: "Energi", 3: "Kjøretøy", 4: "Reiser", 5: "Styring" },
+      next: function (n) { return "Neste: " + n; }, last: "Se tiltakene",
+      tag: { kutt: "Kutt", svar: "Bli klar" },
+      copyOk: "Kopiert. Lim inn i e-posten eller skjemaet.",
+      copyFail: "Teksten er markert. Kopier med Ctrl+C, eller hold inne på mobil.",
+      pct: function (n) { return n + " %"; },
+      a: {
+        kjoretoy: ["Elektrifiser bilparken når bilene skal byttes", function (p) { return "Bilene står for " + p + " av utslippene. Velg elbil eller elektrisk varebil ved neste utskifting, og bruk HVO100 i dieselbilene der det er tilgjengelig til da."; }],
+        kjoretoyEff: function (x) { return "Hver fossil bil som byttes kutter ca. " + x + " tonn i året"; },
+        kjoretoyNone: "Fyll inn antall biler i steg 3 for å se effekten per bil",
+        anlegg: ["Kutt dieselen i maskiner og aggregater", function (p) { return "Maskiner og aggregater står for " + p + ". Bruk HVO100 eller elektriske maskiner, koble til strømnettet i stedet for aggregat der det går, og unngå tomgang."; }],
+        upTo: function (x) { return "Inntil " + x + " tonn i året"; },
+        fly: ["Lag en enkel reisepolicy", function (p) { return "Flyreiser står for " + p + ". Ta tog der reisen er kort nok, og hold faste møter på video."; }],
+        flyEff: function (x) { return "Halvparten så mange flyreiser kutter ca. " + x + " tonn i året"; },
+        propan: ["Fas ut propan", function (p) { return "Propan står for " + p + ". Vurder elektrisk utstyr, som induksjon eller varmepumpe, når utstyret skal byttes."; }],
+        strom: ["Senk strømforbruket", "Strøm gir lave utslipp i Norge, men er ofte den største energiposten. Styr varme, ventilasjon og lys etter åpningstid, og sjekk om Enova har støtte til tiltakene dere vurderer.", "Gir mest i lavere strømregning"],
+        fjernvarme: ["Be om fjernvarmeselskapets eget utslippstall", "Utslippene fra fjernvarme varierer mye mellom nettene. Bytt ut gjennomsnittet her med leverandørens tall.", "Gjør svaret mer presist"],
+        ansvar: ["Gi én person ansvaret", "Noen må eie tallene og svare når kunden spør. Når grunnlaget er på plass, tar det noen timer i året."],
+        data: ["Bytt ut anslagene med faktiske tall", "Strømforbruket per måned finner dere i Elhub, drivstoffet i rapportene fra drivstoffkortet og flyreisene hos reisebyrået. Med faktiske tall kan dere stå inne for svaret."],
+        kunde: ["Send svaret til kunden", "Kopier svaret lenger ned og legg det ved. Det følger VSME, som store kunder og banker er bedt om å holde seg innenfor."],
+        policy: ["Skriv en policy på én side", "Mange kundeskjemaer spør om dere har en policy. Beskriv hva dere gjør for klima, miljø og ansatte, og hvem som har ansvaret."],
+        maal: ["Sett ett konkret mål", "Knytt målet til den største kilden, for eksempel at alle nye biler skal være elektriske fra neste år. Det viser kunder og bank at dere har en retning."],
+        scope3: ["Neste steg: kartlegg innkjøpene", function (b0, b1) { return "Innkjøp hører til Scope 3 og er ikke med her. Innen " + b0 + " ligger mye av utslippene ofte i " + b1 + ". Start med de fem største leverandørene etter beløp."; }]
+      },
+      bransje: {
+        kontor: ["kontor og tjenester", "IT-utstyr, møbler og innkjøpte tjenester"],
+        handverk: ["håndverk og service", "materialene og utstyret dere kjøper inn"],
+        bygg: ["bygg og anlegg", "betong, stål og andre byggematerialer"],
+        transport: ["transport og logistikk", "innleide transporttjenester og vedlikehold av kjøretøy"],
+        handel: ["varehandel", "varene dere selger og transporten av dem"],
+        servering: ["servering", "mat og drikke, særlig kjøtt og meieriprodukter"],
+        industri: ["industri og produksjon", "råvarer og innkjøpte komponenter"],
+        annet: ["deres bransje", "varer og tjenester dere kjøper inn"]
+      },
+      d: {
+        title: function (n, y) { return "Klimadata for " + n + ", regnskapsåret " + y; },
+        placeholderName: "[Bedriftens navn]", placeholderYear: "[år]",
+        method: "Beregnet etter GHG-protokollen, med oppsett etter basismodulen i VSME (B3).",
+        energy: "Energiforbruk", el: "Strøm", heat: "Fjernvarme", fuel: "Drivstoff og brensel", totalE: "Totalt",
+        ghg: "Klimagassutslipp (tonn CO2e)", ghgH: "Klimagassutslipp, tonn CO₂e",
+        s1: "Scope 1", s1l: "Scope 1, egne utslipp", s2: "Scope 2, lokasjonsbasert", s2l: "Scope 2, kjøpt energi (lokasjonsbasert)",
+        s12: "Scope 1 og 2 samlet", s3: "Scope 3, flyreiser i jobben", s3note: "(øvrig Scope 3 er ikke kartlagt)",
+        intH: "Klimaintensitet", int: function (x) { return "Klimaintensitet (Scope 1 og 2): " + x + " tonn CO2e per million kroner omsetning"; },
+        intRow: "Scope 1 og 2 per million kroner omsetning", intMissing: "Klimaintensitet: fyll inn omsetning",
+        dataLbl: "Datagrunnlag", dataM: "fakturaer og målerdata", dataA: "anslag, erstattes med målte tall",
+        factors: "Utslippsfaktorer: NVE klimadeklarasjon for fysisk levert strøm 2025; DEFRA/DESNZ 2025 og 2026 for drivstoff og fly.",
+        gov: "Styring", govItems: { ansvar: "egen ansvarlig", policy: "skriftlig policy", maal: "mål for utslippskutt" },
+        eyebrow: "Klimadata · VSME B3", sub: function (y) { return "Regnskapsåret " + y + ". Beregnet etter GHG-protokollen."; },
+        energyH: "Energiforbruk, MWh",
+        foot: "Øvrig Scope 3 er ikke kartlagt. Utslippsfaktorer fra NVE (strøm 2025) og DEFRA/DESNZ (drivstoff og fly)."
+      }
+    },
+    en: {
+      src: { kjoretoy: "Vehicles", anlegg: "Machinery and generators", propan: "Propane", strom: "Electricity", fjernvarme: "District heating", fly: "Flights" },
+      scope: { 1: "Scope 1 · own emissions", 2: "Scope 2 · purchased energy", 3: "Scope 3 · flights" },
+      company: "Your company", yr: function (y) { return "Financial year " + y; },
+      empty: "Sources appear here once you have entered consumption in steps 2 to 4.",
+      ready: ["Not started yet.", "You have a first estimate.", "Some governance is in place.", "Well under way, a few gaps remain.", "One item remains.", "Ready to answer customers and banks."],
+      of5: function (n) { return n + " of 5."; },
+      step: function (n) { return "Step " + n + " of 5"; },
+      names: { 2: "Energy", 3: "Vehicles", 4: "Travel", 5: "Governance" },
+      next: function (n) { return "Next: " + n; }, last: "See the actions",
+      tag: { kutt: "Cut", svar: "Get ready" },
+      copyOk: "Copied. Paste it into your email or form.",
+      copyFail: "The text is selected. Copy with Ctrl+C, or press and hold on mobile.",
+      pct: function (n) { return n + "%"; },
+      a: {
+        kjoretoy: ["Electrify the fleet as vehicles are replaced", function (p) { return "Vehicles account for " + p + " of your emissions. Choose an electric car or van at the next replacement, and use HVO100 in the diesel vehicles where available until then."; }],
+        kjoretoyEff: function (x) { return "Each fossil vehicle replaced cuts about " + x + " tonnes a year"; },
+        kjoretoyNone: "Enter the number of vehicles in step 3 to see the effect per vehicle",
+        anlegg: ["Cut the diesel in machinery and generators", function (p) { return "Machinery and generators account for " + p + ". Use HVO100 or electric machinery, connect to the grid instead of running a generator where possible, and avoid idling."; }],
+        upTo: function (x) { return "Up to " + x + " tonnes a year"; },
+        fly: ["Introduce a simple travel policy", function (p) { return "Flights account for " + p + ". Take the train where the journey is short enough, and hold regular meetings by video."; }],
+        flyEff: function (x) { return "Halving the number of flights cuts about " + x + " tonnes a year"; },
+        propan: ["Phase out propane", function (p) { return "Propane accounts for " + p + ". Consider electric equipment, such as induction or a heat pump, when equipment is due for replacement."; }],
+        strom: ["Reduce electricity use", "Electricity has low emissions in Norway, but is often the largest energy item. Run heating, ventilation and lighting to opening hours, and check whether Enova supports the measures you are considering.", "Mainly lowers your electricity bill"],
+        fjernvarme: ["Ask your district heating supplier for its own emission factor", "District heating emissions vary widely between networks. Replace the average used here with your supplier's figure.", "Makes your answer more precise"],
+        ansvar: ["Make one person responsible", "Someone has to own the figures and answer when customers ask. Once the data is in place, it takes a few hours a year."],
+        data: ["Replace estimates with actual figures", "Monthly electricity use is in Elhub, fuel in your fuel card reports, and flights with your travel agency. With actual figures you can stand behind your answer."],
+        kunde: ["Send the answer to your customer", "Copy the answer further down and attach it. It follows VSME, which large customers and banks have been asked to stay within."],
+        policy: ["Write a one-page policy", "Many customer forms ask whether you have a policy. Describe what you do for the climate, the environment and your employees, and who is responsible."],
+        maal: ["Set one concrete target", "Tie the target to your largest source, for example that all new vehicles will be electric from next year. It shows customers and banks that you have a direction."],
+        scope3: ["Next step: map your purchases", function (b0, b1) { return "Purchases belong to Scope 3 and are not included here. In " + b0 + ", much of the emissions often lie in " + b1 + ". Start with your five largest suppliers by spend."; }]
+      },
+      bransje: {
+        kontor: ["office and services", "IT equipment, furniture and purchased services"],
+        handverk: ["trades and services", "the materials and equipment you buy"],
+        bygg: ["construction", "concrete, steel and other building materials"],
+        transport: ["transport and logistics", "subcontracted transport and vehicle maintenance"],
+        handel: ["retail", "the goods you sell and their transport"],
+        servering: ["food service", "food and drink, especially meat and dairy"],
+        industri: ["manufacturing", "raw materials and purchased components"],
+        annet: ["your industry", "the goods and services you buy"]
+      },
+      d: {
+        title: function (n, y) { return "Climate data for " + n + ", financial year " + y; },
+        placeholderName: "[Company name]", placeholderYear: "[year]",
+        method: "Calculated under the GHG Protocol, structured according to the VSME basic module (B3).",
+        energy: "Energy consumption", el: "Electricity", heat: "District heating", fuel: "Fuels", totalE: "Total",
+        ghg: "Greenhouse gas emissions (tonnes CO2e)", ghgH: "Greenhouse gas emissions, tonnes CO₂e",
+        s1: "Scope 1", s1l: "Scope 1, own emissions", s2: "Scope 2, location-based", s2l: "Scope 2, purchased energy (location-based)",
+        s12: "Scope 1 and 2 combined", s3: "Scope 3, business flights", s3note: "(other Scope 3 not mapped)",
+        intH: "Emissions intensity", int: function (x) { return "Emissions intensity (Scope 1 and 2): " + x + " tonnes CO2e per NOK million of turnover"; },
+        intRow: "Scope 1 and 2 per NOK million of turnover", intMissing: "Emissions intensity: enter turnover",
+        dataLbl: "Data basis", dataM: "invoices and meter data", dataA: "estimates, to be replaced with measured figures",
+        factors: "Emission factors: NVE climate declaration for physically delivered electricity 2025; DEFRA/DESNZ 2025 and 2026 for fuel and flights.",
+        gov: "Governance", govItems: { ansvar: "dedicated owner", policy: "written policy", maal: "emissions reduction target" },
+        eyebrow: "Climate data · VSME B3", sub: function (y) { return "Financial year " + y + ". Calculated under the GHG Protocol."; },
+        energyH: "Energy consumption, MWh",
+        foot: "Other Scope 3 not mapped. Emission factors from NVE (electricity 2025) and DEFRA/DESNZ (fuel and flights)."
+      }
+    }
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var nf0, nf1, nf2;
+  function makeFormats() {
+    var loc = lang === "en" ? "en-GB" : "nb-NO";
+    nf0 = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 });
+    nf1 = new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    nf2 = new Intl.NumberFormat(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  makeFormats();
+  function L() { return TX[lang]; }
+
+  // Godtar "62 000", "62,000", "1,5" og "1.5"
+  function parse(v) {
+    var s = String(v || "").replace(/[\s ]/g, "");
+    if (/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/,/g, "");
+    else s = s.replace(",", ".");
+    var n = parseFloat(s);
+    return isFinite(n) && n > 0 ? n : 0;
+  }
+  function t(kg) { return kg / 1000; }
+  function fmtT(kg) { var x = t(kg); return x > 0 && x < 0.05 ? "< " + nf1.format(0.1) : nf1.format(x); }
+  function pct(part, whole) { return L().pct(whole > 0 ? Math.round(100 * part / whole) : 0); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function applyStatic() {
+    document.documentElement.lang = lang === "en" ? "en" : "nb";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (el) {
+      if (el.dataset.no == null) el.dataset.no = el.innerHTML;
+      var k = el.dataset.i18n;
+      el.innerHTML = lang === "en" && EN[k] != null ? EN[k] : el.dataset.no;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-ph]"), function (el) {
+      if (el.dataset.noPh == null) el.dataset.noPh = el.getAttribute("placeholder") || "";
+      var k = el.dataset.i18nPh;
+      el.setAttribute("placeholder", lang === "en" && EN[k] != null ? EN[k] : el.dataset.noPh);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (b) {
+      b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+    });
+  }
+
+  // ---------- Statistikk (bare på eget domene) ----------
+  var sent = {};
+  function track(name) {
+    if (!GOATCOUNTER || sent[name]) return;
+    sent[name] = true;
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) {}
+  }
+  if (GOATCOUNTER) {
+    var gs = document.createElement("script");
+    gs.async = true; gs.src = "https://gc.zgo.at/count.js"; gs.setAttribute("data-goatcounter", GOATCOUNTER);
+    document.head.appendChild(gs);
+  }
+  if (LINKEDIN) { $("linkedin").href = LINKEDIN; $("linkedin-row").hidden = false; }
+
+  // ---------- Skjema ----------
+  function read() {
+    var d = {};
+    NUM.forEach(function (k) { d[k] = parse($(k).value); });
+    TXT.forEach(function (k) { d[k] = $(k).value.trim(); });
+    CHK.forEach(function (k) { d[k] = $(k).checked; });
+    d.data = $("data-malt").checked ? "malt" : ($("data-anslag").checked ? "anslag" : "");
+    return d;
+  }
+  function fill(o) {
+    NUM.concat(TXT).forEach(function (k) {
+      if (k === "bransje") $(k).value = o[k] || "kontor"; else $(k).value = o[k] == null ? "" : o[k];
+    });
+    CHK.forEach(function (k) { $(k).checked = !!o[k]; });
+    $("data-malt").checked = o.data === "malt";
+    $("data-anslag").checked = o.data === "anslag";
+    $("example-note").hidden = !o._example;
+  }
+
+  // ---------- Beregning ----------
+  function calc(d) {
+    var src = [
+      { key: "kjoretoy", scope: 1, kg: d.diesel * F.diesel + d.bensin * F.bensin },
+      { key: "anlegg", scope: 1, kg: d.anlegg * F.anlegg },
+      { key: "propan", scope: 1, kg: d.propan * F.propan },
+      { key: "strom", scope: 2, kg: d.strom * F.strom },
+      { key: "fjernvarme", scope: 2, kg: d.fjernvarme * F.fjernvarme },
+      { key: "fly", scope: 3, kg: d.flyInn * TRIP.flyInn + d.flyEur * TRIP.flyEur + d.flyInt * TRIP.flyInt }
+    ];
+    var s = { 1: 0, 2: 0, 3: 0 };
+    src.forEach(function (x) { s[x.scope] += x.kg; });
+    var total = s[1] + s[2] + s[3];
+    var mwhFuel = (d.diesel * KWH.diesel + d.bensin * KWH.bensin + d.anlegg * KWH.anlegg + d.propan * KWH.propan) / 1000;
+    var mwhEl = d.strom / 1000, mwhHeat = d.fjernvarme / 1000;
+    return {
+      src: src.slice().sort(function (a, b) { return b.kg - a.kg; }),
+      s1: s[1], s2: s[2], s3: s[3], total: total,
+      mwh: mwhFuel + mwhEl + mwhHeat, mwhFuel: mwhFuel, mwhEl: mwhEl, mwhHeat: mwhHeat,
+      intensity: d.omsetning > 0 ? t(s[1] + s[2]) / d.omsetning : null,
+      perAnsatt: d.ansatte > 0 ? t(total) / d.ansatte : null,
+      readiness: (d.ansvar ? 1 : 0) + (d.policy ? 1 : 0) + (d.maal ? 1 : 0) + (d.data === "malt" ? 1 : 0) + (total > 0 ? 1 : 0)
+    };
+  }
+
+  // ---------- Klimakort ----------
+  var C = 2 * Math.PI * 80;
+  var SC = { 1: "var(--s1)", 2: "var(--s2)", 3: "var(--s3)" };
+
+  function renderCard(d, r) {
+    var T = L();
+    $("c-co").textContent = d.navn || T.company;
+    $("c-yr").textContent = d.aar ? T.yr(d.aar) : "";
+    $("r-total").textContent = r.total > 0 ? fmtT(r.total) : "0";
+    $("dock-t").textContent = r.total > 0 ? fmtT(r.total) : "0";
+
+    var parts = [1, 2, 3].map(function (sc) { return { sc: sc, kg: r["s" + sc] }; });
+    var visible = parts.filter(function (p) { return p.kg > 0; }).length;
+    var gap = visible > 1 ? 4 : 0, offset = 0;
+    parts.forEach(function (p) {
+      var arc = $("arc" + p.sc);
+      var len = r.total > 0 ? C * p.kg / r.total : 0;
+      var draw = Math.max(0, len - gap);
+      if (p.kg > 0 && draw < 1.5) draw = 1.5;
+      arc.setAttribute("stroke-dasharray", draw + " " + (C - draw));
+      arc.setAttribute("stroke-dashoffset", String(-offset));
+      offset += len;
+    });
+
+    var lg = $("r-legend"); lg.innerHTML = "";
+    parts.forEach(function (p) {
+      var li = document.createElement("div"); li.className = "li";
+      li.innerHTML = '<span class="sw" style="background:' + SC[p.sc] + '"></span><span>' + T.scope[p.sc] + '</span><span class="v">' + (p.kg > 0 ? fmtT(p.kg) : "0") + " t</span>";
+      lg.appendChild(li);
+    });
+
+    $("r-int").textContent = r.intensity == null ? "–" : nf2.format(r.intensity);
+    $("r-ans").textContent = r.perAnsatt == null ? "–" : nf1.format(r.perAnsatt);
+    $("r-mwh").textContent = nf0.format(r.mwh);
+
+    var box = $("r-sources"); box.innerHTML = "";
+    var top = r.src.filter(function (x) { return x.kg > 0; });
+    if (!top.length) {
+      box.innerHTML = '<p class="empty">' + T.empty + "</p>";
+    } else {
+      var max = top[0].kg;
+      top.forEach(function (x) {
+        var el = document.createElement("div"); el.className = "src";
+        el.innerHTML = "<span>" + T.src[x.key] + '</span><span class="val">' + fmtT(x.kg) + " t · " + pct(x.kg, r.total) +
+          '</span><span class="bar"><i style="width:' + Math.max(1, 100 * x.kg / max) + "%;background:" + SC[x.scope] + '"></i></span>';
+        box.appendChild(el);
+      });
+    }
+
+    var dots = $("r-ready").children;
+    for (var i = 0; i < dots.length; i++) dots[i].className = i < r.readiness ? "on" : "";
+    $("r-ready-txt").innerHTML = "<b>" + T.of5(r.readiness) + "</b> " + T.ready[r.readiness];
+  }
+
+  // ---------- Tiltak ----------
+  function actions(d, r) {
+    var A = L().a;
+    var cut = [];
+    var share = function (kg) { return r.total > 0 ? kg / r.total : 0; };
+    r.src.forEach(function (x) {
+      if (x.kg <= 0) return;
+      var p = pct(x.kg, r.total);
+      if (x.key === "kjoretoy") {
+        var per = d.fossile > 0 ? x.kg / d.fossile : 0;
+        cut.push({ tag: "kutt", title: A.kjoretoy[0], body: A.kjoretoy[1](p), effect: per > 0 ? A.kjoretoyEff(nf1.format(t(per))) : A.kjoretoyNone });
+      } else if (x.key === "anlegg") {
+        cut.push({ tag: "kutt", title: A.anlegg[0], body: A.anlegg[1](p), effect: A.upTo(nf1.format(t(x.kg))) });
+      } else if (x.key === "fly") {
+        cut.push({ tag: "kutt", title: A.fly[0], body: A.fly[1](p), effect: A.flyEff(nf1.format(t(x.kg / 2))) });
+      } else if (x.key === "propan") {
+        cut.push({ tag: "kutt", title: A.propan[0], body: A.propan[1](p), effect: A.upTo(nf1.format(t(x.kg))) });
+      } else if (x.key === "strom" && share(x.kg) >= 0.3) {
+        cut.push({ tag: "kutt", title: A.strom[0], body: A.strom[1], effect: A.strom[2] });
+      } else if (x.key === "fjernvarme" && share(x.kg) >= 0.1) {
+        cut.push({ tag: "svar", title: A.fjernvarme[0], body: A.fjernvarme[1], effect: A.fjernvarme[2] });
+      }
+    });
+    var gov = [];
+    if (!d.ansvar) gov.push({ tag: "svar", title: A.ansvar[0], body: A.ansvar[1] });
+    if (d.data !== "malt") gov.push({ tag: "svar", title: A.data[0], body: A.data[1] });
+    if (d.kunde) gov.push({ tag: "svar", title: A.kunde[0], body: A.kunde[1] });
+    if (!d.policy) gov.push({ tag: "svar", title: A.policy[0], body: A.policy[1] });
+    if (!d.maal) gov.push({ tag: "svar", title: A.maal[0], body: A.maal[1] });
+
+    var out = [], i = 0;
+    while (out.length < 5 && (i < cut.length || i < gov.length)) {
+      if (i < cut.length) out.push(cut[i]);
+      if (out.length < 5 && i < gov.length) out.push(gov[i]);
+      i++;
+    }
+    var b = L().bransje[d.bransje] || L().bransje.annet;
+    out.push({ tag: "svar", title: A.scope3[0], body: A.scope3[1](b[0], b[1]) });
+    return out;
+  }
+
+  function renderActions(list) {
+    var ol = $("actions"); ol.innerHTML = "";
+    list.forEach(function (a) {
+      var li = document.createElement("li");
+      li.innerHTML = '<div class="act-head"><h3></h3><span class="tag ' + a.tag + '"></span></div><p class="act-body"></p>' + (a.effect ? '<p class="act-effect"></p>' : "");
+      li.querySelector("h3").textContent = a.title;
+      li.querySelector(".tag").textContent = L().tag[a.tag];
+      li.querySelector(".act-body").textContent = a.body;
+      if (a.effect) li.querySelector(".act-effect").textContent = a.effect;
+      ol.appendChild(li);
+    });
+  }
+
+  // ---------- Kundesvar ----------
+  function govList(d) {
+    var G = L().d.govItems, g = [];
+    if (d.ansvar) g.push(G.ansvar); if (d.policy) g.push(G.policy); if (d.maal) g.push(G.maal);
+    return g;
+  }
+  function summary(d, r) {
+    var D = L().d, out = [];
+    out.push(D.title(d.navn || D.placeholderName, d.aar || D.placeholderYear));
+    out.push(D.method);
+    out.push("");
+    out.push(D.energy + ": " + nf1.format(r.mwh) + " MWh");
+    out.push("  " + D.el + ": " + nf1.format(r.mwhEl) + " MWh");
+    if (r.mwhHeat > 0) out.push("  " + D.heat + ": " + nf1.format(r.mwhHeat) + " MWh");
+    out.push("  " + D.fuel + ": " + nf1.format(r.mwhFuel) + " MWh");
+    out.push("");
+    out.push(D.ghg);
+    out.push("  " + D.s1 + ": " + nf1.format(t(r.s1)));
+    out.push("  " + D.s2 + ": " + nf1.format(t(r.s2)));
+    out.push("  " + D.s12 + ": " + nf1.format(t(r.s1 + r.s2)));
+    out.push("  " + D.s3 + ": " + nf1.format(t(r.s3)) + " " + D.s3note);
+    out.push("");
+    out.push(r.intensity != null ? D.int(nf2.format(r.intensity)) : D.intMissing);
+    out.push("");
+    out.push(D.dataLbl + ": " + (d.data === "malt" ? D.dataM : D.dataA));
+    out.push(D.factors);
+    var g = govList(d);
+    if (g.length) out.push(D.gov + ": " + g.join(", ") + ".");
+    return out.join("\n");
+  }
+  function row(label, value, cls) { return '<div class="doc-row ' + (cls || "") + '"><span>' + label + '</span><span class="v">' + value + "</span></div>"; }
+  function renderDoc(d, r) {
+    var D = L().d, g = govList(d), h = "";
+    h += '<header class="doc-head"><span class="eyebrow">' + D.eyebrow + "</span><h3>" + esc(d.navn || L().company) + "</h3><p>" + D.sub(esc(d.aar || "–")) + "</p></header>";
+    h += '<div class="doc-sec"><h4>' + D.ghgH + "</h4>" +
+      row(D.s1l, nf1.format(t(r.s1))) + row(D.s2l, nf1.format(t(r.s2))) +
+      row(D.s12, nf1.format(t(r.s1 + r.s2)), "total") + row(D.s3, nf1.format(t(r.s3))) + "</div>";
+    h += '<div class="doc-sec"><h4>' + D.energyH + "</h4>" +
+      row(D.el, nf1.format(r.mwhEl), "sub") + (r.mwhHeat > 0 ? row(D.heat, nf1.format(r.mwhHeat), "sub") : "") +
+      row(D.fuel, nf1.format(r.mwhFuel), "sub") + row(D.totalE, nf1.format(r.mwh), "total") + "</div>";
+    h += '<div class="doc-sec"><h4>' + D.intH + "</h4>" + row(D.intRow, r.intensity != null ? nf2.format(r.intensity) + " t" : "–") + "</div>";
+    h += '<p class="doc-foot">' + D.dataLbl + ": " + (d.data === "malt" ? D.dataM : D.dataA) + ". " +
+      (g.length ? D.gov + ": " + g.join(", ") + ". " : "") + D.foot + "</p>";
+    $("doc").innerHTML = h;
+  }
+
+  // ---------- Veiviser ----------
+  var step = 1;
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+  var railBtns = Array.prototype.slice.call(document.querySelectorAll(".rail button"));
+  function go(n, focus) {
+    step = n;
+    var T = L();
+    steps.forEach(function (s) { s.hidden = +s.dataset.step !== n; });
+    railBtns.forEach(function (b) { if (+b.dataset.go === n) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+    $("step-count").textContent = T.step(n);
+    $("prev").hidden = n === 1;
+    $("next").textContent = n < 5 ? T.next(T.names[n + 1]) : T.last;
+    if (focus) {
+      var wiz = $("f");
+      if (wiz.getBoundingClientRect().top < 0) wiz.scrollIntoView({ block: "start" });
+      var h = document.querySelector('.step[data-step="' + n + '"] h3');
+      if (h) h.focus({ preventScroll: true });
+    }
+  }
+  railBtns.forEach(function (b) { b.addEventListener("click", function () { go(+b.dataset.go, true); }); });
+  $("prev").addEventListener("click", function () { if (step > 1) go(step - 1, true); });
+  $("next").addEventListener("click", function () {
+    if (step < 5) go(step + 1, true);
+    else { track("sjekk-fullfort"); $("tiltak").scrollIntoView({ block: "start" }); }
+  });
+  function markFilled() {
+    railBtns.forEach(function (b) {
+      var n = +b.dataset.go, f = STEP_FIELDS[n];
+      var filled = n === 5 ? (CHK.some(function (k) { return $(k).checked; }) || $("data-malt").checked || $("data-anslag").checked)
+                           : f.some(function (k) { return $(k).value.trim() !== ""; });
+      b.classList.toggle("filled", filled);
+    });
+  }
+
+  // ---------- Lagring og oppdatering ----------
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function fetchStore(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  var isExample = false;
+  function snapshot() {
+    var o = {};
+    NUM.concat(TXT).forEach(function (k) { o[k] = $(k).value; });
+    CHK.forEach(function (k) { o[k] = $(k).checked; });
+    o.data = $("data-malt").checked ? "malt" : ($("data-anslag").checked ? "anslag" : "");
+    o._example = isExample;
+    return o;
+  }
+  var lastText = "";
+  function update(fromUser) {
+    if (fromUser && isExample) { isExample = false; $("example-note").hidden = true; }
+    var d = read(), r = calc(d);
+    renderCard(d, r);
+    renderActions(actions(d, r));
+    renderDoc(d, r);
+    lastText = summary(d, r);
+    markFilled();
+    store("klimasvar-v1", JSON.stringify(snapshot()));
+  }
+
+  $("f").addEventListener("input", function () { update(true); });
+  $("f").addEventListener("change", function () { update(true); });
+  $("f").addEventListener("submit", function (e) { e.preventDefault(); });
+
+  function showExample() { fill(EXAMPLE); isExample = true; update(false); go(1, false); }
+  $("btn-example").addEventListener("click", showExample);
+  $("btn-example-hero").addEventListener("click", function () { showExample(); $("sjekk").scrollIntoView({ block: "start" }); });
+  $("btn-clear").addEventListener("click", function () { fill({ bransje: "kontor" }); isExample = false; update(false); go(1, false); $("navn").focus(); });
+
+  $("btn-copy").addEventListener("click", function () {
+    track("svar-kopiert");
+    var done = function (ok) { $("copy-status").textContent = ok ? L().copyOk : L().copyFail; };
+    var fallback = function () {
+      try { var sel = window.getSelection(), rg = document.createRange(); rg.selectNodeContents($("doc")); sel.removeAllRanges(); sel.addRange(rg); } catch (e) {}
+      done(false);
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(lastText).then(function () { done(true); }, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  });
+
+  // Tilbakemelding
+  function showThanks() { $("fb-btns").hidden = true; $("fb-thanks").hidden = false; }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fb]"), function (b) {
+    b.addEventListener("click", function () { track("nyttig-" + b.dataset.fb); store("klimasvar-fb", b.dataset.fb); showThanks(); });
+  });
+  if (fetchStore("klimasvar-fb")) showThanks();
+
+  // Språkbryter
+  function setLang(l, user) {
+    lang = l === "en" ? "en" : "no";
+    makeFormats();
+    applyStatic();
+    $("copy-status").textContent = "";
+    update(false);
+    go(step, false);
+    if (user) {
+      store("klimasvar-lang", lang);
+      if (lang === "en") track("sprak-en");
+      try { history.replaceState(null, "", lang === "en" ? "#en" : location.pathname + location.search); } catch (e) {}
+    }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.lang, true); });
+  });
+
+  // Mobil: vis totalen nederst når klimakortet ikke er synlig
+  var dock = $("dock");
+  if ("IntersectionObserver" in window) {
+    var cardVisible = false, inTool = false;
+    var sync = function () { dock.classList.toggle("show", inTool && !cardVisible); };
+    new IntersectionObserver(function (es) { es.forEach(function (e) { cardVisible = e.isIntersecting; }); sync(); }).observe($("kort"));
+    new IntersectionObserver(function (es) { es.forEach(function (e) { inTool = e.isIntersecting; }); sync(); }).observe($("f"));
+  }
+
+  // ---------- Linjer i forsiden ----------
+  var cv = $("lines");
+  function drawLines() {
+    var ctx = cv.getContext && cv.getContext("2d");
+    if (!ctx) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = cv.clientWidth, h = cv.clientHeight;
+    if (!w || !h) return;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    var seed = 7;
+    var rnd = function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    var N = 26;
+    for (var i = 0; i < N; i++) {
+      var y0 = h * (i + 0.5) / N;
+      var p1 = rnd() * 6.28, p2 = rnd() * 6.28, f1 = 0.004 + rnd() * 0.003, f2 = 0.011 + rnd() * 0.006;
+      ctx.beginPath();
+      for (var x = 0; x <= w; x += 6) {
+        var amp = 6 + 34 * Math.pow(x / w, 1.6);
+        var y = y0 + amp * Math.sin(x * f1 + p1 + i * 0.18) + amp * 0.35 * Math.sin(x * f2 + p2);
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = "rgba(201, 215, 155," + (i % 3 === 0 ? 0.2 : 0.1) + ")";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+  drawLines();
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(drawLines, 120); });
+
+  // ---------- Start ----------
+  var savedRaw = fetchStore("klimasvar-v1"), saved = null;
+  try { saved = savedRaw ? JSON.parse(savedRaw) : null; } catch (e) { saved = null; }
+  if (saved) { fill(saved); isExample = !!saved._example; } else { fill(EXAMPLE); isExample = true; }
+  var startLang = location.hash === "#en" ? "en" : (fetchStore("klimasvar-lang") || "no");
+  setLang(startLang, false);
+
+  window.__klimasvar = { calc: calc, actions: actions, summary: summary, TRIP: TRIP, go: go, setLang: setLang, parse: parse };
+})();
+</script>
+</body>
+</html>
