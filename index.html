@@ -82,6 +82,12 @@ button { font-family: inherit; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
 .lbl { font-size: 13px; font-weight: 700; color: var(--muted); }
 
+.trust li.time { color: var(--ink); font-weight: 700; }
+.trust li.time::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8 1.5a6.5 6.5 0 1 1 0 13a6.5 6.5 0 0 1 0-13zM8 3a5 5 0 1 0 0 10A5 5 0 0 0 8 3zM7.25 4.75h1.5v3.1l2.2 1.3-.75 1.3-2.95-1.75z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8 1.5a6.5 6.5 0 1 1 0 13a6.5 6.5 0 0 1 0-13zM8 3a5 5 0 1 0 0 10A5 5 0 0 0 8 3zM7.25 4.75h1.5v3.1l2.2 1.3-.75 1.3-2.95-1.75z'/%3E%3C/svg%3E");
+}
+
 /* Fagord */
 .term {
   font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: help;
@@ -266,8 +272,25 @@ button { font-family: inherit; }
 .ready { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
 .ready i { height: 6px; border-radius: 3px; background: var(--soft); transition: background .3s; }
 .ready i.on { background: var(--accent); }
-.ready-txt { font-size: 14px; color: var(--muted); }
-.ready-txt b { color: var(--ink); font-weight: 700; }
+.ready-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.ready-n { font-size: 13px; font-weight: 700; color: var(--ink); }
+.ready-txt { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+.ready-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.ready-list li > div, .ready-list li > button {
+  display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%;
+  padding: 7px 0; font: 500 14px/1.35 var(--f-ui); text-align: left; background: none; border: 0; color: var(--ink);
+}
+.ready-list li + li > * { border-top: 1px solid var(--soft); }
+.ready-list .ok { color: var(--muted); }
+.ready-list .ico { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; }
+.ready-list .ok .ico { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.ready-list .ico svg { width: 12px; height: 12px; }
+.ready-list button { cursor: pointer; }
+.ready-list button:hover .go, .ready-list button:focus-visible .go { text-decoration: underline; }
+.ready-list .go { font-size: 13px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+.flash { animation: flash 1.8s ease-out; border-radius: 8px; }
+@keyframes flash { 0%, 35% { background: var(--accent-soft); box-shadow: 0 0 0 8px var(--accent-soft); } 100% { background: transparent; box-shadow: 0 0 0 8px transparent; } }
+@media (prefers-reduced-motion: reduce) { .flash { animation: none; outline: 2px solid var(--accent); outline-offset: 4px; } }
 .empty { font-size: 14px; color: var(--muted); }
 .pdf-btn { width: 100%; }
 
@@ -339,9 +362,18 @@ td.g { color: var(--muted); }
 .about { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: start; }
 @media (max-width: 900px) { .about { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
 .about .prose p { font-size: 18px; line-height: 1.65; }
-.about-photo { position: relative; margin: 8px 0 0; border-radius: var(--r); overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: linear-gradient(160deg, #2F4A22, #6E7F3A); }
-.about-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.about-photo figcaption { position: absolute; left: 12px; bottom: 12px; font-size: 12px; font-weight: 600; color: #fff; background: rgba(10, 20, 15, .45); padding: 4px 9px; border-radius: 6px; }
+/* Avslutning med mosebildet */
+.closing { position: relative; margin-top: 88px; overflow: hidden; background: #1F3318; color: #FFFFFF; }
+.closing-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.closing::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8, 16, 8, .78) 0%, rgba(8, 16, 8, .45) 60%, rgba(8, 16, 8, .25) 100%); }
+.closing-in { position: relative; z-index: 1; padding-block: 104px; display: grid; gap: 16px; justify-items: start; }
+@media (max-width: 600px) { .closing-in { padding-block: 72px; } }
+.closing h2 { font-size: clamp(32px, 4.6vw, 48px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; max-width: 16ch; color: #FFFFFF; }
+.closing p { font-size: 18px; max-width: 46ch; color: rgba(255, 255, 255, .86); }
+.closing .mail { margin-top: 10px; gap: 14px; }
+.closing .mail a { color: #FFFFFF; font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: -0.02em; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.closing .mini-btn { background: transparent; color: #FFFFFF; border-color: rgba(255, 255, 255, .55); padding: 7px 14px; font-size: 14px; }
+.closing .mini-btn:hover { border-color: #FFFFFF; }
 .facts-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); display: grid; }
 .facts-card section { padding: 20px 22px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
 .facts-card section:last-child { border-bottom: 0; }
@@ -353,7 +385,7 @@ td.g { color: var(--muted); }
 .mini-btn { border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 8px; padding: 5px 11px; font-size: 13px; font-weight: 700; cursor: pointer; }
 .mini-btn:hover { border-color: var(--accent); }
 
-footer { margin-top: 88px; border-top: 1px solid var(--line); }
+footer { border-top: 1px solid var(--line); }
 footer .wrap { padding-block: 26px 44px; display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
 footer .mark { font-size: 18px; }
 footer .mark svg { width: 22px; height: 22px; }
@@ -383,7 +415,7 @@ footer a { overflow-wrap: anywhere; }
       </a>
       <div class="topright">
         <nav class="nav" aria-label="Snarveier">
-          <a href="#sjekk" data-i18n="nav.sjekk">Sjekken</a><a href="#tiltak" data-i18n="nav.tiltak">Tiltak</a><a href="#svar" data-i18n="nav.svar">Kundesvar</a><a href="#metode" data-i18n="nav.metode">Metode</a><a href="#om" data-i18n="nav.om">Om</a>
+          <a href="#sjekk" data-i18n="nav.sjekk">Sjekken</a><a href="#tiltak" data-i18n="nav.tiltak">Tiltak</a><a href="#svar" data-i18n="nav.svar">Kundesvar</a><a href="#metode" data-i18n="nav.metode">Metode</a><a href="#om" data-i18n="nav.om">Om</a><a href="#kontakt" data-i18n="nav.kontakt">Kontakt</a>
         </nav>
         <div class="lang" role="group" aria-label="Språk / Language">
           <button type="button" data-lang="no" aria-pressed="true">NO</button>
@@ -402,6 +434,7 @@ footer a { overflow-wrap: anywhere; }
           <button type="button" class="btn ghost" id="btn-example-hero" data-i18n="hero.example">Se et eksempel</button>
         </div>
         <ul class="trust">
+          <li class="time" data-i18n="hero.t0">Ferdig på rundt 10 minutter</li>
           <li data-i18n="hero.t1">Gratis</li>
           <li data-i18n="hero.t2">Ingen innlogging</li>
           <li data-i18n="hero.t3">Tallene blir i nettleseren din</li>
@@ -575,8 +608,9 @@ footer a { overflow-wrap: anywhere; }
             <div class="sources" id="r-sources"></div>
           </div>
           <div class="card-sec">
-            <span class="lbl" data-i18n="card.ready">Klar til å svare</span>
+            <div class="ready-head"><span class="lbl" data-i18n="card.ready">Klar til å svare</span><span class="ready-n" id="r-ready-n"></span></div>
             <div class="ready" id="r-ready" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <ul class="ready-list" id="r-ready-list"></ul>
             <p class="ready-txt" id="r-ready-txt"></p>
           </div>
           <div class="card-sec">
@@ -620,7 +654,7 @@ footer a { overflow-wrap: anywhere; }
               <button type="button" class="pill" data-fb="delvis" data-i18n="fb.delvis">Delvis</button>
               <button type="button" class="pill" data-fb="nei" data-i18n="fb.nei">Nei</button>
             </div>
-            <p class="fb-thanks" id="fb-thanks" hidden><span data-i18n="fb.thanks">Takk! Savnet dere noe, eller var noe uklart? Skriv gjerne til</span> <a class="mailto" href="mailto:sjuvevictor@gmail.com">sjuvevictor@gmail.com</a></p>
+            <p class="fb-thanks" id="fb-thanks" hidden><span data-i18n="fb.thanks">Takk! Savnet dere noe, eller var noe uklart? Skriv gjerne til</span> <a class="mailto" href="mailto:klimasvar.no@gmail.com">klimasvar.no@gmail.com</a></p>
           </div>
         </div>
       </div>
@@ -674,20 +708,11 @@ footer a { overflow-wrap: anywhere; }
         <div class="prose">
           <p data-i18n="o.p1">Store selskaper og banker må rapportere stadig mer om bærekraft, og spørsmålene havner hos leverandørene deres. Mange små bedrifter har ingen som jobber med dette, og et fullt klimaregnskap er mer enn de trenger for å svare på et kundeskjema.</p>
           <p data-i18n="o.p2">Klimasvar gir et godt nok første svar på ti minutter. Tallene bygger på offentlige utslippsfaktorer, svaret er satt opp etter VSME, og tiltakslisten viser hvor det lønner seg å begynne. Tjenesten er gratis og krever ingen innlogging.</p>
-          <figure class="about-photo" id="about-fig">
-            <img src="om.jpg" alt="" id="about-img" loading="lazy" onerror="this.parentNode.remove()">
-            <figcaption id="about-cap" hidden></figcaption>
-          </figure>
         </div>
         <div class="facts-card">
           <section>
             <h3 data-i18n="o.privH">Personvern</h3>
             <p data-i18n="o.priv">Alt regnes ut i nettleseren din. Tallene sendes ikke til oss eller andre, og forsvinner hvis du tømmer nettleseren. Vi teller anonymt hvor mange som bruker sjekken, uten informasjonskapsler.</p>
-          </section>
-          <section>
-            <h3 data-i18n="o.contactH">Kontakt</h3>
-            <p data-i18n="o.contact">Spørsmål, feil i tallene eller ønsker om nye funksjoner? Skriv til oss.</p>
-            <div class="mail"><a class="mailto" href="mailto:sjuvevictor@gmail.com">sjuvevictor@gmail.com</a><button type="button" class="mini-btn" id="copy-mail" data-i18n="o.copy">Kopier</button></div>
           </section>
           <section>
             <h3 data-i18n="o.road">Kommer etter hvert</h3>
@@ -701,12 +726,21 @@ footer a { overflow-wrap: anywhere; }
       </div>
     </div>
   </section>
+
+  <section class="closing" id="kontakt" aria-labelledby="closing-h">
+    <img src="om.jpg" alt="" class="closing-img" loading="lazy" onerror="this.remove()">
+    <div class="wrap closing-in">
+      <h2 id="closing-h" data-i18n="cl.h">Spørsmål eller tilbakemelding?</h2>
+      <p data-i18n="cl.p">Fant dere noe som ikke stemmer, savner dere noe, eller lurer dere på hvordan tallene er regnet ut? Skriv til oss.</p>
+      <div class="mail"><a class="mailto" href="mailto:klimasvar.no@gmail.com">klimasvar.no@gmail.com</a><button type="button" class="mini-btn" id="copy-mail" data-i18n="o.copy">Kopier</button></div>
+    </div>
+  </section>
 </main>
 
 <footer>
   <div class="wrap">
     <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="none" stroke="var(--soft)" stroke-width="5"/><circle cx="16" cy="16" r="11" fill="none" stroke="var(--accent)" stroke-width="5" stroke-dasharray="52 69" transform="rotate(-90 16 16)"/><circle cx="16" cy="16" r="11" fill="none" stroke="var(--warm)" stroke-width="5" stroke-dasharray="9 69" stroke-dashoffset="-54" transform="rotate(-90 16 16)"/></svg>Klimasvar</span>
-    <span data-i18n="foot">Gratis bærekraftssjekk for småbedrifter · Tallene lagres bare i din nettleser · <a class="mailto" href="mailto:sjuvevictor@gmail.com">sjuvevictor@gmail.com</a></span>
+    <span data-i18n="foot">Gratis bærekraftssjekk for småbedrifter · Tallene lagres bare i din nettleser · <a class="mailto" href="mailto:klimasvar.no@gmail.com">klimasvar.no@gmail.com</a></span>
   </div>
 </footer>
 
@@ -717,7 +751,7 @@ footer a { overflow-wrap: anywhere; }
   // ---------- Innstillinger ----------
   // Fylles inn i versjonen på klimasvar.no
   var GOATCOUNTER = "https://klimasvar.goatcounter.com/count";
-  var CONTACT = "sjuvevictor@gmail.com";
+  var CONTACT = "klimasvar.no@gmail.com";
   // Alternativ tekst og bildetekst. La bildeteksten stå tom hvis bildet ikke skal ha tekst.
   var PHOTOS = {
     hero: { alt: { no: "Skogkledd fjellside i tåke", en: "Forested mountainside in mist" }, cap: { no: "", en: "" } },
@@ -747,12 +781,12 @@ footer a { overflow-wrap: anywhere; }
   var lang = "no";
   var T_ = function (k) { return '<button type="button" class="term" data-term="' + k[0] + '">' + k[1] + "</button>"; };
   var EN = {
-    "nav.sjekk": "The check", "nav.tiltak": "Actions", "nav.svar": "Customer answer", "nav.metode": "Method", "nav.om": "About",
+    "nav.sjekk": "The check", "nav.tiltak": "Actions", "nav.svar": "Customer answer", "nav.metode": "Method", "nav.om": "About", "nav.kontakt": "Contact",
     "hero.kicker": "A free sustainability check for small and medium-sized businesses",
     "hero.h1": "Has a customer asked for your climate figures?",
     "hero.lede": "Klimasvar helps you answer. Enter your electricity, fuel and travel, and get your emissions, the most important actions and a ready-to-send answer as a PDF.",
     "hero.start": "Start the check", "hero.example": "See an example",
-    "hero.t1": "Free", "hero.t2": "No sign-up", "hero.t3": "Your figures stay in your browser",
+    "hero.t0": "Done in about 10 minutes", "hero.t1": "Free", "hero.t2": "No sign-up", "hero.t3": "Your figures stay in your browser",
     "mini.ex": "Example", "mini.unit": "tonnes CO₂e a year",
     "tool.h": "The check", "tool.p": "Five short steps. You'll find the figures on your invoices and in your fuel card report.",
     "tool.example": "Show example", "tool.clear": "Clear the form",
@@ -822,10 +856,12 @@ footer a { overflow-wrap: anywhere; }
     "o.p2": "Klimasvar gives a good-enough first answer in ten minutes. The figures build on public emission factors, the answer is structured according to VSME, and the action list shows where it pays to start. The service is free and needs no sign-up.",
     "o.privH": "Privacy",
     "o.priv": "Everything is calculated in your browser. Your figures are not sent to us or anyone else, and they disappear if you clear your browser. We count anonymously how many people use the check, without cookies.",
-    "o.contactH": "Contact", "o.contact": "Questions, errors in the figures or ideas for new features? Write to us.", "o.copy": "Copy",
+    "o.copy": "Copy",
     "o.road": "Coming later",
     "o.ul": "<li>Purchases and the rest of Scope 3, using spend-based factors</li><li>More of the VSME data points, such as employees and health and safety</li><li>Comparison with the previous year</li>",
-    "foot": "Free sustainability check for small businesses · Your figures are stored only in your browser · <a class=\"mailto\" href=\"mailto:sjuvevictor@gmail.com\">sjuvevictor@gmail.com</a>",
+    "foot": "Free sustainability check for small businesses · Your figures are stored only in your browser · <a class=\"mailto\" href=\"mailto:klimasvar.no@gmail.com\">klimasvar.no@gmail.com</a>",
+    "cl.h": "Questions or feedback?",
+    "cl.p": "Found something that doesn't add up, missing something, or wondering how the figures are calculated? Write to us.",
     "dock.u": "tonnes CO₂e", "dock.a": "See the result"
   };
 
@@ -856,8 +892,11 @@ footer a { overflow-wrap: anywhere; }
       scope: { 1: "Scope 1 · egne utslipp", 2: "Scope 2 · kjøpt energi", 3: "Scope 3 · flyreiser" },
       company: "Din bedrift", yr: function (y) { return "Regnskapsår " + y; },
       empty: "Kildene vises her når du har fylt inn forbruk i steg 2 til 4.",
-      ready: ["Ikke i gang ennå.", "Dere har et første estimat.", "Noe styring er på plass.", "Godt i gang, noen hull gjenstår.", "Ett punkt gjenstår.", "Klare til å svare kunder og bank."],
-      of5: function (n) { return n + " av 5."; },
+      readyItems: { est: "Utslippsestimat", ansvar: "Én ansvarlig person", policy: "Skriftlig policy", maal: "Mål for utslippskutt", data: "Tall fra fakturaer, ikke anslag" },
+      stepGo: function (n) { return "Steg " + n + " →"; },
+      readyNote: "Dere kan laste ned og sende svaret nå. Punktene som mangler, gjør det sterkere.",
+      readyDone: "Svaret er så komplett som Klimasvar kan gjøre det.",
+      of5: function (n) { return n + " av 5"; },
       step: function (n) { return "Steg " + n + " av 5"; },
       names: { 2: "Energi", 3: "Kjøretøy", 4: "Reiser", 5: "Styring" },
       next: function (n) { return "Neste: " + n; }, last: "Se tiltakene", lastMobile: "Se resultatet",
@@ -937,8 +976,11 @@ footer a { overflow-wrap: anywhere; }
       scope: { 1: "Scope 1 · own emissions", 2: "Scope 2 · purchased energy", 3: "Scope 3 · flights" },
       company: "Your company", yr: function (y) { return "Financial year " + y; },
       empty: "Sources appear here once you have entered consumption in steps 2 to 4.",
-      ready: ["Not started yet.", "You have a first estimate.", "Some governance is in place.", "Well under way, a few gaps remain.", "One item remains.", "Ready to answer customers and banks."],
-      of5: function (n) { return n + " of 5."; },
+      readyItems: { est: "Emissions estimate", ansvar: "One person responsible", policy: "Written policy", maal: "Emissions reduction target", data: "Figures from invoices, not estimates" },
+      stepGo: function (n) { return "Step " + n + " →"; },
+      readyNote: "You can download and send the answer now. The missing items make it stronger.",
+      readyDone: "The answer is as complete as Klimasvar can make it.",
+      of5: function (n) { return n + " of 5"; },
       step: function (n) { return "Step " + n + " of 5"; },
       names: { 2: "Energy", 3: "Vehicles", 4: "Travel", 5: "Governance" },
       next: function (n) { return "Next: " + n; }, last: "See the actions", lastMobile: "See the result",
@@ -1215,7 +1257,26 @@ footer a { overflow-wrap: anywhere; }
 
     var dots = $("r-ready").children;
     for (var i = 0; i < dots.length; i++) dots[i].className = i < r.readiness ? "on" : "";
-    $("r-ready-txt").innerHTML = "<b>" + T.of5(r.readiness) + "</b> " + T.ready[r.readiness];
+    $("r-ready-n").textContent = T.of5(r.readiness);
+    // [nøkkel, oppfylt, steg, felt som får fokus]
+    var items = [
+      ["est", r.total > 0, 2, "strom"],
+      ["ansvar", d.ansvar, 5, "ansvar"],
+      ["policy", d.policy, 5, "policy"],
+      ["maal", d.maal, 5, "maal"],
+      ["data", d.data === "malt", 5, "data-malt"]
+    ];
+    var list = $("r-ready-list"); list.innerHTML = "";
+    items.forEach(function (it) {
+      var li = document.createElement("li");
+      li.innerHTML = it[1]
+        ? '<div class="ok"><span class="ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6.2 11.6 2.6 8l1.1-1.1 2.5 2.5 6.1-6.1L13.4 4.4z"/></svg></span><span class="nm"></span><span></span></div>'
+        : '<button type="button" data-step="' + it[2] + '" data-focus="' + it[3] + '"><span class="ico"></span><span class="nm"></span><span class="go"></span></button>';
+      li.querySelector(".nm").textContent = T.readyItems[it[0]];
+      if (!it[1]) li.querySelector(".go").textContent = T.stepGo(it[2]);
+      list.appendChild(li);
+    });
+    $("r-ready-txt").textContent = r.readiness === 5 ? T.readyDone : T.readyNote;
   }
 
   // Eksempelkortet på bildet øverst
@@ -1400,6 +1461,22 @@ footer a { overflow-wrap: anywhere; }
     markFilled();
     store("klimasvar-v1", JSON.stringify(snapshot()));
   }
+
+  // Sjekklisten i klimakortet: hopp til feltet som mangler
+  $("r-ready-list").addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("button[data-step]") : null;
+    if (!b) return;
+    go(+b.dataset.step, true);
+    var el = $(b.dataset.focus);
+    if (!el) return;
+    var row = el.closest(".check, .datasrc, .fld") || el;
+    setTimeout(function () {
+      row.scrollIntoView({ block: "center" });
+      try { el.focus({ preventScroll: true }); } catch (err) {}
+      row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+      setTimeout(function () { row.classList.remove("flash"); }, 1900);
+    }, 60);
+  });
 
   $("f").addEventListener("input", function () { update(true); });
   $("f").addEventListener("change", function () { update(true); });
