@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Klimasvar">
 <meta property="og:title" content="Klimasvar">
 <meta property="og:description" content="Har en kunde spurt om klimatallene deres? Gratis bærekraftssjekk for småbedrifter, med ferdig svar som PDF på ti minutter.">
-<meta property="og:image" content="https://klimasvar.no/og.png?v=3">
+<meta property="og:image" content="https://klimasvar.no/og.png?v=4">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -164,7 +164,9 @@ button { font-family: inherit; }
 .linkbtns { display: flex; gap: 6px; flex-wrap: wrap; }
 .linkbtn { background: none; border: 0; padding: 7px 11px; font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; border-radius: 8px; }
 .linkbtn:hover { color: var(--ink); background: var(--soft); }
-.example-note { margin-bottom: 16px; font-size: 14px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+.example-note { margin-bottom: 16px; font-size: 14px; color: var(--muted); display: flex; gap: 6px 10px; align-items: center; flex-wrap: wrap; }
+.example-note .linkbtn { padding: 2px 4px; color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.example-note .linkbtn:hover { background: none; color: var(--ink); }
 .example-note::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--warm); flex: none; }
 .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 28px; align-items: start; }
 @media (max-width: 960px) { .grid { grid-template-columns: minmax(0, 1fr); } }
@@ -179,13 +181,14 @@ button { font-family: inherit; }
 .rail button .n i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0; transition: opacity .2s; }
 .rail button.filled .n i { opacity: 1; }
 .rail button[aria-current="step"] { color: var(--ink); background: var(--paper); }
-.rail button[aria-current="step"]::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); }
 .rail button:focus-visible { outline-offset: -3px; }
 @media (max-width: 600px) {
   .rail button { padding: 13px 4px 12px; text-align: center; }
   .rail button .n { justify-content: center; font-size: 15px; }
-  .rail button .t { display: none; }
+  /* Skjult for øyet, men lest opp av skjermlesere */
+  .rail button .t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .step { padding: 30px 32px 8px; display: grid; gap: 26px; }
 @media (max-width: 600px) { .step { padding: 24px 20px 4px; } }
 .step-head { display: grid; gap: 8px; }
@@ -210,6 +213,13 @@ button { font-family: inherit; }
 .step-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px 32px 28px; flex-wrap: wrap; }
 @media (max-width: 600px) { .step-foot { padding: 18px 20px 22px; } }
 .step-foot .count { font-size: 13px; color: var(--muted); }
+.step-foot .left { display: grid; gap: 2px; }
+.step-foot .saved { font-size: 12.5px; color: var(--muted); opacity: .8; }
+.fmsg { font-size: 13px; line-height: 1.45; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.fmsg.err { color: var(--warm); }
+.fmsg.warn { color: var(--muted); }
+.fmsg button { background: none; border: 0; padding: 0; font: 700 13px/1.45 var(--f-ui); color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.fld.bad .in { border-color: var(--warm); }
 .step-foot .btns { display: flex; gap: 10px; margin-left: auto; }
 
 .choice { display: grid; gap: 10px; padding-top: 4px; }
@@ -286,6 +296,11 @@ button { font-family: inherit; }
 @keyframes flash { 0%, 35% { background: var(--accent-soft); box-shadow: 0 0 0 8px var(--accent-soft); } 100% { background: transparent; box-shadow: 0 0 0 8px transparent; } }
 @media (prefers-reduced-motion: reduce) { .flash { animation: none; outline: 2px solid var(--accent); outline-offset: 4px; } }
 .empty { font-size: 14px; color: var(--muted); }
+.gap-sec { background: var(--warm-soft); }
+.gap-sec .lbl { color: var(--warm); }
+.gap-sec .ready-list li + li > * { border-top-color: rgba(233, 237, 224, .08); }
+.gap-sec .ready-list .ico { border-color: var(--warm); }
+.gap-sec .ready-list .go { color: var(--warm); }
 .pdf-btn { width: 100%; }
 
 /* Tiltak */
@@ -310,7 +325,7 @@ ol.actions li::before {
 /* Kundesvar */
 .answer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 310px); gap: 40px; align-items: start; }
 @media (max-width: 900px) { .answer { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
-.doc { --paper: #F4F5EE; --soft: #E7EADD; --ink: #18201A; --muted: #5E6858; --line: #D6DBCC; --accent: #4B6420; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow); padding: clamp(24px, 5vw, 50px); display: grid; gap: 22px; }
+.doc { --paper: #F4F5EE; --soft: #E7EADD; --ink: #18201A; --muted: #5E6858; --line: #D6DBCC; --accent: #4B6420; --warm: #8E4426; --warm-soft: #F3E3D7; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow); padding: clamp(24px, 5vw, 50px); display: grid; gap: 22px; }
 .doc-head { display: grid; gap: 6px; padding-bottom: 18px; border-bottom: 2px solid var(--ink); }
 .doc-head .lbl { color: var(--accent); }
 .doc-head h3 { font-size: 28px; font-weight: 800; line-height: 1.15; overflow-wrap: anywhere; }
@@ -322,6 +337,20 @@ ol.actions li::before {
 .doc-row.total { border-bottom: 0; border-top: 1.5px solid var(--ink); margin-top: 2px; font-weight: 700; }
 .doc-row.sub { padding-left: 16px; color: var(--muted); }
 .doc-foot { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.doc-row .v.na { color: var(--muted); font-weight: 500; }
+.doc-warn { background: var(--warm-soft); color: var(--warm); border-radius: 6px; padding: 12px 14px; font-size: 14px; line-height: 1.5; }
+.doc-warn b { font-weight: 700; }
+.doc-head .ex { color: var(--warm); }
+.etab-wrap { overflow-x: auto; }
+.etab { width: 100%; border-collapse: collapse; font-size: 14px; }
+.etab th, .etab td { padding: 7px 0 7px 10px; border-bottom: 1px dotted var(--line); text-align: right; vertical-align: baseline; }
+.etab th:first-child, .etab td:first-child { text-align: left; padding-left: 0; }
+.etab th { font-size: 12px; font-weight: 700; color: var(--muted); }
+.etab td { font-weight: 700; }
+.etab td:first-child { font-weight: 400; }
+.etab td.na { color: var(--muted); font-weight: 500; }
+.etab tr.total td { border-top: 1.5px solid var(--ink); border-bottom: 0; font-weight: 700; }
+.etab-note { margin-top: 6px; font-size: 13px; color: var(--muted); line-height: 1.45; }
 .answer-side { display: grid; gap: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); }
 @media (max-width: 900px) { .answer-side { position: static; } }
 .answer-side > p { color: var(--muted); font-size: 15px; }
@@ -395,7 +424,113 @@ footer a { overflow-wrap: anywhere; }
 .dock .t small { font-size: 13px; font-weight: 500; opacity: .75; }
 .dock a { color: var(--accent); font-weight: 700; font-size: 14px; }
 @media (max-width: 960px) { .dock.show { display: flex; } body { padding-bottom: 76px; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+/* ---------- Bevegelse ----------
+   Ett språk: korte overganger (140–300 ms) for respons, lengre (500–1100 ms) bare for store flater og diagrammer.
+   Bare transform og opacity animeres, bortsett fra søyler og ringen, som tegnes. */
+:root { --ease: cubic-bezier(.4, 0, .2, 1); --ease-out: cubic-bezier(.2, .7, .2, 1); }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes pop-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes settle { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: none; } }
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes step-fwd { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+@keyframes step-back { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes ico-pop { 0% { transform: scale(.6); } 60% { transform: scale(1.08); } 100% { transform: none; } }
+@keyframes ring-done { from { opacity: .6; transform: scale(.94); } to { opacity: 0; transform: scale(1.12); } }
+
+/* Hero: kort, forskjøvet inngang. Overskriften og knappen er lesbare etter et øyeblikk. */
+.hero-copy > * { animation: rise .55s var(--ease-out) both; }
+.hero-copy > :nth-child(2) { animation-delay: .04s; }
+.hero-copy > :nth-child(3) { animation-delay: .1s; }
+.hero-copy > :nth-child(4) { animation-delay: .16s; }
+.hero-copy > :nth-child(5) { animation-delay: .24s; }
+.photo { animation: rise .7s var(--ease-out) .06s both; }
+.photo img { animation: settle 1.4s var(--ease-out) both; }
+.mini { animation: rise .6s var(--ease-out) .5s both; }
+.mini .stack { transform-origin: left center; animation: grow-x .9s var(--ease-out) .8s both; }
+
+/* Knapper og lenker */
+.btn { transition: background-color .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease); }
+.btn.solid:hover { box-shadow: 0 10px 24px -12px rgba(169, 189, 90, .6); }
+.btn:active { transform: translateY(0) scale(.98); transition-duration: .06s; }
+.btn:disabled:active { transform: none; }
+.pill, .mini-btn, .linkbtn { transition: border-color .18s var(--ease), background-color .18s var(--ease), color .18s var(--ease), transform .12s var(--ease); }
+.pill:active, .mini-btn:active { transform: scale(.97); }
+.nav a { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat; padding-bottom: 3px; transition: color .2s var(--ease), background-size .28s var(--ease-out); }
+.nav a:hover, .nav a:focus-visible { background-size: 100% 1.5px; }
+.lang { position: relative; }
+.lang::before { content: ""; position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 6px; background: var(--accent); transition: transform .3s var(--ease); }
+.lang[data-l="en"]::before { transform: translateX(100%); }
+.lang button { position: relative; z-index: 1; min-width: 40px; padding: 5px 0; transition: color .2s var(--ease); }
+.lang button[aria-pressed="true"] { background: none; }
+.pop:not([hidden]) { animation: pop-in .16s var(--ease-out); }
+
+/* Fremdrift i veiviseren: én markør som glir mellom stegene */
+.rail { position: relative; }
+.rail-ind { position: absolute; top: 0; left: 0; z-index: 1; width: 20%; height: 3px; background: var(--accent); transform: translateX(calc(var(--i, 0) * 100%)); transition: transform .34s var(--ease); pointer-events: none; }
+.rail button { transition: background-color .2s var(--ease), color .2s var(--ease); }
+.rail button .n i { transform: scale(.3); transition: opacity .2s var(--ease), transform .35s var(--ease-out); }
+.rail button.filled .n i { transform: none; }
+.step.enter-fwd { animation: step-fwd .3s var(--ease-out) both; }
+.step.enter-back { animation: step-back .3s var(--ease-out) both; }
+
+/* Skjemafelt: linjen tegnes fra venstre ved fokus, valgknappene får en glidende markering */
+.in { position: relative; }
+.in::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left center; transition: transform .3s var(--ease-out), background-color .2s var(--ease); pointer-events: none; }
+.in:focus-within { border-color: var(--line); }
+.in:focus-within::after { transform: none; }
+.fld.bad .in::after { background: var(--warm); transform: none; }
+.fmsg { animation: pop-in .22s var(--ease-out) both; }
+.seg { position: relative; }
+.seg label { position: relative; z-index: 1; transition: color .2s var(--ease); }
+.seg.has-ind input:checked + label { background: none; box-shadow: none; }
+.seg-ind { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / var(--n, 2)); border-radius: 7px; background: var(--raise); box-shadow: 0 1px 3px rgba(0, 0, 0, .3); transform: translateX(calc(var(--i, 0) * 100%)); transition: transform .28s var(--ease), opacity .2s var(--ease); pointer-events: none; }
+.seg:not([data-i]) .seg-ind { opacity: 0; }
+.switch span { transition: background-color .22s var(--ease); }
+.switch span::after { transition: transform .26s var(--ease-out); }
+.example-note:not([hidden]), .gap-sec:not([hidden]) { animation: pop-in .3s var(--ease-out); }
+
+/* Resultatet: kortet kommer inn i trinn første gang det vises, ringen og søylene tegnes */
+.card .card-sec { transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+.card.mo-pre .card-sec { opacity: 0; transform: translateY(10px); }
+.card.mo-stagger .card-sec:nth-child(2) { transition-delay: .07s; }
+.card.mo-stagger .card-sec:nth-child(3) { transition-delay: .14s; }
+.card.mo-stagger .card-sec:nth-child(4) { transition-delay: .21s; }
+.card.mo-stagger .card-sec:nth-child(5) { transition-delay: .28s; }
+.card.mo-stagger .card-sec:nth-child(6) { transition-delay: .35s; }
+.ring::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; pointer-events: none; }
+.ring.done::after { animation: ring-done .9s var(--ease-out); }
+.ring .arc.no-tr { transition: none !important; }
+.ring .arc.draw { transition-duration: 1.1s, 1.1s; transition-delay: .12s, .12s; }
+.src .bar i.grow { transition: width .9s var(--ease-out); }
+.ready i { transition: background-color .35s var(--ease); }
+.ready-list button .go { display: inline-block; transition: transform .2s var(--ease); }
+.ready-list button:hover .go, .ready-list button:focus-visible .go { transform: translateX(3px); }
+.ready-list .pop .ico { animation: ico-pop .42s var(--ease-out); }
+.ready-list .pop .ico path { stroke-dasharray: 1; animation: draw .45s var(--ease-out) .1s both; }
+ol.actions li { transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+ol.actions.mo-pre li { opacity: 0; transform: translateY(12px); }
+ol.actions.mo-stagger li:nth-child(2) { transition-delay: .06s; }
+ol.actions.mo-stagger li:nth-child(3) { transition-delay: .12s; }
+ol.actions.mo-stagger li:nth-child(4) { transition-delay: .18s; }
+ol.actions.mo-stagger li:nth-child(5) { transition-delay: .24s; }
+ol.actions.mo-stagger li:nth-child(6) { transition-delay: .3s; }
+.doc.mo-el { transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.doc.mo-pre { opacity: 0; transform: translateY(18px); }
+
+/* Bekreftelser */
+.status { display: flex; align-items: center; gap: 8px; }
+.ok-ic { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; animation: ico-pop .42s var(--ease-out); }
+.ok-ic svg { width: 12px; height: 12px; }
+.ok-ic path { stroke-dasharray: 1; animation: draw .45s var(--ease-out) .1s both; }
+.fb-thanks:not([hidden]) { animation: rise .4s var(--ease-out) both; }
+
+/* Mobil: totalen glir opp nederst i stedet for å dukke opp */
+@media (max-width: 960px) {
+  .dock { display: flex; transform: translateY(110%); visibility: hidden; transition: transform .32s var(--ease), visibility 0s linear .32s; }
+  .dock.show { transform: none; visibility: visible; transition: transform .32s var(--ease), visibility 0s; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
@@ -424,8 +559,8 @@ footer a { overflow-wrap: anywhere; }
         <h1 data-i18n="hero.h1">Har en kunde spurt om klimatallene deres?</h1>
         <p class="lede" data-i18n="hero.lede">Klimasvar hjelper dere å svare. Fyll inn strøm, drivstoff og reiser, så får dere utslippene, de viktigste tiltakene og et ferdig svar å sende som PDF.</p>
         <div class="cta">
-          <a class="btn solid" href="#sjekk" data-i18n="hero.start">Start sjekken</a>
-          <button type="button" class="btn ghost" id="btn-example-hero" data-i18n="hero.example">Se et eksempel</button>
+          <a class="btn solid" href="#sjekk" id="btn-start" data-i18n="hero.start">Start sjekken</a>
+          <button type="button" class="btn ghost" id="btn-example-hero" data-i18n="hero.example">Se eksempelrapport</button>
         </div>
         <ul class="trust">
           <li class="time" data-i18n="hero.t0">Ferdig på rundt 10 minutter</li>
@@ -457,18 +592,18 @@ footer a { overflow-wrap: anywhere; }
       <div class="tool-head">
         <div class="band-head">
           <h2 data-i18n="tool.h">Sjekken</h2>
-          <p data-i18n="tool.p">Fem korte steg. Tallene finner dere på fakturaer og i rapporten fra drivstoffkortet.</p>
+          <p data-i18n="tool.p">Fem korte steg. Tallene finner dere på fakturaer og i rapporten fra drivstoffkortet. Skriv 0 der dere ikke har forbruk.</p>
         </div>
         <div class="linkbtns">
           <button type="button" class="linkbtn" id="btn-example" data-i18n="tool.example">Vis eksempel</button>
           <button type="button" class="linkbtn" id="btn-clear" data-i18n="tool.clear">Tøm skjemaet</button>
         </div>
       </div>
-      <p class="example-note" id="example-note" hidden><span data-i18n="tool.note">Du ser en eksempelbedrift: en elektriker med 14 ansatte. Bytt ut tallene med deres egne.</span></p>
+      <p class="example-note" id="example-note" role="status" hidden><span id="note-t"></span><button type="button" class="linkbtn" id="btn-restore" hidden></button></p>
 
       <div class="grid">
         <form class="wizard" id="f" autocomplete="off" novalidate>
-          <div class="rail" role="group" aria-label="Steg">
+          <div class="rail" role="group" aria-label="Steg"><span class="rail-ind" aria-hidden="true"></span>
             <button type="button" data-go="1"><span class="n">1<i></i></span><span class="t" data-i18n="rail1">Bedriften</span></button>
             <button type="button" data-go="2"><span class="n">2<i></i></span><span class="t" data-i18n="rail2">Energi</span></button>
             <button type="button" data-go="3"><span class="n">3<i></i></span><span class="t" data-i18n="rail3">Kjøretøy</span></button>
@@ -494,9 +629,9 @@ footer a { overflow-wrap: anywhere; }
                   <option value="industri" data-i18n="b.industri">Industri og produksjon</option>
                   <option value="annet" data-i18n="b.annet">Annet</option>
                 </select></div></div>
-              <div class="fld"><label for="aar"><span class="fl" data-i18n="f.aar">Regnskapsår</span></label><div class="in"><input id="aar" type="text" inputmode="numeric" placeholder="2025"></div></div>
-              <div class="fld"><label for="ansatte"><span class="fl" data-i18n="f.ansatte">Ansatte</span><span class="fh" data-i18n="h.ansatte">Antall <button type="button" class="term" data-term="arsverk">årsverk</button>, omtrentlig</span></label><div class="in"><input id="ansatte" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.arsverk">årsverk</span></div></div>
-              <div class="fld"><label for="omsetning"><span class="fl" data-i18n="f.omsetning">Omsetning</span><span class="fh" data-i18n="h.omsetning">Siste regnskapsår. Brukes til <button type="button" class="term" data-term="intensitet">klimaintensitet</button></span></label><div class="in"><input id="omsetning" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.mnok">mill. kr</span></div></div>
+              <div class="fld"><label for="aar"><span class="fl" data-i18n="f.aar">Regnskapsår</span></label><div class="in"><input id="aar" type="text" inputmode="numeric"></div></div>
+              <div class="fld"><label for="ansatte"><span class="fl" data-i18n="f.ansatte">Ansatte</span><span class="fh" data-i18n="h.ansatte">Antall <button type="button" class="term" data-term="arsverk">årsverk</button>, omtrentlig</span></label><div class="in"><input id="ansatte" type="text" inputmode="decimal"><span class="u" data-i18n="u.arsverk">årsverk</span></div></div>
+              <div class="fld"><label for="omsetning"><span class="fl" data-i18n="f.omsetning">Omsetning</span><span class="fh" data-i18n="h.omsetning">Siste regnskapsår. Brukes til <button type="button" class="term" data-term="intensitet">klimaintensitet</button></span></label><div class="in"><input id="omsetning" type="text" inputmode="decimal"><span class="u" data-i18n="u.mnok">mill. kr</span></div></div>
             </div>
           </section>
 
@@ -506,9 +641,9 @@ footer a { overflow-wrap: anywhere; }
               <p data-i18n="s2.p">Energien dere kjøper til lokalene. Strøm og fjernvarme hører til <button type="button" class="term" data-term="scope2">Scope 2</button>, propan dere brenner selv til <button type="button" class="term" data-term="scope1">Scope 1</button>.</p>
             </div>
             <div class="fields">
-              <div class="fld"><label for="strom"><span class="fl" data-i18n="f.strom">Strøm</span><span class="fh" data-i18n="h.strom">På fakturaen eller i Elhub. Inkludert i husleien? Spør utleier.</span></label><div class="in"><input id="strom" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.kwh">kWh i året</span></div></div>
-              <div class="fld"><label for="fjernvarme"><span class="fl" data-i18n="f.fjernvarme">Fjernvarme</span><span class="fh" data-i18n="h.fjernvarme">På fakturaen fra fjernvarmeselskapet</span></label><div class="in"><input id="fjernvarme" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.kwh">kWh i året</span></div></div>
-              <div class="fld"><label for="propan"><span class="fl" data-i18n="f.propan">Propan</span><span class="fh" data-i18n="h.propan">Kjøkken, oppvarming eller tørking. En vanlig flaske er 11 kg.</span></label><div class="in"><input id="propan" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.kg">kg i året</span></div></div>
+              <div class="fld"><label for="strom"><span class="fl" data-i18n="f.strom">Strøm</span><span class="fh" data-i18n="h.strom">På fakturaen eller i Elhub. Inkludert i husleien? Spør utleier.</span></label><div class="in"><input id="strom" type="text" inputmode="decimal"><span class="u" data-i18n="u.kwh">kWh i året</span></div></div>
+              <div class="fld"><label for="fjernvarme"><span class="fl" data-i18n="f.fjernvarme">Fjernvarme</span><span class="fh" data-i18n="h.fjernvarme">På fakturaen fra fjernvarmeselskapet</span></label><div class="in"><input id="fjernvarme" type="text" inputmode="decimal"><span class="u" data-i18n="u.kwh">kWh i året</span></div></div>
+              <div class="fld"><label for="propan"><span class="fl" data-i18n="f.propan">Propan</span><span class="fh" data-i18n="h.propan">Kjøkken, oppvarming eller tørking. En vanlig flaske er 11 kg.</span></label><div class="in"><input id="propan" type="text" inputmode="decimal"><span class="u" data-i18n="u.kg">kg i året</span></div></div>
             </div>
             <div class="choice" role="group" aria-labelledby="go-lbl">
               <span class="fl" id="go-lbl" data-i18n="go.q">Har strømavtalen <button type="button" class="term" data-term="go">opprinnelsesgarantier</button>?</span>
@@ -527,11 +662,11 @@ footer a { overflow-wrap: anywhere; }
               <p data-i18n="s3.p">For de fleste håndverkere og transportbedrifter er dette den største posten. Literne står i rapporten fra drivstoffkortet.</p>
             </div>
             <div class="fields">
-              <div class="fld"><label for="diesel"><span class="fl" data-i18n="f.diesel">Diesel til biler</span><span class="fh" data-i18n="h.diesel">Firmabiler og varebiler</span></label><div class="in"><input id="diesel" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
-              <div class="fld"><label for="bensin"><span class="fl" data-i18n="f.bensin">Bensin til biler</span><span class="fh" data-i18n="h.bensin">Inkludert ladbare hybrider</span></label><div class="in"><input id="bensin" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
-              <div class="fld"><label for="anlegg"><span class="fl" data-i18n="f.anlegg">Anleggsdiesel</span><span class="fh" data-i18n="h.anlegg">Maskiner, aggregater og byggtørking</span></label><div class="in"><input id="anlegg" type="text" inputmode="decimal" placeholder="0"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
-              <div class="fld"><label for="fossile"><span class="fl" data-i18n="f.fossile">Diesel- og bensinbiler</span><span class="fh" data-i18n="h.fossile">Brukes til å regne effekten av å bytte</span></label><div class="in"><input id="fossile" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.stk">stk.</span></div></div>
-              <div class="fld"><label for="elbiler"><span class="fl" data-i18n="f.elbiler">Elbiler</span><span class="fh" data-i18n="h.elbiler">Ladestrøm hos dere selv er med under strøm</span></label><div class="in"><input id="elbiler" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.stk">stk.</span></div></div>
+              <div class="fld"><label for="diesel"><span class="fl" data-i18n="f.diesel">Diesel til biler</span><span class="fh" data-i18n="h.diesel">Firmabiler og varebiler</span></label><div class="in"><input id="diesel" type="text" inputmode="decimal"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
+              <div class="fld"><label for="bensin"><span class="fl" data-i18n="f.bensin">Bensin til biler</span><span class="fh" data-i18n="h.bensin">Inkludert ladbare hybrider</span></label><div class="in"><input id="bensin" type="text" inputmode="decimal"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
+              <div class="fld"><label for="anlegg"><span class="fl" data-i18n="f.anlegg">Anleggsdiesel</span><span class="fh" data-i18n="h.anlegg">Maskiner, aggregater og byggtørking</span></label><div class="in"><input id="anlegg" type="text" inputmode="decimal"><span class="u" data-i18n="u.liter">liter i året</span></div></div>
+              <div class="fld"><label for="fossile"><span class="fl" data-i18n="f.fossile">Diesel- og bensinbiler</span><span class="fh" data-i18n="h.fossile">Brukes til å regne effekten av å bytte</span></label><div class="in"><input id="fossile" type="text" inputmode="numeric"><span class="u" data-i18n="u.stk">stk.</span></div></div>
+              <div class="fld"><label for="elbiler"><span class="fl" data-i18n="f.elbiler">Elbiler</span><span class="fh" data-i18n="h.elbiler">Ladestrøm hos dere selv er med under strøm</span></label><div class="in"><input id="elbiler" type="text" inputmode="numeric"><span class="u" data-i18n="u.stk">stk.</span></div></div>
             </div>
           </section>
 
@@ -541,9 +676,9 @@ footer a { overflow-wrap: anywhere; }
               <p data-i18n="s4.p">Antall tur-retur-reiser for alle ansatte til sammen. Flyreiser hører til <button type="button" class="term" data-term="scope3">Scope 3</button>. Reisebyrået kan ofte gi dere en oversikt.</p>
             </div>
             <div class="fields">
-              <div class="fld"><label for="flyInn"><span class="fl" data-i18n="f.flyInn">Innenlands</span><span class="fh" data-i18n="h.flyInn">For eksempel Oslo–Bergen eller Oslo–Tromsø</span></label><div class="in"><input id="flyInn" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
-              <div class="fld"><label for="flyEur"><span class="fl" data-i18n="f.flyEur">Europa</span><span class="fh" data-i18n="h.flyEur">For eksempel Oslo–London eller Oslo–Barcelona</span></label><div class="in"><input id="flyEur" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
-              <div class="fld"><label for="flyInt"><span class="fl" data-i18n="f.flyInt">Utenfor Europa</span><span class="fh" data-i18n="h.flyInt">For eksempel Oslo–New York eller Oslo–Bangkok</span></label><div class="in"><input id="flyInt" type="text" inputmode="numeric" placeholder="0"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
+              <div class="fld"><label for="flyInn"><span class="fl" data-i18n="f.flyInn">Innenlands</span><span class="fh" data-i18n="h.flyInn">For eksempel Oslo–Bergen eller Oslo–Tromsø</span></label><div class="in"><input id="flyInn" type="text" inputmode="numeric"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
+              <div class="fld"><label for="flyEur"><span class="fl" data-i18n="f.flyEur">Europa</span><span class="fh" data-i18n="h.flyEur">For eksempel Oslo–London eller Oslo–Barcelona</span></label><div class="in"><input id="flyEur" type="text" inputmode="numeric"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
+              <div class="fld"><label for="flyInt"><span class="fl" data-i18n="f.flyInt">Utenfor Europa</span><span class="fh" data-i18n="h.flyInt">For eksempel Oslo–New York eller Oslo–Bangkok</span></label><div class="in"><input id="flyInt" type="text" inputmode="numeric"><span class="u" data-i18n="u.tur">tur-retur</span></div></div>
             </div>
           </section>
 
@@ -568,7 +703,7 @@ footer a { overflow-wrap: anywhere; }
           </section>
 
           <div class="step-foot">
-            <span class="count" id="step-count">Steg 1 av 5</span>
+            <span class="left"><span class="count" id="step-count">Steg 1 av 5</span><span class="saved" id="saved" data-i18n="tool.saved">Lagres automatisk i denne nettleseren</span></span>
             <div class="btns">
               <button type="button" class="btn ghost" id="prev" data-i18n="btn.prev">Tilbake</button>
               <button type="button" class="btn solid" id="next">Neste</button>
@@ -576,7 +711,7 @@ footer a { overflow-wrap: anywhere; }
           </div>
         </form>
 
-        <aside class="card" id="kort" aria-live="polite">
+        <aside class="card" id="kort" aria-labelledby="c-co">
           <div class="card-sec">
             <div class="card-top"><span class="card-co" id="c-co">Bedrift AS</span><span class="card-yr" id="c-yr"></span></div>
             <div class="ring">
@@ -592,7 +727,7 @@ footer a { overflow-wrap: anywhere; }
           </div>
           <div class="card-sec">
             <div class="kpis">
-              <div class="kpi"><span class="v" id="r-int">–</span><span class="k" data-i18n="card.int">tonn per mill. kr, Scope 1 og 2</span></div>
+              <div class="kpi"><span class="v" id="r-int">–</span><span class="k" data-i18n="card.int">tonn per mill. kr omsetning</span></div>
               <div class="kpi"><span class="v" id="r-ans">–</span><span class="k" data-i18n="card.ans">tonn per årsverk</span></div>
               <div class="kpi"><span class="v" id="r-mwh">0</span><span class="k" data-i18n="card.mwh">MWh energi</span></div>
             </div>
@@ -600,6 +735,11 @@ footer a { overflow-wrap: anywhere; }
           <div class="card-sec">
             <span class="lbl" data-i18n="card.src">Største kilder</span>
             <div class="sources" id="r-sources"></div>
+          </div>
+          <div class="card-sec gap-sec" id="gap-sec" hidden>
+            <span class="lbl" data-i18n="card.gaps">Mangler i tallene</span>
+            <ul class="ready-list" id="r-gap-list"></ul>
+            <p class="ready-txt" data-i18n="card.gapsTxt">Til dette er fylt inn, er svaret ikke komplett. Skriv 0 der dere ikke har forbruk.</p>
           </div>
           <div class="card-sec">
             <div class="ready-head"><span class="lbl" data-i18n="card.ready">Klar til å svare</span><span class="ready-n" id="r-ready-n"></span></div>
@@ -633,7 +773,7 @@ footer a { overflow-wrap: anywhere; }
       <div class="answer">
         <article class="doc" id="doc"></article>
         <div class="answer-side">
-          <p data-i18n="a.p1">Svaret følger datapunktene i basismodulen til <button type="button" class="term" data-term="vsme">VSME</button>, den frivillige standarden EU-kommisjonen ber store selskaper og banker bruke når de spør småbedrifter om bærekraft.</p>
+          <p data-i18n="a.p1">Svaret følger datapunktene i grunnmodulen til <button type="button" class="term" data-term="vsme">VSME</button>, den frivillige standarden EU-kommisjonen ber store selskaper og banker bruke når de spør småbedrifter om bærekraft.</p>
           <p data-i18n="a.p2">Last ned svaret som PDF og legg det ved, eller kopier teksten inn i e-posten, anbudet eller kundeskjemaet.</p>
           <div class="btnrow">
             <button type="button" class="btn solid" id="btn-pdf" data-pdf data-i18n="a.pdf">Last ned PDF</button>
@@ -666,12 +806,12 @@ footer a { overflow-wrap: anywhere; }
           <table>
             <thead><tr><th data-i18n="m.c1">Kilde</th><th data-i18n="m.c2">Faktor</th><th data-i18n="m.c3">Grunnlag</th></tr></thead>
             <tbody data-i18n="m.tbody">
-              <tr><td>Strøm</td><td class="f">0,0094 kg/kWh</td><td class="g">NVE, klimadeklarasjon for fysisk levert strøm 2025</td></tr>
+              <tr><td>Strøm</td><td class="f">0,0094 kg/kWh</td><td class="g">NVE, klimadeklarasjon for fysisk levert strøm 2025. 96 % fornybar</td></tr>
               <tr><td>Fjernvarme</td><td class="f">0,015 kg/kWh</td><td class="g">Anslått norsk gjennomsnitt, varierer mellom nettene</td></tr>
-              <tr><td>Propan</td><td class="f">2,94 kg/kg</td><td class="g">DEFRA/DESNZ 2025, LPG omregnet fra liter</td></tr>
-              <tr><td>Diesel, biler</td><td class="f">2,571 kg/l</td><td class="g">DEFRA/DESNZ 2025, med biodrivstoff</td></tr>
-              <tr><td>Bensin, biler</td><td class="f">2,069 kg/l</td><td class="g">DEFRA/DESNZ 2025, med biodrivstoff</td></tr>
-              <tr><td>Anleggsdiesel</td><td class="f">2,755 kg/l</td><td class="g">DEFRA/DESNZ 2025, fossil gassolje</td></tr>
+              <tr><td>Propan</td><td class="f">3,00 kg/kg</td><td class="g">Miljødirektoratet, LPG. 12,8 kWh/kg</td></tr>
+              <tr><td>Diesel, biler</td><td class="f">2,66 kg/l</td><td class="g">Miljødirektoratet, fossil diesel. 10,1 kWh/l</td></tr>
+              <tr><td>Bensin, biler</td><td class="f">2,32 kg/l</td><td class="g">Miljødirektoratet, fossil bensin. 9,0 kWh/l</td></tr>
+              <tr><td>Anleggsdiesel</td><td class="f">2,66 kg/l</td><td class="g">Miljødirektoratet, fossil diesel. 10,1 kWh/l</td></tr>
               <tr><td>Fly, innenlands</td><td class="f">229 kg</td><td class="g">Per tur-retur. DEFRA/DESNZ 2026, 2 × 500 km</td></tr>
               <tr><td>Fly, Europa</td><td class="f">352 kg</td><td class="g">Per tur-retur. DEFRA/DESNZ 2026, 2 × 1 400 km</td></tr>
               <tr><td>Fly, utenfor Europa</td><td class="f">1 639 kg</td><td class="g">Per tur-retur. DEFRA/DESNZ 2026, 2 × 7 000 km</td></tr>
@@ -681,13 +821,16 @@ footer a { overflow-wrap: anywhere; }
         <div class="prose">
           <p data-i18n="m.p">Beregningen følger GHG-protokollen. Scope 1 er det dere brenner selv. Scope 2 er utslippene fra å produsere strømmen og varmen dere kjøper. Scope 3 er resten av verdikjeden, og her er bare flyreiser med.</p>
           <ul data-i18n="m.ul">
-            <li>Norsk drivstoff har mer biodrivstoff enn den britiske snittfaktoren, så utslippene fra biler blir heller litt for høye enn for lave.</li>
+            <li>Drivstoff regnes med Miljødirektoratets faktorer for fossilt drivstoff, slik den norske VSME-veiledningen anbefaler. Biodrivstoffet som er blandet inn, er ikke trukket fra, så utslippene blir heller litt for høye enn for lave.</li>
+            <li>Energien deles i fornybar og ikke-fornybar etter NVEs klimadeklarasjon: 96 % av strømmen brukt i Norge i 2025 var fornybar. Drivstoff regnes som ikke-fornybart.</li>
+            <li>Rapporteringsgrensen er operasjonell kontroll: det bedriften selv driver, eier eller leier.</li>
+            <li>Et tomt felt betyr «ikke oppgitt», ikke null. Svaret viser hva som mangler. Tomt felt for fjernvarme og propan regnes som at dere ikke bruker det.</li>
             <li>Strøm regnes lokasjonsbasert, slik VSME ber om. Har dere opprinnelsesgarantier, viser svaret i tillegg markedsbasert Scope 2, der den strømmen regnes som utslippsfri.</li>
-            <li>Flyfaktorene inkluderer effekten av utslipp i høyden.</li>
+            <li>Flyfaktorene inkluderer effekten av utslipp i høyden. Klimaintensiteten er brutto utslipp, inkludert flyreisene, delt på omsetningen, slik VSME ber om.</li>
             <li>Innkjøp av varer og tjenester er ikke med. For mange bedrifter er det den største posten.</li>
             <li>Resultatet er et estimat, ikke et revidert klimaregnskap.</li>
           </ul>
-          <p class="src-links"><span data-i18n="m.src">Kilder:</span> <a href="https://www.nve.no/energi/energisystem/energibruk/stroemdeklarasjoner/" target="_blank" rel="noopener">NVE</a> · <a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025" target="_blank" rel="noopener">DEFRA/DESNZ 2025</a> · <a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026" target="_blank" rel="noopener">DEFRA/DESNZ 2026</a> · <a href="https://www.efrag.org" target="_blank" rel="noopener">EFRAG</a></p>
+          <p class="src-links"><span data-i18n="m.src">Kilder:</span> <a href="https://www.nve.no/energi/energisystem/energibruk/stroemdeklarasjoner/" target="_blank" rel="noopener">NVE</a> · <a href="https://www.miljodirektoratet.no/ansvarsomrader/klima/klimagasser-utslippstall-regnskap/utslippsfaktorer-klimagassregnskap/" target="_blank" rel="noopener">Miljødirektoratet</a> · <a href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026" target="_blank" rel="noopener">DEFRA/DESNZ 2026</a> · <a href="https://www.efrag.org" target="_blank" rel="noopener">EFRAG</a></p>
         </div>
       </div>
     </div>
@@ -738,6 +881,7 @@ footer a { overflow-wrap: anywhere; }
   </div>
 </footer>
 
+<p class="vh" id="live" aria-live="polite"></p>
 <div class="dock" id="dock"><span class="t"><span id="dock-t">0</span> <small data-i18n="dock.u">tonn CO₂e</small></span><a href="#kort" data-i18n="dock.a">Se resultatet</a></div>
 
 <script>
@@ -753,11 +897,16 @@ footer a { overflow-wrap: anywhere; }
   };
 
   // ---------- Faktorer (kg CO2e per enhet) ----------
-  var F = { strom: 0.0094, fjernvarme: 0.015, propan: 2.94, diesel: 2.571, bensin: 2.069, anlegg: 2.755,
+  // Drivstoff: Miljødirektoratet, fossilt drivstoff (anbefalt i den norske VSME-veiledningen).
+  // Fly: DEFRA/DESNZ 2026 med effekten av utslipp i høyden, fordi det ikke finnes norske flyfaktorer.
+  var F = { strom: 0.0094, fjernvarme: 0.015, propan: 3.00, diesel: 2.66, bensin: 2.32, anlegg: 2.66,
             flyInn: 0.22928, flyEur: 0.12576, flyInt: 0.11704 };
+  // Fornybar andel av strømmen, NVEs klimadeklarasjon for 2025 (lokasjonsbasert)
+  var REN_EL = 0.96;
   var KM = { flyInn: 500, flyEur: 1400, flyInt: 7000 };
   var TRIP = { flyInn: 2 * KM.flyInn * F.flyInn, flyEur: 2 * KM.flyEur * F.flyEur, flyInt: 2 * KM.flyInt * F.flyInt };
-  var KWH = { diesel: 10.0, bensin: 8.9, anlegg: 10.0, propan: 12.8 };
+  // Energiinnhold, Miljødirektoratet: diesel 0,84 kg/l × 12,0 kWh/kg, bensin 0,74 kg/l × 12,2 kWh/kg, LPG 12,8 kWh/kg
+  var KWH = { diesel: 10.08, bensin: 9.028, anlegg: 10.08, propan: 12.8 };
 
   var NUM = ["omsetning", "ansatte", "strom", "fjernvarme", "propan", "diesel", "bensin", "anlegg", "fossile", "elbiler", "flyInn", "flyEur", "flyInt"];
   var TXT = ["navn", "aar", "bransje"];
@@ -779,12 +928,11 @@ footer a { overflow-wrap: anywhere; }
     "hero.kicker": "A free sustainability check for small and medium-sized businesses",
     "hero.h1": "Has a customer asked for your climate figures?",
     "hero.lede": "Klimasvar helps you answer. Enter your electricity, fuel and travel, and get your emissions, the most important actions and a ready-to-send answer as a PDF.",
-    "hero.start": "Start the check", "hero.example": "See an example",
+    "hero.start": "Start the check", "hero.example": "See an example report",
     "hero.t0": "Done in about 10 minutes", "hero.t1": "Free", "hero.t2": "No sign-up", "hero.t3": "Your figures stay in your browser",
     "mini.ex": "Example", "mini.unit": "tonnes CO₂e a year",
-    "tool.h": "The check", "tool.p": "Five short steps. You'll find the figures on your invoices and in your fuel card report.",
+    "tool.h": "The check", "tool.p": "Five short steps. You'll find the figures on your invoices and in your fuel card report. Enter 0 where you have no consumption.", "tool.saved": "Saved automatically in this browser",
     "tool.example": "Show example", "tool.clear": "Clear the form",
-    "tool.note": "You are looking at an example business: an electrician with 14 employees. Replace the figures with your own.",
     "rail1": "Company", "rail2": "Energy", "rail3": "Vehicles", "rail4": "Travel", "rail5": "Governance",
     "s1.h": "About the business", "s1.p": "Name and year are used in the answer to your customer. Turnover is needed for emissions intensity, which banks often ask for.",
     "f.navn": "Name", "ph.navn": "Your company AS", "f.bransje": "Industry",
@@ -816,7 +964,8 @@ footer a { overflow-wrap: anywhere; }
     "c.kunde": "We have been asked for climate figures by a customer, a bank or in a tender",
     "c.data": "The figures we have entered are", "c.malt": "From invoices", "c.anslag": "Estimates",
     "btn.prev": "Back",
-    "card.unit": "tonnes CO₂e a year", "card.int": "tonnes per NOK million, Scope 1 and 2", "card.ans": "tonnes per FTE", "card.mwh": "MWh of energy",
+    "card.unit": "tonnes CO₂e a year", "card.int": "tonnes per NOK million of turnover",
+    "card.gaps": "Missing from the figures", "card.gapsTxt": "Until this is filled in, the answer is not complete. Enter 0 where you have no consumption.", "card.ans": "tonnes per FTE", "card.mwh": "MWh of energy",
     "card.src": "Largest sources", "card.ready": "Ready to answer", "card.pdf": "Download as PDF",
     "t.h": "Do this first", "t.p": "Ranked by what cuts the most, and what your customers most often ask about. The list follows your figures.",
     "a.h": "Answer for your customer",
@@ -828,20 +977,23 @@ footer a { overflow-wrap: anywhere; }
     "m.h": "How we calculate", "m.updated": "The emission factors were last updated in October 2026.",
     "m.c1": "Source", "m.c2": "Factor", "m.c3": "Basis",
     "m.tbody":
-      '<tr><td>Electricity</td><td class="f">0.0094 kg/kWh</td><td class="g">NVE, climate declaration for physically delivered electricity 2025</td></tr>' +
+      '<tr><td>Electricity</td><td class="f">0.0094 kg/kWh</td><td class="g">NVE, climate declaration for physically delivered electricity 2025. 96% renewable</td></tr>' +
       '<tr><td>District heating</td><td class="f">0.015 kg/kWh</td><td class="g">Estimated Norwegian average, varies between networks</td></tr>' +
-      '<tr><td>Propane</td><td class="f">2.94 kg/kg</td><td class="g">DEFRA/DESNZ 2025, LPG converted from litres</td></tr>' +
-      '<tr><td>Diesel, vehicles</td><td class="f">2.571 kg/l</td><td class="g">DEFRA/DESNZ 2025, with biofuel blend</td></tr>' +
-      '<tr><td>Petrol, vehicles</td><td class="f">2.069 kg/l</td><td class="g">DEFRA/DESNZ 2025, with biofuel blend</td></tr>' +
-      '<tr><td>Off-road diesel</td><td class="f">2.755 kg/l</td><td class="g">DEFRA/DESNZ 2025, fossil gas oil</td></tr>' +
+      '<tr><td>Propane</td><td class="f">3.00 kg/kg</td><td class="g">Norwegian Environment Agency, LPG. 12.8 kWh/kg</td></tr>' +
+      '<tr><td>Diesel, vehicles</td><td class="f">2.66 kg/l</td><td class="g">Norwegian Environment Agency, fossil diesel. 10.1 kWh/l</td></tr>' +
+      '<tr><td>Petrol, vehicles</td><td class="f">2.32 kg/l</td><td class="g">Norwegian Environment Agency, fossil petrol. 9.0 kWh/l</td></tr>' +
+      '<tr><td>Off-road diesel</td><td class="f">2.66 kg/l</td><td class="g">Norwegian Environment Agency, fossil diesel. 10.1 kWh/l</td></tr>' +
       '<tr><td>Flight, domestic</td><td class="f">229 kg</td><td class="g">Per return trip. DEFRA/DESNZ 2026, 2 × 500 km</td></tr>' +
       '<tr><td>Flight, Europe</td><td class="f">352 kg</td><td class="g">Per return trip. DEFRA/DESNZ 2026, 2 × 1,400 km</td></tr>' +
       '<tr><td>Flight, outside Europe</td><td class="f">1,639 kg</td><td class="g">Per return trip. DEFRA/DESNZ 2026, 2 × 7,000 km</td></tr>',
     "m.p": "The calculation follows the GHG Protocol. Scope 1 is what you burn yourselves. Scope 2 is the emissions from producing the electricity and heat you buy. Scope 3 is the rest of the value chain, and only flights are included here.",
     "m.ul":
-      "<li>Norwegian fuel contains more biofuel than the UK average factor, so vehicle emissions are more likely slightly too high than too low.</li>" +
+      "<li>Fuel is calculated with the Norwegian Environment Agency's factors for fossil fuel, as the Norwegian VSME guidance recommends. The blended-in biofuel is not deducted, so emissions are more likely slightly too high than too low.</li>" +
+      "<li>Energy is split into renewable and non-renewable using NVE's climate declaration: 96% of the electricity used in Norway in 2025 was renewable. Fuel counts as non-renewable.</li>" +
+      "<li>The reporting boundary is operational control: what the business itself runs, owns or leases.</li>" +
+      "<li>An empty field means «not stated», not zero. The answer shows what is missing. Empty fields for district heating and propane count as not used.</li>" +
       "<li>Electricity is calculated location-based, as VSME asks. If you have guarantees of origin, the answer also shows market-based Scope 2, where that electricity counts as emission-free.</li>" +
-      "<li>The flight factors include the warming effect of emissions at altitude.</li>" +
+      "<li>The flight factors include the warming effect of emissions at altitude. Emissions intensity is gross emissions, including flights, divided by turnover, as VSME asks.</li>" +
       "<li>Purchased goods and services are not included. For many businesses they are the largest item.</li>" +
       "<li>The result is an estimate, not an audited carbon account.</li>",
     "m.src": "Sources:",
@@ -866,7 +1018,7 @@ footer a { overflow-wrap: anywhere; }
       scope3: ["Scope 3", "Andre utslipp i verdikjeden, som flyreiser, innkjøp og frakt. Klimasvar regner foreløpig bare med flyreiser."],
       vsme: ["VSME", "EUs frivillige standard for bærekraftsrapportering for små og mellomstore bedrifter. EU-kommisjonen anbefaler at store selskaper og banker holder seg til den når de spør leverandører om bærekraft."],
       arsverk: ["Årsverk", "Én person i full stilling i ett år. To personer i halv stilling er til sammen ett årsverk."],
-      intensitet: ["Klimaintensitet", "Utslippene i Scope 1 og 2 delt på omsetningen. Banker bruker tallet til å sammenligne bedrifter av ulik størrelse."],
+      intensitet: ["Klimaintensitet", "Brutto utslipp delt på omsetningen. Flyreisene i Scope 3 er med, slik VSME ber om. Banker bruker tallet til å sammenligne bedrifter av ulik størrelse."],
       go: ["Opprinnelsesgarantier", "Et sertifikat som dokumenterer at like mye strøm som dere bruker, er produsert fra fornybare kilder. Det endrer ikke strømmen i stikkontakten, men gir lavere markedsbasert Scope 2."]
     },
     en: {
@@ -875,7 +1027,7 @@ footer a { overflow-wrap: anywhere; }
       scope3: ["Scope 3", "Other emissions in the value chain, such as flights, purchases and freight. Klimasvar currently includes only flights."],
       vsme: ["VSME", "The EU's voluntary sustainability reporting standard for small and medium-sized businesses. The European Commission recommends that large companies and banks keep to it when they ask suppliers about sustainability."],
       arsverk: ["Full-time equivalent", "One person working full time for a year. Two people working half time add up to one FTE."],
-      intensitet: ["Emissions intensity", "Scope 1 and 2 emissions divided by turnover. Banks use it to compare businesses of different sizes."],
+      intensitet: ["Emissions intensity", "Gross emissions divided by turnover. Flights in Scope 3 are included, as VSME asks. Banks use it to compare businesses of different sizes."],
       go: ["Guarantees of origin", "A certificate documenting that as much electricity as you use has been produced from renewable sources. It doesn't change the electricity in your socket, but lowers market-based Scope 2."]
     }
   };
@@ -894,6 +1046,19 @@ footer a { overflow-wrap: anywhere; }
       step: function (n) { return "Steg " + n + " av 5"; },
       names: { 2: "Energi", 3: "Kjøretøy", 4: "Reiser", 5: "Styring" },
       next: function (n) { return "Neste: " + n; }, last: "Se tiltakene", lastMobile: "Se resultatet",
+      note: {
+        example: "Du ser en eksempelbedrift: en elektriker med 14 ansatte. Klikk i et felt for å starte med deres egne tall.",
+        left: "Eksempeltallene er fjernet. Nå regner vi bare med deres egne tall.",
+        cleared: "Skjemaet er tømt.",
+        back: "Deres egne tall er hentet tilbake.",
+        restore: "Tilbake til deres tall", undo: "Angre"
+      },
+      gapNames: { navn: "Navn og regnskapsår", strom: "Strøm", kjoretoy: "Kjøretøy og maskiner", drivstoff: "Drivstoff til bilene", fly: "Flyreiser", omsetning: "Omsetning, for klimaintensitet" },
+      err: "Skriv bare tall, for eksempel 45 000.",
+      hKwh: function (x) { return "Feltet er i kWh. Står det MWh på fakturaen, er det " + x + " kWh."; },
+      hMnok: function (y) { return "Feltet er i millioner kroner. Mente dere " + y + " mill. kr?"; },
+      use: function (x) { return "Bruk " + x; },
+      live: function (x) { return "Totalt " + x + " tonn CO2e i året"; },
       tag: { kutt: "Kutt", svar: "Bli klar" },
       mini: function (src, p) { return "Største kilde: " + src.toLowerCase() + ", " + p; },
       copyOk: "Kopiert. Lim inn i e-posten eller skjemaet.",
@@ -934,29 +1099,44 @@ footer a { overflow-wrap: anywhere; }
       d: {
         title: function (n, y) { return "Klimadata for " + n + ", regnskapsåret " + y; },
         placeholderName: "[Bedriftens navn]", placeholderYear: "[år]",
-        method: "Beregnet etter GHG-protokollen, med oppsett etter basismodulen i VSME (B3).",
+        method: "Beregnet etter GHG-protokollen, med oppsett etter grunnmodulen i VSME (B3). Rapporteringsgrense: operasjonell kontroll.",
         energy: "Energiforbruk", el: "Strøm", heat: "Fjernvarme", fuel: "Drivstoff og brensel", totalE: "Totalt",
         ghg: "Klimagassutslipp (tonn CO2e)", ghgH: "Klimagassutslipp, tonn CO₂e",
         s1: "Scope 1", s1l: "Scope 1, egne utslipp", s2: "Scope 2, lokasjonsbasert", s2l: "Scope 2, kjøpt energi (lokasjonsbasert)",
         s2m: "Scope 2, markedsbasert", s2ml: "Scope 2, markedsbasert (strøm med opprinnelsesgarantier)",
         s12: "Scope 1 og 2 samlet", s3: "Scope 3, flyreiser i jobben", s3note: "(øvrig Scope 3 er ikke kartlagt)",
-        intH: "Klimaintensitet", int: function (x) { return "Klimaintensitet (Scope 1 og 2): " + x + " tonn CO2e per million kroner omsetning"; },
-        intRow: "Scope 1 og 2 per million kroner omsetning", intMissing: "Klimaintensitet: fyll inn omsetning",
+        intH: "Klimaintensitet", int: function (x) { return "Klimaintensitet, brutto utslipp: " + x + " tonn CO2e per million kroner omsetning"; },
+        int12: function (x) { return "Klimaintensitet, Scope 1 og 2: " + x + " tonn CO2e per million kroner omsetning"; },
+        intRow: "Brutto utslipp per million kroner omsetning", intRow12: "Scope 1 og 2 per million kroner omsetning", intMissing: "Klimaintensitet: ikke beregnet, fordi tall mangler",
+        na: "Ikke oppgitt",
+        warn: function (list) { return "Svaret er ikke komplett. Dette mangler: " + list + ". Fyll inn før dere sender det."; },
+        renLine: function (r, n) { return "fornybar " + r + " MWh, ikke-fornybar " + n + " MWh"; },
+        exampleTag: "Eksempel",
+        e: { el: "Elektrisitet", heat: "Fjernvarme", fuel: "Brensel og drivstoff", total: "Totalt", ren: "Fornybar", non: "Ikke-fornybar", tot: "Totalt",
+             note: "Strømmen er delt etter NVEs klimadeklarasjon for 2025, der 96 % var fornybar. Drivstoff regnes som ikke-fornybart.",
+             heatNote: " Fjernvarmen er ikke delt opp, fordi andelen varierer mellom nettene." },
         dataLbl: "Datagrunnlag", dataM: "fakturaer og målerdata", dataA: "anslag, erstattes med målte tall",
         goLbl: "Opprinnelsesgarantier for strøm", goVal: { ja: "ja", nei: "nei", vet: "ikke kjent", "": "ikke oppgitt" },
-        factors: "Utslippsfaktorer: NVE klimadeklarasjon for fysisk levert strøm 2025; DEFRA/DESNZ 2025 og 2026 for drivstoff og fly.",
+        factors: "Utslippsfaktorer: NVEs klimadeklarasjon for fysisk levert strøm 2025, Miljødirektoratet for drivstoff og DEFRA/DESNZ 2026 for fly.",
         gov: "Styring", govItems: { ansvar: "egen ansvarlig", policy: "skriftlig policy", maal: "mål for utslippskutt" },
         eyebrow: "Klimadata · VSME B3", sub: function (y) { return "Regnskapsåret " + y + ". Beregnet etter GHG-protokollen."; },
         energyH: "Energiforbruk, MWh",
-        foot: "Øvrig Scope 3 er ikke kartlagt. Utslippsfaktorer fra NVE (strøm 2025) og DEFRA/DESNZ (drivstoff og fly)."
+        foot: "Øvrig Scope 3 er ikke kartlagt. Rapporteringsgrense: operasjonell kontroll. Utslippsfaktorer fra NVE (strøm 2025), Miljødirektoratet (drivstoff) og DEFRA/DESNZ (fly)."
       },
       pdf: {
         band: "Klimadata · VSME B3",
         sub: function (y, date) { return "Regnskapsår " + y + "  ·  Beregnet etter GHG-protokollen  ·  Laget " + date; },
         totalLbl: "Samlede utslipp", perYear: "tonn CO2e per år",
-        kInt: "tonn CO2e per mill. kr omsetning (Scope 1 og 2)", kAns: "tonn CO2e per årsverk", kMwh: "MWh energi totalt",
-        srcH: "Største kilder", dataH: "Datagrunnlag og metode",
-        method: "Scope 2 er beregnet lokasjonsbasert med NVEs klimadeklarasjon for fysisk levert strøm 2025. Drivstoff og flyreiser er beregnet med DEFRA/DESNZ-faktorer for 2025 og 2026, og flyreisene inkluderer effekten av utslipp i høyden. Øvrig Scope 3, som innkjøp av varer og tjenester, er ikke kartlagt.",
+        kInt: "tonn CO2e per mill. kr omsetning", kAns: "tonn CO2e per årsverk", kMwh: "MWh energi totalt",
+        srcH: "Største kilder", dataH: "Datagrunnlag og avgrensninger", methodH: "Metode",
+        prelim: "foreløpig, tall mangler",
+        dq: { data: "Datagrunnlag", go: "Opprinnelsesgarantier", gov: "Styring", govNone: "ingen av punktene", boundary: "Rapporteringsgrense", boundaryV: "Operasjonell kontroll",
+              scope3: "Ikke med", scope3V: "Innkjøp og øvrig Scope 3", gaps: "Mangler", gapsNone: "Ingenting" },
+        warnH: "Svaret er ikke komplett",
+        method: "Scope 2 er beregnet lokasjonsbasert med NVEs klimadeklarasjon for fysisk levert strøm 2025, og energien er delt i fornybar og ikke-fornybar etter den samme deklarasjonen. Drivstoff er beregnet med Miljødirektoratets faktorer for fossilt drivstoff, og flyreisene med DEFRA/DESNZ 2026, inkludert effekten av utslipp i høyden. Klimaintensiteten er brutto utslipp delt på omsetningen. Tomme felt er oppgitt som mangler, ikke regnet som null.",
+        ren: "Fornybar", non: "Ikke-forn.", tot: "Totalt",
+        exampleBand: "Eksempelrapport · ikke ekte tall", exampleSub: "Eksempel: oppdiktet bedrift med typiske tall for en elektriker",
+        owner: "Ansvarlig", due: "Frist",
         methodGo: " Markedsbasert Scope 2 regner strøm med opprinnelsesgarantier som utslippsfri.",
         disclaimer: "Estimat basert på opplysninger fra bedriften. Ikke et revidert klimaregnskap.",
         made: "Laget med klimasvar.no", page: function (i, n) { return "Side " + i + " av " + n; },
@@ -978,6 +1158,19 @@ footer a { overflow-wrap: anywhere; }
       step: function (n) { return "Step " + n + " of 5"; },
       names: { 2: "Energy", 3: "Vehicles", 4: "Travel", 5: "Governance" },
       next: function (n) { return "Next: " + n; }, last: "See the actions", lastMobile: "See the result",
+      note: {
+        example: "You are looking at an example business: an electrician with 14 employees. Click in a field to start with your own figures.",
+        left: "The example figures have been removed. Only your own figures are used now.",
+        cleared: "The form has been cleared.",
+        back: "Your own figures are back.",
+        restore: "Back to your figures", undo: "Undo"
+      },
+      gapNames: { navn: "Name and financial year", strom: "Electricity", kjoretoy: "Vehicles and machinery", drivstoff: "Fuel for the vehicles", fly: "Flights", omsetning: "Turnover, for emissions intensity" },
+      err: "Enter numbers only, for example 45,000.",
+      hKwh: function (x) { return "This field is in kWh. If your invoice says MWh, that is " + x + " kWh."; },
+      hMnok: function (y) { return "This field is in NOK million. Did you mean NOK " + y + " million?"; },
+      use: function (x) { return "Use " + x; },
+      live: function (x) { return "Total " + x + " tonnes CO2e a year"; },
       tag: { kutt: "Cut", svar: "Get ready" },
       mini: function (src, p) { return "Largest source: " + src.toLowerCase() + ", " + p; },
       copyOk: "Copied. Paste it into your email or form.",
@@ -1018,29 +1211,44 @@ footer a { overflow-wrap: anywhere; }
       d: {
         title: function (n, y) { return "Climate data for " + n + ", financial year " + y; },
         placeholderName: "[Company name]", placeholderYear: "[year]",
-        method: "Calculated under the GHG Protocol, structured according to the VSME basic module (B3).",
+        method: "Calculated under the GHG Protocol, structured according to the VSME basic module (B3). Reporting boundary: operational control.",
         energy: "Energy consumption", el: "Electricity", heat: "District heating", fuel: "Fuels", totalE: "Total",
         ghg: "Greenhouse gas emissions (tonnes CO2e)", ghgH: "Greenhouse gas emissions, tonnes CO₂e",
         s1: "Scope 1", s1l: "Scope 1, own emissions", s2: "Scope 2, location-based", s2l: "Scope 2, purchased energy (location-based)",
         s2m: "Scope 2, market-based", s2ml: "Scope 2, market-based (electricity with guarantees of origin)",
         s12: "Scope 1 and 2 combined", s3: "Scope 3, business flights", s3note: "(other Scope 3 not mapped)",
-        intH: "Emissions intensity", int: function (x) { return "Emissions intensity (Scope 1 and 2): " + x + " tonnes CO2e per NOK million of turnover"; },
-        intRow: "Scope 1 and 2 per NOK million of turnover", intMissing: "Emissions intensity: enter turnover",
+        intH: "Emissions intensity", int: function (x) { return "Emissions intensity, gross emissions: " + x + " tonnes CO2e per NOK million of turnover"; },
+        int12: function (x) { return "Emissions intensity, Scope 1 and 2: " + x + " tonnes CO2e per NOK million of turnover"; },
+        intRow: "Gross emissions per NOK million of turnover", intRow12: "Scope 1 and 2 per NOK million of turnover", intMissing: "Emissions intensity: not calculated, because figures are missing",
+        na: "Not stated",
+        warn: function (list) { return "The answer is not complete. Missing: " + list + ". Fill it in before you send it."; },
+        renLine: function (r, n) { return "renewable " + r + " MWh, non-renewable " + n + " MWh"; },
+        exampleTag: "Example",
+        e: { el: "Electricity", heat: "District heating", fuel: "Fuels", total: "Total", ren: "Renewable", non: "Non-renewable", tot: "Total",
+             note: "Electricity is split using NVE's climate declaration for 2025, under which 96% was renewable. Fuel counts as non-renewable.",
+             heatNote: " District heating is not split, because the share varies between networks." },
         dataLbl: "Data basis", dataM: "invoices and meter data", dataA: "estimates, to be replaced with measured figures",
         goLbl: "Guarantees of origin for electricity", goVal: { ja: "yes", nei: "no", vet: "not known", "": "not stated" },
-        factors: "Emission factors: NVE climate declaration for physically delivered electricity 2025; DEFRA/DESNZ 2025 and 2026 for fuel and flights.",
+        factors: "Emission factors: NVE's climate declaration for physically delivered electricity 2025, the Norwegian Environment Agency for fuel and DEFRA/DESNZ 2026 for flights.",
         gov: "Governance", govItems: { ansvar: "dedicated owner", policy: "written policy", maal: "emissions reduction target" },
         eyebrow: "Climate data · VSME B3", sub: function (y) { return "Financial year " + y + ". Calculated under the GHG Protocol."; },
         energyH: "Energy consumption, MWh",
-        foot: "Other Scope 3 not mapped. Emission factors from NVE (electricity 2025) and DEFRA/DESNZ (fuel and flights)."
+        foot: "Other Scope 3 not mapped. Reporting boundary: operational control. Emission factors from NVE (electricity 2025), the Norwegian Environment Agency (fuel) and DEFRA/DESNZ (flights)."
       },
       pdf: {
         band: "Climate data · VSME B3",
         sub: function (y, date) { return "Financial year " + y + "  ·  Calculated under the GHG Protocol  ·  Created " + date; },
         totalLbl: "Total emissions", perYear: "tonnes CO2e a year",
-        kInt: "tonnes CO2e per NOK million of turnover (Scope 1 and 2)", kAns: "tonnes CO2e per FTE", kMwh: "MWh of energy in total",
-        srcH: "Largest sources", dataH: "Data and method",
-        method: "Scope 2 is calculated location-based using NVE's climate declaration for physically delivered electricity 2025. Fuel and flights are calculated with DEFRA/DESNZ factors for 2025 and 2026, and flights include the warming effect of emissions at altitude. Other Scope 3, such as purchased goods and services, is not mapped.",
+        kInt: "tonnes CO2e per NOK million of turnover", kAns: "tonnes CO2e per FTE", kMwh: "MWh of energy in total",
+        srcH: "Largest sources", dataH: "Data and boundaries", methodH: "Method",
+        prelim: "preliminary, figures missing",
+        dq: { data: "Data basis", go: "Guarantees of origin", gov: "Governance", govNone: "none of the items", boundary: "Reporting boundary", boundaryV: "Operational control",
+              scope3: "Not included", scope3V: "Purchases and other Scope 3", gaps: "Missing", gapsNone: "Nothing" },
+        warnH: "The answer is not complete",
+        method: "Scope 2 is calculated location-based using NVE's climate declaration for physically delivered electricity 2025, and energy is split into renewable and non-renewable using the same declaration. Fuel is calculated with the Norwegian Environment Agency's factors for fossil fuel, and flights with DEFRA/DESNZ 2026, including the warming effect of emissions at altitude. Emissions intensity is gross emissions divided by turnover. Empty fields are listed as missing, not counted as zero.",
+        ren: "Renewable", non: "Non-ren.", tot: "Total",
+        exampleBand: "Example report · not real figures", exampleSub: "Example: a fictional business with typical figures for an electrician",
+        owner: "Owner", due: "Due",
         methodGo: " Market-based Scope 2 counts electricity with guarantees of origin as emission-free.",
         disclaimer: "Estimate based on information provided by the company. Not an audited carbon account.",
         made: "Made with klimasvar.no", page: function (i, n) { return "Page " + i + " of " + n; },
@@ -1062,14 +1270,20 @@ footer a { overflow-wrap: anywhere; }
   makeFormats();
   function L() { return TX[lang]; }
 
-  // Godtar "62 000", "62,000", "1,5" og "1.5"
-  function parse(v) {
-    var s = String(v || "").replace(/[\s ]/g, "");
-    if (/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/,/g, "");
+  // Tolker tall slik folk skriver dem: "45 000", "45.000", "45,000", "1,5" og "1.5".
+  // Tre siffer etter punktum eller komma regnes som tusenskille.
+  function parseNum(v) {
+    var s = String(v == null ? "" : v).replace(/[\s\u00a0\u202f]/g, "");
+    if (s === "") return { empty: true, ok: true, n: 0 };
+    if (/^[1-9]\d{0,2}(\.\d{3})+,\d+$/.test(s)) s = s.replace(/\./g, "").replace(",", ".");
+    else if (/^[1-9]\d{0,2}(,\d{3})+\.\d+$/.test(s)) s = s.replace(/,/g, "");
+    else if (/^[1-9]\d{0,2}([.,]\d{3})+$/.test(s)) s = s.replace(/[.,]/g, "");
     else s = s.replace(",", ".");
+    if (!/^(\d+\.?\d*|\.\d+)$/.test(s)) return { empty: false, ok: false, n: 0 };
     var n = parseFloat(s);
-    return isFinite(n) && n > 0 ? n : 0;
+    return { empty: false, ok: isFinite(n), n: isFinite(n) && n > 0 ? n : 0 };
   }
+  function parse(v) { return parseNum(v).n; }
   function t(kg) { return kg / 1000; }
   function fmtT(kg) { var x = t(kg); return x > 0 && x < 0.05 ? "< " + nf1.format(0.1) : nf1.format(x); }
   function pct(part, whole) { return L().pct(whole > 0 ? Math.round(100 * part / whole) : 0); }
@@ -1090,6 +1304,7 @@ footer a { overflow-wrap: anywhere; }
     Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (b) {
       b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
     });
+    document.querySelector(".lang").setAttribute("data-l", lang);
     [["hero", "hero-img", "hero-cap"], ["om", "about-img", "about-cap"]].forEach(function (p) {
       var img = $(p[1]), cap = $(p[2]), meta = PHOTOS[p[0]];
       if (img) img.alt = meta.alt[lang] || "";
@@ -1158,8 +1373,11 @@ footer a { overflow-wrap: anywhere; }
   function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
   function setRadio(name, v) { Array.prototype.forEach.call(document.querySelectorAll('input[name="' + name + '"]'), function (el) { el.checked = el.value === v; }); }
   function read() {
-    var d = {};
-    NUM.forEach(function (k) { d[k] = parse($(k).value); });
+    var d = { filled: {}, invalid: {} };
+    NUM.forEach(function (k) {
+      var p = parseNum($(k).value);
+      d[k] = p.n; d.filled[k] = !p.empty && p.ok; d.invalid[k] = !p.ok;
+    });
     TXT.forEach(function (k) { d[k] = $(k).value.trim(); });
     CHK.forEach(function (k) { d[k] = $(k).checked; });
     d.data = radio("data"); d.go = radio("go");
@@ -1171,11 +1389,27 @@ footer a { overflow-wrap: anywhere; }
     });
     CHK.forEach(function (k) { $(k).checked = !!o[k]; });
     setRadio("data", o.data || ""); setRadio("go", o.go || "");
-    $("example-note").hidden = !o._example;
+  }
+
+  // ---------- Manglende tall ----------
+  // Et tomt felt er «ikke oppgitt», ikke null. [nøkkel, steg, felt, påvirker utslippene]
+  function gaps(d) {
+    var f = d.filled, list = [];
+    var veh = f.diesel || f.bensin || f.anlegg, fly = f.flyInn || f.flyEur || f.flyInt;
+    var fuelGap = veh && d.fossile > 0 && !f.diesel && !f.bensin;
+    if (!d.navn || !d.aar) list.push(["navn", 1, d.navn ? "aar" : "navn", false]);
+    if (!f.strom) list.push(["strom", 2, "strom", true]);
+    if (!veh) list.push(["kjoretoy", 3, "diesel", true]);
+    else if (fuelGap) list.push(["drivstoff", 3, "diesel", true]);
+    if (!fly) list.push(["fly", 4, "flyInn", true]);
+    if (!f.omsetning) list.push(["omsetning", 1, "omsetning", false]);
+    var s1 = !!veh && !fuelGap, s2 = !!f.strom, s3 = !!fly;
+    return { list: list, core: list.filter(function (x) { return x[3]; }), s1: s1, s2: s2, s3: s3, el: s2, fuel: s1, complete: s1 && s2 && s3 };
   }
 
   // ---------- Beregning ----------
   function calc(d) {
+    var g = d.filled ? gaps(d) : null;
     var src = [
       { key: "kjoretoy", scope: 1, kg: d.diesel * F.diesel + d.bensin * F.bensin },
       { key: "anlegg", scope: 1, kg: d.anlegg * F.anlegg },
@@ -1194,10 +1428,113 @@ footer a { overflow-wrap: anywhere; }
       s1: s[1], s2: s[2], s3: s[3], total: total,
       s2m: d.go === "ja" ? d.fjernvarme * F.fjernvarme : null,
       mwh: mwhFuel + mwhEl + mwhHeat, mwhFuel: mwhFuel, mwhEl: mwhEl, mwhHeat: mwhHeat,
-      intensity: d.omsetning > 0 ? t(s[1] + s[2]) / d.omsetning : null,
-      perAnsatt: d.ansatte > 0 ? t(total) / d.ansatte : null,
-      readiness: (d.ansvar ? 1 : 0) + (d.policy ? 1 : 0) + (d.maal ? 1 : 0) + (d.data === "malt" ? 1 : 0) + (total > 0 ? 1 : 0)
+      mwhElRen: mwhEl * REN_EL, mwhElNon: mwhEl * (1 - REN_EL), mwhRen: mwhEl * REN_EL, mwhNon: mwhEl * (1 - REN_EL) + mwhFuel,
+      // VSME: brutto utslipp, med Scope 3 når det rapporteres. Regnes bare når tallene er komplette.
+      intensity: d.omsetning > 0 && (!g || g.complete) ? t(total) / d.omsetning : null,
+      intensity12: d.omsetning > 0 && (!g || (g.s1 && g.s2)) ? t(s[1] + s[2]) / d.omsetning : null,
+      perAnsatt: d.ansatte > 0 && (!g || g.complete) ? t(total) / d.ansatte : null,
+      gaps: g,
+      readiness: (d.ansvar ? 1 : 0) + (d.policy ? 1 : 0) + (d.maal ? 1 : 0) + (d.data === "malt" ? 1 : 0) + (total > 0 && (!g || g.complete) ? 1 : 0)
     };
+  }
+
+  // ---------- Bevegelse ----------
+  // Tallene i siden er alltid de riktige. Tellingen er bare visuell, og alt slås av ved redusert bevegelse.
+  var REDUCED = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var MOTION = !REDUCED && "IntersectionObserver" in window && !!window.requestAnimationFrame;
+  var cardShown = !MOTION, lastR = null, lastFromUser = false, prevReady = null, miniKg = 0;
+  var CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.6 8.4l2.9 2.9 5.9-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg>';
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+  // Teller fra «from» til «to» og skriver alltid den nøyaktige teksten til slutt
+  function tween(el, from, to, dur, fmt, finalText, delay, write) {
+    write = write || function (s) { el.textContent = s; };
+    var tok = {}; el._tw = tok;
+    if (!MOTION || !(dur > 0) || from === to) { el._tw = null; write(finalText); return; }
+    var t0 = null;
+    requestAnimationFrame(function frame(ts) {
+      if (el._tw !== tok) return;
+      if (t0 === null) t0 = ts + (delay || 0);
+      var p = ts < t0 ? 0 : Math.min(1, (ts - t0) / dur);
+      if (p >= 1) { el._tw = null; write(finalText); return; }
+      write(fmt(from + (to - from) * easeOut(p)));
+      requestAnimationFrame(frame);
+    });
+  }
+  var fmtTon = function (x) { return nf1.format(x); };
+  function setTotal(r) {
+    var el = $("r-total"), txt = r.total > 0 ? fmtT(r.total) : "0", prev = el._kg;
+    el._kg = r.total;
+    if (cardShown && MOTION && prev != null && Math.abs(prev - r.total) >= 50) tween(el, prev / 1000, r.total / 1000, lastFromUser ? 320 : 650, fmtTon, txt);
+    else { el._tw = null; el.textContent = txt; }
+  }
+  function ringDone() {
+    if (!MOTION) return;
+    var ring = document.querySelector(".ring");
+    ring.classList.remove("done"); void ring.offsetWidth; ring.classList.add("done");
+  }
+  function okStatus(el, txt) {
+    el.innerHTML = '<span class="ok-ic">' + CHECK + "</span><span></span>";
+    el.lastChild.textContent = txt;
+  }
+  // Første gang klimakortet vises: tallene telles opp, ringen og søylene tegnes, seksjonene kommer inn i trinn
+  function revealCard() {
+    if (cardShown) return;
+    cardShown = true;
+    var card = $("kort");
+    card.classList.add("mo-stagger"); card.classList.remove("mo-pre");
+    setTimeout(function () { card.classList.remove("mo-stagger"); }, 1300);
+    if (!lastR) return;
+    var r = lastR, rt = $("r-total");
+    tween(rt, 0, r.total / 1000, 1000, fmtTon, rt.textContent, 120);
+    [["r-int", r.intensity, nf2], ["r-ans", r.perAnsatt, nf1], ["r-mwh", $("r-mwh").textContent === "–" ? null : r.mwh, nf0]].forEach(function (k) {
+      var el = $(k[0]);
+      if (k[1] == null) return;
+      tween(el, 0, k[1], 900, function (x) { return k[2].format(x); }, el.textContent, 260);
+    });
+    var arcs = [$("arc1"), $("arc2"), $("arc3")], keep = arcs.map(function (a) { return a.getAttribute("stroke-dasharray"); });
+    arcs.forEach(function (a) { a.classList.add("no-tr"); a.setAttribute("stroke-dasharray", "0 " + C); });
+    var bars = Array.prototype.slice.call(card.querySelectorAll(".src .bar i")), bw = bars.map(function (b) { return b.style.width; });
+    bars.forEach(function (b) { b.style.transition = "none"; b.style.width = "0"; });
+    var dots = Array.prototype.slice.call($("r-ready").children), on = dots.map(function (x) { return x.className; });
+    dots.forEach(function (x) { x.style.transition = "none"; x.className = ""; });
+    void card.offsetWidth;
+    arcs.forEach(function (a, i) { a.classList.remove("no-tr"); a.classList.add("draw"); a.setAttribute("stroke-dasharray", keep[i]); });
+    bars.forEach(function (b, i) { b.style.transition = ""; b.classList.add("grow"); b.style.transitionDelay = (0.25 + i * 0.08) + "s"; b.style.width = bw[i]; });
+    dots.forEach(function (x, i) { x.style.transition = ""; x.style.transitionDelay = (0.4 + i * 0.09) + "s"; x.className = on[i]; });
+    setTimeout(function () {
+      arcs.forEach(function (a) { a.classList.remove("draw"); });
+      bars.forEach(function (b) { b.classList.remove("grow"); b.style.transitionDelay = ""; });
+      dots.forEach(function (x) { x.style.transitionDelay = ""; });
+    }, 1700);
+  }
+  function revealList(el) {
+    el.classList.add("mo-stagger"); el.classList.remove("mo-pre");
+    setTimeout(function () { el.classList.remove("mo-stagger"); }, 1300);
+  }
+  function onView(el, fn) {
+    var io = new IntersectionObserver(function (es) {
+      if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); fn(); }
+    }, { rootMargin: "0px 0px -12% 0px" });
+    io.observe(el);
+  }
+  // Glidende markering i valgknappene. Valgene i en gruppe er like brede.
+  var segs = Array.prototype.slice.call(document.querySelectorAll("#f .seg"));
+  segs.forEach(function (sg) {
+    var ind = document.createElement("span");
+    ind.className = "seg-ind"; ind.setAttribute("aria-hidden", "true");
+    sg.insertBefore(ind, sg.firstChild);
+    sg.classList.add("has-ind");
+    sg.style.setProperty("--n", sg.querySelectorAll("input").length);
+  });
+  function syncSegs() {
+    segs.forEach(function (sg) {
+      var ins = sg.querySelectorAll("input"), idx = -1, ind = sg.querySelector(".seg-ind");
+      for (var i = 0; i < ins.length; i++) if (ins[i].checked) idx = i;
+      if (idx < 0) { sg.removeAttribute("data-i"); return; }
+      if (!sg.hasAttribute("data-i")) { ind.style.transition = "none"; sg.style.setProperty("--i", idx); void ind.offsetWidth; ind.style.transition = ""; }
+      else sg.style.setProperty("--i", idx);
+      sg.setAttribute("data-i", String(idx));
+    });
   }
 
   // ---------- Klimakort ----------
@@ -1208,7 +1545,7 @@ footer a { overflow-wrap: anywhere; }
     var T = L();
     $("c-co").textContent = d.navn || T.company;
     $("c-yr").textContent = d.aar ? T.yr(d.aar) : "";
-    $("r-total").textContent = r.total > 0 ? fmtT(r.total) : "0";
+    setTotal(r);
     $("dock-t").textContent = r.total > 0 ? fmtT(r.total) : "0";
 
     var parts = [1, 2, 3].map(function (sc) { return { sc: sc, kg: r["s" + sc] }; });
@@ -1227,13 +1564,14 @@ footer a { overflow-wrap: anywhere; }
     var lg = $("r-legend"); lg.innerHTML = "";
     parts.forEach(function (p) {
       var li = document.createElement("div"); li.className = "li";
-      li.innerHTML = '<span class="sw" style="background:' + SC[p.sc] + '"></span><span>' + T.scope[p.sc] + '</span><span class="v">' + (p.kg > 0 ? fmtT(p.kg) : "0") + " t</span>";
+      var known = { 1: r.gaps.s1, 2: r.gaps.s2, 3: r.gaps.s3 }[p.sc];
+      li.innerHTML = '<span class="sw" style="background:' + SC[p.sc] + '"></span><span>' + T.scope[p.sc] + '</span><span class="v">' + (known ? (p.kg > 0 ? fmtT(p.kg) : "0") + " t" : "–") + "</span>";
       lg.appendChild(li);
     });
 
     $("r-int").textContent = r.intensity == null ? "–" : nf2.format(r.intensity);
     $("r-ans").textContent = r.perAnsatt == null ? "–" : nf1.format(r.perAnsatt);
-    $("r-mwh").textContent = nf0.format(r.mwh);
+    $("r-mwh").textContent = r.gaps && !(r.gaps.el && r.gaps.fuel) ? "–" : nf0.format(r.mwh);
 
     var box = $("r-sources"); box.innerHTML = "";
     var top = r.src.filter(function (x) { return x.kg > 0; });
@@ -1252,25 +1590,41 @@ footer a { overflow-wrap: anywhere; }
     var dots = $("r-ready").children;
     for (var i = 0; i < dots.length; i++) dots[i].className = i < r.readiness ? "on" : "";
     $("r-ready-n").textContent = T.of5(r.readiness);
+    var gl = $("r-gap-list"); gl.innerHTML = "";
+    r.gaps.list.forEach(function (x) {
+      var li = document.createElement("li");
+      li.innerHTML = '<button type="button" data-step="' + x[1] + '" data-focus="' + x[2] + '"><span class="ico"></span><span class="nm"></span><span class="go"></span></button>';
+      li.querySelector(".nm").textContent = T.gapNames[x[0]];
+      li.querySelector(".go").textContent = T.stepGo(x[1]);
+      gl.appendChild(li);
+    });
+    $("gap-sec").hidden = !r.gaps.list.length;
+    var firstGap = r.gaps.core[0];
     // [nøkkel, oppfylt, steg, felt som får fokus]
     var items = [
-      ["est", r.total > 0, 2, "strom"],
+      ["est", r.total > 0 && r.gaps.complete, firstGap ? firstGap[1] : 2, firstGap ? firstGap[2] : "strom"],
       ["ansvar", d.ansvar, 5, "ansvar"],
       ["policy", d.policy, 5, "policy"],
       ["maal", d.maal, 5, "maal"],
       ["data", d.data === "malt", 5, "data-malt"]
     ];
     var list = $("r-ready-list"); list.innerHTML = "";
-    items.forEach(function (it) {
+    var nowOk = items.map(function (it) { return !!it[1]; });
+    items.forEach(function (it, idx) {
       var li = document.createElement("li");
+      // Punkter som nettopp ble oppfylt, får en kort bekreftelse
+      if (it[1] && prevReady && !prevReady[idx] && lastFromUser && MOTION) li.className = "pop";
       li.innerHTML = it[1]
-        ? '<div class="ok"><span class="ico"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M6.2 11.6 2.6 8l1.1-1.1 2.5 2.5 6.1-6.1L13.4 4.4z"/></svg></span><span class="nm"></span><span></span></div>'
+        ? '<div class="ok"><span class="ico">' + CHECK + '</span><span class="nm"></span><span></span></div>'
         : '<button type="button" data-step="' + it[2] + '" data-focus="' + it[3] + '"><span class="ico"></span><span class="nm"></span><span class="go"></span></button>';
       li.querySelector(".nm").textContent = T.readyItems[it[0]];
       if (!it[1]) li.querySelector(".go").textContent = T.stepGo(it[2]);
       list.appendChild(li);
     });
     $("r-ready-txt").textContent = r.readiness === 5 ? T.readyDone : T.readyNote;
+    // Utslippsestimatet ble komplett nå: diskret bekreftelse rundt ringen
+    if (cardShown && lastFromUser && prevReady && !prevReady[0] && nowOk[0]) ringDone();
+    prevReady = nowOk;
   }
 
   // Eksempelkortet på bildet øverst
@@ -1280,7 +1634,9 @@ footer a { overflow-wrap: anywhere; }
     d.go = EXAMPLE.go; d.data = EXAMPLE.data;
     var r = calc(d), T = L();
     $("mini-co").textContent = EXAMPLE.navn;
+    $("mini-total")._tw = null;
     $("mini-total").firstChild.nodeValue = fmtT(r.total);
+    miniKg = r.total;
     var st = $("mini-stack"); st.innerHTML = "";
     [1, 2, 3].forEach(function (sc) {
       if (!(r["s" + sc] > 0)) return;
@@ -1352,24 +1708,49 @@ footer a { overflow-wrap: anywhere; }
     if (d.ansvar) g.push(G.ansvar); if (d.policy) g.push(G.policy); if (d.maal) g.push(G.maal);
     return g;
   }
+  function joinList(a) {
+    if (a.length < 2) return a.join("");
+    return a.slice(0, -1).join(", ") + (lang === "en" ? " and " : " og ") + a[a.length - 1];
+  }
+  // Tallene slik de vises i svaret. null betyr at tallet ikke kan oppgis fordi noe mangler.
+  function shown(r) {
+    var G = r.gaps || { s1: true, s2: true, s3: true, el: true, fuel: true, complete: true, core: [], list: [] };
+    var E = L().d.e, v = function (ok, kg) { return ok ? nf1.format(t(kg)) : null; };
+    var rows = [[E.el, G.el ? r.mwhElRen : null, G.el ? r.mwhElNon : null, G.el ? r.mwhEl : null]];
+    if (r.mwhHeat > 0) rows.push([E.heat, null, null, r.mwhHeat]);
+    rows.push([E.fuel, G.fuel ? 0 : null, G.fuel ? r.mwhFuel : null, G.fuel ? r.mwhFuel : null]);
+    var allE = G.el && G.fuel;
+    rows.push([E.total, allE ? r.mwhRen : null, allE ? r.mwhNon : null, allE ? r.mwh : null, "total"]);
+    return {
+      G: G,
+      s1: v(G.s1, r.s1), s2: v(G.s2, r.s2), s2m: r.s2m != null && G.s2 ? nf1.format(t(r.s2m)) : null,
+      s12: v(G.s1 && G.s2, r.s1 + r.s2), s3: v(G.s3, r.s3),
+      int: r.intensity != null ? nf2.format(r.intensity) : null,
+      int12: r.intensity12 != null ? nf2.format(r.intensity12) : null,
+      erows: rows,
+      warn: G.core.length ? L().d.warn(joinList(G.core.map(function (x) { return L().gapNames[x[0]].toLowerCase(); }))) : ""
+    };
+  }
   function summary(d, r) {
-    var D = L().d, out = [];
+    var D = L().d, S = shown(r), out = [], na = D.na;
+    var x = function (v) { return v == null ? na : v; };
     out.push(D.title(d.navn || D.placeholderName, d.aar || D.placeholderYear));
     out.push(D.method);
+    if (S.warn) { out.push(""); out.push(S.warn); }
     out.push("");
-    out.push(D.energy + ": " + nf1.format(r.mwh) + " MWh");
-    out.push("  " + D.el + ": " + nf1.format(r.mwhEl) + " MWh");
-    if (r.mwhHeat > 0) out.push("  " + D.heat + ": " + nf1.format(r.mwhHeat) + " MWh");
-    out.push("  " + D.fuel + ": " + nf1.format(r.mwhFuel) + " MWh");
+    var tot = S.erows[S.erows.length - 1];
+    out.push(D.energy + ": " + (tot[3] != null ? nf1.format(tot[3]) + " MWh (" + D.renLine(nf1.format(tot[1]), nf1.format(tot[2])) + ")" : na));
+    S.erows.slice(0, -1).forEach(function (e) { out.push("  " + e[0] + ": " + (e[3] != null ? nf1.format(e[3]) + " MWh" : na)); });
     out.push("");
     out.push(D.ghg);
-    out.push("  " + D.s1 + ": " + nf1.format(t(r.s1)));
-    out.push("  " + D.s2 + ": " + nf1.format(t(r.s2)));
-    if (r.s2m != null) out.push("  " + D.s2m + ": " + nf1.format(t(r.s2m)));
-    out.push("  " + D.s12 + ": " + nf1.format(t(r.s1 + r.s2)));
-    out.push("  " + D.s3 + ": " + nf1.format(t(r.s3)) + " " + D.s3note);
+    out.push("  " + D.s1 + ": " + x(S.s1));
+    out.push("  " + D.s2 + ": " + x(S.s2));
+    if (S.s2m != null) out.push("  " + D.s2m + ": " + S.s2m);
+    out.push("  " + D.s12 + ": " + x(S.s12));
+    out.push("  " + D.s3 + ": " + (S.s3 != null ? S.s3 + " " + D.s3note : na));
     out.push("");
-    out.push(r.intensity != null ? D.int(nf2.format(r.intensity)) : D.intMissing);
+    out.push(S.int != null ? D.int(S.int) : D.intMissing);
+    if (S.int12 != null) out.push(D.int12(S.int12));
     out.push("");
     out.push(D.dataLbl + ": " + (d.data === "malt" ? D.dataM : D.dataA));
     out.push(D.goLbl + ": " + D.goVal[d.go || ""]);
@@ -1378,18 +1759,25 @@ footer a { overflow-wrap: anywhere; }
     if (g.length) out.push(D.gov + ": " + g.join(", ") + ".");
     return out.join("\n");
   }
-  function row(label, value, cls) { return '<div class="doc-row ' + (cls || "") + '"><span>' + label + '</span><span class="v">' + value + "</span></div>"; }
+  function row(label, value, cls) {
+    var na = value == null;
+    return '<div class="doc-row ' + (cls || "") + '"><span>' + label + '</span><span class="v' + (na ? " na" : "") + '">' + (na ? L().d.na : esc(value)) + "</span></div>";
+  }
   function renderDoc(d, r) {
-    var D = L().d, g = govList(d), h = "";
-    h += '<header class="doc-head"><span class="lbl">' + D.eyebrow + "</span><h3>" + esc(d.navn || L().company) + "</h3><p>" + D.sub(esc(d.aar || "–")) + "</p></header>";
+    var D = L().d, E = D.e, S = shown(r), g = govList(d), h = "";
+    var cell = function (v) { return v == null ? '<td class="na">–</td>' : "<td>" + nf1.format(v) + "</td>"; };
+    h += '<header class="doc-head"><span class="lbl">' + D.eyebrow + (isExample ? ' · <span class="ex">' + D.exampleTag + "</span>" : "") + "</span><h3>" +
+      esc(d.navn || L().company) + "</h3><p>" + D.sub(esc(d.aar || "–")) + "</p></header>";
+    if (S.warn) h += '<p class="doc-warn">' + esc(S.warn) + "</p>";
     h += '<div class="doc-sec"><h4>' + D.ghgH + "</h4>" +
-      row(D.s1l, nf1.format(t(r.s1))) + row(D.s2l, nf1.format(t(r.s2))) +
-      (r.s2m != null ? row(D.s2ml, nf1.format(t(r.s2m)), "sub") : "") +
-      row(D.s12, nf1.format(t(r.s1 + r.s2)), "total") + row(D.s3, nf1.format(t(r.s3))) + "</div>";
-    h += '<div class="doc-sec"><h4>' + D.energyH + "</h4>" +
-      row(D.el, nf1.format(r.mwhEl), "sub") + (r.mwhHeat > 0 ? row(D.heat, nf1.format(r.mwhHeat), "sub") : "") +
-      row(D.fuel, nf1.format(r.mwhFuel), "sub") + row(D.totalE, nf1.format(r.mwh), "total") + "</div>";
-    h += '<div class="doc-sec"><h4>' + D.intH + "</h4>" + row(D.intRow, r.intensity != null ? nf2.format(r.intensity) + " t" : "–") + "</div>";
+      row(D.s1l, S.s1) + row(D.s2l, S.s2) + (S.s2m != null ? row(D.s2ml, S.s2m, "sub") : "") +
+      row(D.s12, S.s12, "total") + row(D.s3, S.s3) + "</div>";
+    var tb = '<div class="etab-wrap"><table class="etab"><thead><tr><th></th><th>' + E.ren + "</th><th>" + E.non + "</th><th>" + E.tot + "</th></tr></thead><tbody>";
+    S.erows.forEach(function (x) { tb += '<tr class="' + (x[4] || "") + '"><td>' + x[0] + "</td>" + cell(x[1]) + cell(x[2]) + cell(x[3]) + "</tr>"; });
+    tb += '</tbody></table></div><p class="etab-note">' + E.note + (r.mwhHeat > 0 ? E.heatNote : "") + "</p>";
+    h += '<div class="doc-sec"><h4>' + D.energyH + "</h4>" + tb + "</div>";
+    h += '<div class="doc-sec"><h4>' + D.intH + "</h4>" +
+      row(D.intRow, S.int != null ? S.int + " t" : null) + row(D.intRow12, S.int12 != null ? S.int12 + " t" : null) + "</div>";
     h += '<p class="doc-foot">' + D.dataLbl + ": " + (d.data === "malt" ? D.dataM : D.dataA) + ". " +
       D.goLbl + ": " + D.goVal[d.go || ""] + ". " +
       (g.length ? D.gov + ": " + g.join(", ") + ". " : "") + D.foot + "</p>";
@@ -1402,9 +1790,17 @@ footer a { overflow-wrap: anywhere; }
   var railBtns = Array.prototype.slice.call(document.querySelectorAll(".rail button"));
   function isNarrow() { return window.matchMedia("(max-width: 960px)").matches; }
   function go(n, focus) {
+    var from = step;
     step = n;
     var T = L();
     steps.forEach(function (s) { s.hidden = +s.dataset.step !== n; });
+    document.querySelector(".rail").style.setProperty("--i", n - 1);
+    // Nytt steg glir inn fra den retningen brukeren går. Det gamle forsvinner med en gang, så ingenting venter.
+    if (focus && MOTION && from !== n) {
+      var cur = steps[n - 1];
+      cur.classList.remove("enter-fwd", "enter-back"); void cur.offsetWidth;
+      cur.classList.add(n > from ? "enter-fwd" : "enter-back");
+    }
     railBtns.forEach(function (b) { if (+b.dataset.go === n) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
     $("step-count").textContent = T.step(n);
     $("prev").hidden = n === 1;
@@ -1445,19 +1841,91 @@ footer a { overflow-wrap: anywhere; }
     return o;
   }
   var lastText = "";
+  var noteState = "", noteTimer = null, liveTimer = null;
+  var STASH = "klimasvar-mine";
+  function dropStore(k) { try { localStorage.removeItem(k); } catch (e) {} }
+  function stash() { var s = fetchStore(STASH); try { return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+  function renderNote() {
+    var N = L().note, st = isExample ? "example" : noteState, rb = $("btn-restore");
+    $("example-note").hidden = !st;
+    $("note-t").textContent = st ? N[st] : "";
+    rb.hidden = !(stash() && (st === "example" || st === "cleared"));
+    rb.textContent = st === "cleared" ? N.undo : N.restore;
+  }
+  function flash(state) {
+    noteState = state; clearTimeout(noteTimer);
+    if (state === "left" || state === "back") noteTimer = setTimeout(function () { if (noteState === state) { noteState = ""; renderNote(); } }, 8000);
+    renderNote();
+  }
+  function hasOwn() {
+    if (isExample) return false;
+    return $("navn").value.trim() !== "" || NUM.some(function (k) { return $(k).value.trim() !== ""; });
+  }
+  // Tar vare på egne tall før eksemplet vises eller skjemaet tømmes
+  function keepMine() { if (hasOwn()) store(STASH, JSON.stringify(snapshot())); }
+  // Første gang brukeren rører skjemaet mens eksemplet vises: fjern eksempeltallene, eller hent egne tall tilbake
+  function leaveExample() {
+    var s = stash();
+    if (s) { fill(s); dropStore(STASH); } else fill({ bransje: "kontor" });
+    isExample = false;
+    update(false);
+    flash(s ? "back" : "left");
+  }
   function update(fromUser) {
-    if (fromUser && isExample) { isExample = false; $("example-note").hidden = true; }
+    if (fromUser && noteState === "cleared") { dropStore(STASH); noteState = ""; }
+    if (fromUser && (noteState === "left" || noteState === "back")) noteState = "";
     var d = read(), r = calc(d);
+    lastFromUser = !!fromUser; lastR = r;
+    validate(d);
+    if (fromUser) {
+      clearTimeout(liveTimer);
+      liveTimer = setTimeout(function () { $("live").textContent = L().live(r.total > 0 ? fmtT(r.total) : "0"); }, 900);
+    }
     renderCard(d, r);
     renderActions(actions(d, r));
     renderDoc(d, r);
     lastText = summary(d, r);
     markFilled();
+    renderNote();
+    syncSegs();
     store("klimasvar-v1", JSON.stringify(snapshot()));
   }
 
-  // Sjekklisten i klimakortet: hopp til feltet som mangler
-  $("r-ready-list").addEventListener("click", function (e) {
+  // Feilmeldinger og enhetshint under feltene
+  var UNIT_HINT = {
+    strom: function (n) { return n > 0 && n < 500 ? n * 1000 : null; },
+    fjernvarme: function (n) { return n > 0 && n < 500 ? n * 1000 : null; },
+    omsetning: function (n) { return n >= 20000 ? n / 1e6 : null; }
+  };
+  function validate(d) {
+    var T = L();
+    NUM.forEach(function (k) {
+      var inp = $(k), fld = inp.closest(".fld"), msg = fld.querySelector(".fmsg"), html = "", cls = "";
+      if (d.invalid[k]) { cls = "err"; html = esc(T.err); }
+      else if (UNIT_HINT[k] && d.filled[k]) {
+        var fix = UNIT_HINT[k](d[k]);
+        if (fix != null) {
+          var fx = Math.abs(fix - Math.round(fix)) < 1e-9 ? nf0.format(fix) : nf1.format(fix);
+          cls = "warn";
+          html = "<span>" + esc(k === "omsetning" ? T.hMnok(fx) : T.hKwh(fx)) + '</span><button type="button" data-fix="' + k + '" data-v="' + esc(fx) + '">' + esc(T.use(fx)) + "</button>";
+        }
+      }
+      fld.classList.toggle("bad", cls === "err");
+      if (!html) {
+        if (msg) msg.remove();
+        inp.removeAttribute("aria-invalid"); inp.removeAttribute("aria-describedby");
+        return;
+      }
+      if (!msg) { msg = document.createElement("p"); msg.id = k + "-msg"; fld.appendChild(msg); }
+      // Bygg bare om når teksten endres, så knappen ikke forsvinner midt i et klikk
+      if (msg.dataset.h !== cls + html) { msg.className = "fmsg " + cls; msg.innerHTML = html; msg.dataset.h = cls + html; }
+      inp.setAttribute("aria-describedby", msg.id);
+      if (cls === "err") inp.setAttribute("aria-invalid", "true"); else inp.removeAttribute("aria-invalid");
+    });
+  }
+
+  // Sjekklistene i klimakortet: hopp til feltet som mangler
+  function jumpTo(e) {
     var b = e.target.closest ? e.target.closest("button[data-step]") : null;
     if (!b) return;
     go(+b.dataset.step, true);
@@ -1470,16 +1938,44 @@ footer a { overflow-wrap: anywhere; }
       row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
       setTimeout(function () { row.classList.remove("flash"); }, 1900);
     }, 60);
+  }
+  $("r-ready-list").addEventListener("click", jumpTo);
+  $("r-gap-list").addEventListener("click", jumpTo);
+
+  function onEdit(e) {
+    if (isExample) {
+      // Brukeren endret noe uten å fokusere først (for eksempel en bryter): behold akkurat det valget
+      var el = e.target, isBox = el.type === "checkbox", isRad = el.type === "radio";
+      var val = isBox ? el.checked : isRad ? el.checked : el.value;
+      leaveExample();
+      if (isBox) el.checked = val; else if (isRad) { if (val) el.checked = true; } else el.value = val;
+    }
+    update(true);
+  }
+  $("f").addEventListener("input", onEdit);
+  $("f").addEventListener("change", onEdit);
+  $("f").addEventListener("submit", function (e) { e.preventDefault(); });
+  $("f").addEventListener("focusin", function (e) {
+    if (isExample && e.target.matches && e.target.matches("input, select")) leaveExample();
+  });
+  $("f").addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("button[data-fix]") : null;
+    if (!b) return;
+    var inp = $(b.dataset.fix);
+    inp.value = b.dataset.v; update(true); inp.focus();
   });
 
-  $("f").addEventListener("input", function () { update(true); });
-  $("f").addEventListener("change", function () { update(true); });
-  $("f").addEventListener("submit", function (e) { e.preventDefault(); });
-
-  function showExample() { fill(EXAMPLE); isExample = true; update(false); go(1, false); }
+  function showExample() { keepMine(); fill(EXAMPLE); isExample = true; noteState = ""; update(false); go(1, false); }
   $("btn-example").addEventListener("click", showExample);
-  $("btn-example-hero").addEventListener("click", function () { showExample(); $("sjekk").scrollIntoView({ block: "start" }); });
-  $("btn-clear").addEventListener("click", function () { fill({ bransje: "kontor" }); isExample = false; update(false); go(1, false); $("navn").focus(); });
+  $("btn-example-hero").addEventListener("click", function () { showExample(); track("eksempel-forside"); $("svar").scrollIntoView({ block: "start" }); });
+  $("btn-start").addEventListener("click", function () { if (isExample) leaveExample(); go(1, false); track("start-forside"); });
+  $("btn-clear").addEventListener("click", function () {
+    keepMine(); fill({ bransje: "kontor" }); isExample = false; update(false); flash(stash() ? "cleared" : ""); go(1, false); $("navn").focus();
+  });
+  $("btn-restore").addEventListener("click", function () {
+    var s = stash(); if (!s) return;
+    fill(s); isExample = false; dropStore(STASH); update(false); flash("back"); go(1, false);
+  });
 
   function copyText(text, ok, fail, selectEl) {
     var fallback = function () {
@@ -1494,7 +1990,7 @@ footer a { overflow-wrap: anywhere; }
   $("btn-copy").addEventListener("click", function () {
     track("svar-kopiert");
     copyText(lastText,
-      function () { $("copy-status").textContent = L().copyOk; },
+      function () { okStatus($("copy-status"), L().copyOk); },
       function () { $("copy-status").textContent = L().copyFail; }, $("doc"));
   });
   $("copy-mail").addEventListener("click", function () {
@@ -1587,25 +2083,73 @@ footer a { overflow-wrap: anywhere; }
         font("helvetica", kind === "total" ? "bold" : "normal", 9, kind === "sub" ? C.body : C.ink);
         var lines = doc.splitTextToSize(P(row[0]), w - 20 - (kind === "sub" ? 3 : 0));
         doc.text(lines, x + (kind === "sub" ? 3 : 0), yy + 5.2);
-        font("helvetica", "bold", 9, C.ink);
-        text(row[1], x + w, yy + 5.2, { align: "right" });
+        font("helvetica", row[1] == null ? "normal" : "bold", 9, row[1] == null ? C.muted : C.ink);
+        text(row[1] == null ? D.na : row[1], x + w, yy + 5.2, { align: "right" });
         yy += lines.length * 4.13 + 3.8;
         if (kind !== "total") rule(x, yy, x + w, C.line, 0.25, true);
       });
       return yy;
     }
 
+    // Energitabellen: etikett, fornybar, ikke-fornybar, totalt
+    function etab(x, y0, w, title, list) {
+      label(title, x, y0);
+      var cw = 15.5, lx = w - 3 * cw;
+      font("helvetica", "bold", 6.6, C.muted);
+      [PD.ren, PD.non, PD.tot].forEach(function (hd, i) { text(hd, x + lx + (i + 1) * cw, y0, { align: "right" }); });
+      var yy = y0 + 3;
+      list.forEach(function (rw) {
+        var tot = rw[4] === "total";
+        if (tot) rule(x, yy, x + w, C.ink, 0.35);
+        font("helvetica", tot ? "bold" : "normal", 9, C.ink);
+        var lines = doc.splitTextToSize(P(rw[0]), lx - 2);
+        doc.text(lines, x, yy + 5.2);
+        [1, 2, 3].forEach(function (i) {
+          font("helvetica", rw[i] == null ? "normal" : "bold", 9, rw[i] == null ? C.muted : C.ink);
+          text(rw[i] == null ? "–" : nf1.format(rw[i]), x + lx + i * cw, yy + 5.2, { align: "right" });
+        });
+        yy += lines.length * 4.13 + 3.8;
+        if (!tot) rule(x, yy, x + w, C.line, 0.25, true);
+      });
+      return yy;
+    }
+    // Nøkkel og verdi i to kolonner
+    function kv(x, y0, w, list) {
+      var yy = y0, lw = w * 0.42, vx = x + w * 0.45, vw = w * 0.55;
+      list.forEach(function (rw) {
+        font("helvetica", "normal", 8.4, C.body);
+        var ll = doc.splitTextToSize(P(rw[0]), lw);
+        font("helvetica", "bold", 8.4, C.ink);
+        var vl = doc.splitTextToSize(P(rw[1]), vw);
+        font("helvetica", "normal", 8.4, C.body); doc.text(ll, x, yy + 4.6);
+        font("helvetica", "bold", 8.4, rw[2] || C.ink); doc.text(vl, vx, yy + 4.6);
+        yy += Math.max(ll.length, vl.length) * 3.86 + 3.2;
+        rule(x, yy, x + w, C.line, 0.25, true);
+      });
+      return yy;
+    }
+    var S = shown(r);
+
     // ----- Side 1: klimadata -----
-    band(PD.band);
+    band(isExample ? PD.exampleBand : PD.band);
     var y = 43;
     font("helvetica", "bold", 22, C.ink);
     var nameLines = doc.splitTextToSize(P(d.navn || T.company), CW).slice(0, 2);
     doc.text(nameLines, M, y);
     y += (nameLines.length - 1) * 10;
     font("helvetica", "normal", 8.8, C.muted);
-    text(PD.sub(d.aar || "–", date), M, y + 7);
+    text(isExample ? PD.exampleSub : PD.sub(d.aar || "–", date), M, y + 7);
     y += 13;
     rule(M, y, W - M, C.ink, 0.4);
+    if (S.warn) {
+      y += 6;
+      font("helvetica", "bold", 8.6, C.warm);
+      var wl = doc.splitTextToSize(P(S.warn), CW - 10);
+      var wh = wl.length * 3.95 + 6.4;
+      doc.setFillColor("#F3E3D7"); doc.rect(M, y, CW, wh, "F");
+      font("helvetica", "bold", 8.6, C.warm); doc.text(wl, M + 5, y + 5.4);
+      y += wh;
+    }
 
     y += 11;
     label(PD.totalLbl, M, y);
@@ -1613,12 +2157,13 @@ footer a { overflow-wrap: anywhere; }
     font("helvetica", "bold", 36, C.ink); text(tot, M, y + 15);
     var tw = doc.getTextWidth(P(tot));
     font("helvetica", "normal", 9.5, C.muted); text(PD.perYear, M + tw + 3, y + 15);
+    if (!S.G.complete) { font("helvetica", "bold", 7.6, C.warm); text(PD.prelim, M + tw + 3, y + 10.2); }
 
     var kx = M + 98, kw = (CW - 98) / 3;
     [
       [r.intensity == null ? "–" : nf2.format(r.intensity), PD.kInt],
       [r.perAnsatt == null ? "–" : nf1.format(r.perAnsatt), PD.kAns],
-      [nf0.format(r.mwh), PD.kMwh]
+      [S.G.el && S.G.fuel ? nf0.format(r.mwh) : "–", PD.kMwh]
     ].forEach(function (k, i) {
       var x = kx + i * kw;
       if (i) { doc.setDrawColor(C.line); doc.setLineWidth(0.25); doc.line(x - 3, y - 2.5, x - 3, y + 18); }
@@ -1644,21 +2189,18 @@ footer a { overflow-wrap: anywhere; }
       doc.setFillColor(SCOL[sc]); doc.rect(x, y - 2.2, 2.2, 2.2, "F");
       font("helvetica", "normal", 8, C.body); text(T.scope[sc], x + 3.8, y);
       font("helvetica", "bold", 8, C.ink);
-      text((r["s" + sc] > 0 ? fmtT(r["s" + sc]) : "0") + " t", x + lw - (i < 2 ? 6 : 0), y, { align: "right" });
+      var known = sc === 1 ? S.G.s1 : sc === 2 ? S.G.s2 : S.G.s3;
+      text(known ? (r["s" + sc] > 0 ? fmtT(r["s" + sc]) : "0") + " t" : "–", x + lw - (i < 2 ? 6 : 0), y, { align: "right" });
     });
 
     y += 13;
     var colW = (CW - 12) / 2;
-    var ghgRows = [[D.s1l, nf1.format(t(r.s1))], [D.s2l, nf1.format(t(r.s2))]];
-    if (r.s2m != null) ghgRows.push([D.s2ml, nf1.format(t(r.s2m)), "sub"]);
-    ghgRows.push([D.s12, nf1.format(t(r.s1 + r.s2)), "total"]);
-    ghgRows.push([D.s3, nf1.format(t(r.s3))]);
+    var ghgRows = [[D.s1l, S.s1], [D.s2l, S.s2]];
+    if (S.s2m != null) ghgRows.push([D.s2ml, S.s2m, "sub"]);
+    ghgRows.push([D.s12, S.s12, "total"]);
+    ghgRows.push([D.s3, S.s3]);
     var endL = rows(M, y, colW, D.ghgH, ghgRows);
-    var enRows = [[D.el, nf1.format(r.mwhEl), "sub"]];
-    if (r.mwhHeat > 0) enRows.push([D.heat, nf1.format(r.mwhHeat), "sub"]);
-    enRows.push([D.fuel, nf1.format(r.mwhFuel), "sub"]);
-    enRows.push([D.totalE, nf1.format(r.mwh), "total"]);
-    var endR = rows(M + colW + 12, y, colW, D.energyH, enRows);
+    var endR = etab(M + colW + 12, y, colW, D.energyH, S.erows);
     y = Math.max(endL, endR) + 11;
 
     var top = r.src.filter(function (x) { return x.kg > 0; });
@@ -1676,14 +2218,30 @@ footer a { overflow-wrap: anywhere; }
       y += 4;
     }
 
+    // Datagrunnlag og avgrensninger
+    if (y + 62 > H - 22) { doc.addPage(); band(isExample ? PD.exampleBand : PD.band); y = 40; }
+    var DQ = PD.dq, g = govList(d);
+    var gapTxt = S.G.list.length ? joinList(S.G.list.map(function (x) { return T.gapNames[x[0]].toLowerCase(); })) : DQ.gapsNone;
     label(PD.dataH, M, y);
-    y += 5.5;
-    var g = govList(d);
-    var para = D.dataLbl + ": " + (d.data === "malt" ? D.dataM : D.dataA) + ". " +
-      D.goLbl + ": " + D.goVal[d.go || ""] + ". " +
-      (g.length ? D.gov + ": " + g.join(", ") + ". " : "") + PD.method + (r.s2m != null ? PD.methodGo : "");
-    font("helvetica", "normal", 8.4, C.body);
-    doc.text(doc.splitTextToSize(P(para), CW), M, y);
+    y += 2.5;
+    var yl = kv(M, y, colW, [
+      [DQ.data, d.data === "malt" ? D.dataM : D.dataA, d.data === "malt" ? null : C.warm],
+      [DQ.go, D.goVal[d.go || ""]],
+      [DQ.gov, g.length ? g.join(", ") : DQ.govNone]
+    ]);
+    var yr = kv(M + colW + 12, y, colW, [
+      [DQ.boundary, DQ.boundaryV],
+      [DQ.scope3, DQ.scope3V],
+      [DQ.gaps, gapTxt, S.G.list.length ? C.warm : null]
+    ]);
+    y = Math.max(yl, yr) + 9;
+    var para = PD.method + (S.s2m != null ? PD.methodGo : "");
+    font("helvetica", "normal", 8.2, C.body);
+    var pl = doc.splitTextToSize(P(para), CW);
+    if (y + pl.length * 3.8 + 6 > H - 20) { doc.addPage(); band(isExample ? PD.exampleBand : PD.band); y = 40; }
+    label(PD.methodH, M, y);
+    font("helvetica", "normal", 8.2, C.body);
+    doc.text(pl, M, y + 5.5);
 
     // ----- Side 2: tiltaksplan -----
     if (withPlan) {
@@ -1699,7 +2257,7 @@ footer a { overflow-wrap: anywhere; }
         var tl = doc.splitTextToSize(P(a.title), tw2 - 24);
         font("helvetica", "normal", 9, C.body);
         var bl = doc.splitTextToSize(P(a.body), tw2);
-        var need = tl.length * 4.8 + bl.length * 4.13 + (a.effect ? 6 : 0) + 12;
+        var need = tl.length * 4.8 + bl.length * 4.13 + (a.effect ? 6 : 0) + 19;
         if (py + need > H - 22) { doc.addPage(); band(PD.planBand); py = 40; }
         doc.setFillColor(C.soft); doc.circle(M + 4.2, py + 3, 4.2, "F");
         font("helvetica", "bold", 10, C.accent); text(String(i + 1), M + 4.2, py + 4.4, { align: "center" });
@@ -1715,6 +2273,12 @@ footer a { overflow-wrap: anywhere; }
           doc.setDrawColor(C.accent); doc.setLineWidth(0.5); doc.line(tx, by - 1.15, tx + 3, by - 1.15);
           font("helvetica", "bold", 9, C.ink); text(a.effect, tx + 5, by);
         }
+        // Til intern bruk: hvem gjør det, og når
+        by += 7.5;
+        var ow = label(PD.owner, tx, by, C.muted);
+        rule(tx + ow + 2.5, by + 0.6, tx + 64, C.line, 0.3);
+        var dw = label(PD.due, tx + 72, by, C.muted);
+        rule(tx + 72 + dw + 2.5, by + 0.6, tx + 112, C.line, 0.3);
         py = by + 5;
         rule(M, py, W - M, C.line, 0.25);
         py += 7;
@@ -1750,7 +2314,7 @@ footer a { overflow-wrap: anywhere; }
         var d = read(), r = calc(d);
         makePdf(JsPDF, d, r, $("pdf-plan").checked).save(pdfName(d));
         track("pdf-lastet-ned");
-        status.textContent = L().pdfOk;
+        okStatus(status, L().pdfOk);
       }).catch(function () {
         status.textContent = L().pdfFail;
       }).then(function () {
@@ -1797,13 +2361,29 @@ footer a { overflow-wrap: anywhere; }
   }
 
   // ---------- Start ----------
+  // Skjul «lagres automatisk» hvis nettleseren ikke lar oss lagre
+  (function () {
+    var ok = true;
+    try { localStorage.setItem("klimasvar-test", "1"); localStorage.removeItem("klimasvar-test"); } catch (e) { ok = false; }
+    $("saved").hidden = !ok;
+  })();
   var savedRaw = fetchStore("klimasvar-v1"), saved = null;
   try { saved = savedRaw ? JSON.parse(savedRaw) : null; } catch (e) { saved = null; }
   if (saved) { fill(saved); isExample = !!saved._example; } else { fill(EXAMPLE); isExample = true; }
   var startLang = location.hash === "#en" ? "en" : (fetchStore("klimasvar-lang") || "no");
   setLang(startLang, false);
 
-  window.__klimasvar = { calc: calc, read: read, summary: summary, setLang: setLang, go: go };
+  // Inngang: eksempeltallet på bildet telles opp, og resultatene vises første gang de rulles inn
+  if (MOTION) {
+    var mt = $("mini-total"), mtxt = mt.firstChild.nodeValue;
+    tween(mt, 0, miniKg / 1000, 1000, fmtTon, mtxt, 650, function (s) { mt.firstChild.nodeValue = s; });
+    var cardEl = $("kort"), actsEl = $("actions"), docEl = $("doc");
+    cardEl.classList.add("mo-pre"); onView(cardEl, revealCard);
+    actsEl.classList.add("mo-pre"); onView(actsEl, function () { revealList(actsEl); });
+    docEl.classList.add("mo-el", "mo-pre"); onView(docEl, function () { docEl.classList.remove("mo-pre"); });
+  }
+
+  window.__klimasvar = { calc: calc, read: read, summary: summary, setLang: setLang, go: go, parseNum: parseNum, isExample: function () { return isExample; } };
 })();
 </script>
 </body>
